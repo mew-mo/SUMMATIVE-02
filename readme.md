@@ -1,11 +1,14 @@
 #  Sweet As!<br> Queenstown Getaways
 ##### T O U R I S M &nbsp;&nbsp;N E W &nbsp;&nbsp;Z E A L A N D
 \
-This project is a Single Page Application (SPA) requested by Tourism New Zealand, the client, for their new campaign. The campaign, 'Sweet As! Queenstown Getaways' is aimed at Kiwis who want a brief holiday in Queenstown- and the application is for allowing them to book their accommodation for up to 4 people, for a length of up to 15 days.
+This project is a Single Page Application (SPA) requested by Tourism New Zealand, the client, for their new campaign. The campaign, 'Sweet As! Queenstown Getaways' is aimed at Kiwis who want a brief holiday in Queenstown- the application is for allowing them to book their accommodation for up to 4 people, for a length of up to 15 days.
 
 :ski:
 
 The main objectives of the application is to create a simple, easy to understand UI that provides the user with live updating feedback throughout the whole booking process, including thorough information validation to minimize user error.
+
+
+*This project was done for class at Yoobee Colleges, and the premise is entirely fictional. Made for educational purposes only to build on the foundations of my Javascript coding and showcase what I have learned through the second module.*
 
 ---
 
