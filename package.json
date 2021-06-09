@@ -19,5 +19,9 @@
     "gulp": "gulp"
   },
   "author": "Jared",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.0.1",
+    "jquery": "^3.6.0"
+  }
 }

@@ -29,14 +29,14 @@
       minNights: 2,
       maxNights: 15
     }
-  }
+  };
 
   var meals = {
     breakfast: 20,
     lunch: 20,
     dinner: 25,
     all: 65
-  }
+  };
 
 }());
 // iife ENDS
