@@ -19,7 +19,7 @@ function serve (done) {
 
 // Styles Task
 function styles (done) {
-    gulp.src('sass/custom.scss')
+    gulp.src('scss/custom.scss')
         .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
         .pipe(rename({suffix: '.min'}))
         .pipe(minifyCss())
@@ -49,7 +49,7 @@ function lint (done) {
 
 // Watch task to watch for file changes
 function watch (done) {
-	gulp.watch('sass/**/*.scss', gulp.series(styles));
+	gulp.watch('scss/**/*.scss', gulp.series(styles));
 	gulp.watch('./*.html', gulp.series(html));
 	gulp.watch('js/*.js', gulp.series(lint));
 	done();

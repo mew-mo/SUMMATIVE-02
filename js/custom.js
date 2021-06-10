@@ -2,7 +2,7 @@
 
 // --------------- DATA OBJECTS ---------------
 
-  var accomodation = {
+  var accommodation = {
     hotel: {
       minPeople: 1,
       maxPeople: 2,
@@ -32,7 +32,7 @@
       maxNights: 15
     }
   };
-  // accomodation object ENDS
+  // accommodation object ENDS
 
   var meals = {
     breakfast: 20,
@@ -56,11 +56,13 @@
 
   $('.screens').slick({
     accessibility: false,
+    arrows: false,
     draggable: false,
     swipe: false,
     touchMove: false,
-    infinite: true,
+    infinite: false,
     speed: 300,
+    autoplay: false,
     slidesToShow: 1,
     slidesToScroll: 1
   });
@@ -75,8 +77,9 @@
 
     // initialisation function
     init: function() {
-      // will call a function when clicked (should be the function to go to the first slide!!! ok!!!)
       app.startBtn.addEventListener('click', app.next, false);
+      app.nextBtn.addEventListener('click', app.next, false);
+      app.backBtn.addEventListener('click', app.back, false);
     },
     // init function ENDS
 
@@ -85,8 +88,14 @@
       app.nextBtn.style.display = 'block';
       app.backBtn.style.display = 'block';
       $('.screens').slick('slickNext');
-    }
+    },
     // next function ENDS
+
+    back: function() {
+      console.log('back works');
+      $('.screens').slick('slickPrev');
+    }
+    // back function ENDS
   };
 
   // starts the code by calling the initialisation function

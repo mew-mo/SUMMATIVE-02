@@ -9,142 +9,177 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&family=Viga&display=swap" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
-  <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
   <link rel="stylesheet" href="css/font-awesome.min.css">
   <link rel="stylesheet" href="css/custom.min.css">
   <title>Sweet As! Queenstown Getaways | Tourism NZ</title>
 </head>
 <body>
 
-  <div class="logo">
-    <img src="img/tnz-logo.png" alt="Tourism New Zealand Logo, including text that says '100% pure New Zealand', and a website link 'newzealand.com'">
-    <!-- logo here, let it just be pulled out and stuck on -->
+  <!-- container STARTS -->
+  <div class="container">
+
+    <div class="logo">
+      <img src="img/tnz-logo.png" alt="Tourism New Zealand Logo, including text that says '100% pure New Zealand', and a website link 'newzealand.com'">
+      <!-- logo here, let it just be pulled out and stuck on -->
+    </div>
+
+    <!-- controls START -->
+    <div class="controls">
+      <div class="back">
+        <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+      </div>
+      <div class="next">
+        <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+      </div>
+    </div>
+    <!-- controls END -->
+
+    <!-- screens STARTS -->
+    <div class="screens">
+
+      <!-- first div- welcome STARTS -->
+      <div id="welcome">
+        <!-- bootstrap col STARTS -->
+        <div class="col-md-4 mx-auto welcome-content">
+          <div class="hero-logo">
+          </div>
+
+          <button class="info-btn">
+            What's This?
+          </button>
+
+          <button class="go-btn">
+            Let's Go!
+          </button>
+        </div>
+        <!-- col ENDS -->
+      </div>
+      <!-- welcome ENDS -->
+
+      <!-- people select STARTS -->
+      <div id="peopleSelect">
+        <div class="col-md-12 mx-auto people-content">
+          <h2>How many people are you booking for?</h2>
+          <button class="one-btn">1</button>
+          <button class="two-btn">2</button>
+          <button class="three-btn">3</button>
+          <button class="four-btn">4</button>
+          <h6>*Note: The Sweet As Campaign only accepts <span class="max-people">0</span> travellers booked together maximum.</h6>
+        </div>
+        <!-- col ENDS -->
+      </div>
+      <!-- people select ENDS -->
+
+      <!-- date select STARTS -->
+      <div id="dateSelect">
+        <div class="date-content row">
+
+          <div class="check-in col-md-6 mx-auto">
+            <h2>Select Check-In date</h2>
+          </div>
+
+          <div class="check-out col-md-6 mx-auto">
+            <h2>Select Check-Out date</h2>
+          </div>
+
+          <h6>*Note: The Sweet As Campaign only accepts <span class="max-days"></span> days booked maxiumum. Keep your trips sweet!</h6>
+        </div>
+        <!-- date content col ENDS -->
+      </div>
+      <!-- date select ENDS -->
+
+      <!-- place select STARTS -->
+      <div id="placeSelect">
+
+        <div class="place-content row">
+          <!-- map STARTS -->
+          <div class="map col-md-6 mx-auto">
+
+          </div>
+          <!-- map ENDS -->
+          <!-- place info STARTS -->
+          <div class="place-info col-md-6 mx-auto">
+            <h2>Choose your accommodation</h2>
+
+            <select name="accommodation" id="accommodation">
+              <option selected disabled hidden class="placeholder">
+                Select
+              </option>
+              <option value=""></option>
+              <option value=""></option>
+            </select>
+
+            <h3 class="price"></h3>
+            <p class="location-info"></p>
+
+            <h5>Nearby Attractions</h5>
+            <ul class="attractions">
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+
+          </div>
+          <!-- place info ENDS -->
+        </div>
+        <!-- place content row ENDS -->
+
+      </div>
+      <!-- placeSelect ENDS -->
+
+      <!-- mealSelect STARTS -->
+      <div id="mealSelect">
+        <div class="col-md-12 mx-auto meal-content">
+          <h2>Would you like our complimentary meals?</h2>
+          <h6>For the first day of your trip, we offer meals day-round. Select those you'd like!</h6>
+
+          <input type="checkbox" id="breakfast">
+          <label for="breakfast">Breakfast</label>
+
+          <input type="checkbox" id="lunch">
+          <label for="lunch">Lunch</label>
+
+          <input type="checkbox" id="dinner">
+          <label for="dinner">Dinner</label>
+
+          <input type="checkbox" id="noMeals">
+          <label for="noMeals">No thanks!</label>
+          <!-- ADD PRICE ADD PRICE ADD PRICE DISPLAY -->
+        </div>
+        <!-- col ENDS -->
+      </div>
+      <!-- mealSelect ENDS -->
+
+      <!-- bookingReview STARTS -->
+      <div id="bookingReview">
+        <div class="col-md-12 mx-auto review-content">
+          <h3 class="rev-ppl"></h3>
+          <h3 class="rev-stay"></h3>
+          <h3 class="rev-place"></h3>
+          <h3 class="rev-meals"></h3>
+          <h1>Total Price: </h1>
+          <h6>Click Next to confirm your booking!</h6>
+        </div>
+        <!-- col ENDS -->
+      </div>
+      <!-- bookingReview ENDS -->
+
+      <!-- confirmScreen STARTS -->
+      <div id="confirmScreen">
+        <div class="col-md-12 mx-auto confirmed-content">
+          <h2>Thank you for booking with us, enjoy your trip!</h2>
+          <h6>We'll be in touch with you via email soon!</h6>
+        </div>
+        <!-- col ENDS -->
+      </div>
+      <!-- confirmScreen ENDS -->
+
+    </div>
+    <!-- screens ENDS -->
+
   </div>
-
-  <!-- controls START -->
-  <div class="controls">
-    <div class="back">
-      <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
-    </div>
-    <div class="next">
-      <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-    </div>
-  </div>
-  <!-- controls END -->
-
-  <!-- screens STARTS -->
-  <div class="screens">
-
-    <!-- first div- welcome STARTS -->
-    <div id="welcome">
-      <div class="hero-logo">
-      </div>
-
-      <button class="info-btn">
-        What's This?
-      </button>
-
-      <button class="go-btn">
-        Let's Go!
-      </button>
-    </div>
-    <!-- welcome ENDS -->
-
-    <!-- people select STARTS -->
-    <div id="peopleSelect">
-      <h2>How many people are you booking for?</h2>
-      <button class="one-btn">1</button>
-      <button class="two-btn">2</button>
-      <button class="three-btn">3</button>
-      <button class="four-btn">4</button>
-      <h6>*Note: The Sweet As Campaign only accepts <span class="max-people">0</span> travellers booked together maximum.</h6>
-    </div>
-    <!-- people select ENDS -->
-
-    <!-- date select STARTS -->
-    <div id="dateSelect">
-      <div class="check-in">
-        <h2>Select Check-In date</h2>
-      </div>
-
-      <div class="check-out">
-        <h2>Select Check-Out date</h2>
-      </div>
-      <h6>*Note: The Sweet As Campaign only accepts <span class="max-days"></span> days booked maxiumum. Keep your trips sweet!</h6>
-    </div>
-    <!-- date select ENDS -->
-
-    <!-- place select STARTS -->
-    <div id="placeSelect">
-      <!-- map STARTS -->
-      <div class="map">
-
-      </div>
-      <!-- map ENDS -->
-      <!-- place info STARTS -->
-      <div class="place-info">
-        <h2>Choose your accommodation</h2>
-
-        <select name="accommodation" id="accommodation">
-          <option value=""></option>
-          <option value=""></option>
-        </select>
-
-        <h3 class="price"></h3>
-        <p class="location-info"></p>
-
-        <h5>Nearby Attractions</h5>
-        <ul class="attractions">
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-        </ul>
-
-      </div>
-      <!-- place info ENDS -->
-    </div>
-    <!-- placeSelect ENDS -->
-
-    <!-- mealSelect STARTS -->
-    <div id="mealSelect">
-      <h2>Would you like our complimentary meals?</h2>
-      <h6>For the first day of your trip, we offer meals day-round. Select those you'd like!</h6>
-
-      <input type="checkbox" id="breakfast">
-      <label for="breakfast">Breakfast</label>
-
-      <input type="checkbox" id="lunch">
-      <label for="lunch">Lunch</label>
-
-      <input type="checkbox" id="dinner">
-      <label for="dinner">Dinner</label>
-
-      <input type="checkbox" id="noMeals">
-      <label for="noMeals">No thanks!</label>
-      <!-- ADD PRICE ADD PRICE ADD PRICE DISPLAY -->
-    </div>
-    <!-- mealSelect ENDS -->
-
-    <!-- bookingReview STARTS -->
-    <div id="bookingReview">
-      <h3 class="rev-ppl"></h3>
-      <h3 class="rev-stay"></h3>
-      <h3 class="rev-place"></h3>
-      <h3 class="rev-meals"></h3>
-      <h1>Total Price: </h1>
-      <h6>Click Next to confirm your booking!</h6>
-    </div>
-    <!-- bookingReview ENDS -->
-
-    <!-- confirmScreen STARTS -->
-    <div id="confirmScreen">
-      <h2>Thank you for booking with us, enjoy your trip!</h2>
-    </div>
-    <!-- confirmScreen ENDS -->
-
-  </div>
-  <!-- screens ENDS -->
+  <!-- container ENDS -->
 
   <script src="js/jquery.min.js"></script>
   <script src="slick/slick.min.js"></script>

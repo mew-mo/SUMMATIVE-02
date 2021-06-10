@@ -4,7 +4,7 @@
 
 @import 'vars';
 
-// ---------------------- UNIVERSAL ELEMENTS ---------------------------
+// ---------------------- UNIVERSAL ELEMENTS ----------------------
 
 * {
   margin: 0;
@@ -38,9 +38,9 @@ body {
   color: $color;
   background-color: $bg-color;
   border: 2px $color solid;
-  font-size: 70px;
-  height: 170px;
-  width: 170px;
+  font-size: 90px;
+  height: 250px;
+  width: 250px;
   border-radius: 80%;
   @include jost-default($color);
 }
@@ -69,27 +69,32 @@ body {
 h1 {
   @include jost-default;
 }
+// h1 - big thin jost letters, display total price
 
 h2 {
   font-size: 2.5rem;
   @include viga-default;
 }
+// h2 - viga title questions for each slide
 
 h3 {
   font-size: 2rem;
   @include jost-default($cyan);
 }
+// h3 - slightly larger jost in cyan, displays dom feedback!!
 
 h5 {
   font-size: 1.5rem;
   text-transform: uppercase;
   @include jost-default($cyan);
 }
+// h5 - jost in ALL CAPS cyan and a lil bigger- for subtitles like NEARBY ATTRACTIONS
 
 h6 {
   font-size: 1.2rem;
   @include jost-default;
 }
+// h6 - regular white jost - for informational notes on slides
 
 p {
   @include jost-default;
@@ -102,17 +107,8 @@ p {
     position: absolute;
     width: 20rem;
     padding: 10px 0 0 10px;
+    margin-left: -8%;
   }
-}
-
-// ---------------------- LOAD IN BUTTONS ----------------------
-
-.info-btn {
-  @include button;
-}
-
-.go-btn {
-  @include button($dark, $cyan);
 }
 
 // ---------------------- NEXT AND BACK BUTTONS ----------------------
@@ -140,7 +136,37 @@ p {
   }
 }
 
-// ---------------------- NUM BUTTONS ----------------------
+// ---------------------- WELCOME SCREEN ----------------------
+
+//  add bg images to #welcome later and all that good cool epic stuff >:D
+
+.welcome-content {
+  margin-top: 50%;
+  text-align: center;
+}
+
+// ---------------------- load in buttons
+
+.info-btn {
+  @include button;
+}
+
+.go-btn {
+  @include button($dark, $cyan);
+}
+
+// ---------------------- PEOPLE SELECT SCREEN ----------------------
+
+.people-content {
+  margin-top: 11%;
+  text-align: center;
+
+  button {
+    margin: 70px 20px 70px 20px;
+  }
+}
+
+// ---------------------- num buttons
 
 .one-btn {
   @include round-button;
@@ -172,4 +198,49 @@ p {
 
 .four-btn:hover {
   @include round-button($purple, $dark);
+}
+
+// ---------------------- DATE SELECT SCREEN ----------------------
+
+.date-content {
+  @extend .people-content;
+}
+
+// ---------------------- PLACE SELECT SCREEN ----------------------
+
+.place-content {
+  margin-top: 11%;
+}
+
+#accommodation {
+  position: relative;
+  width: 190px;
+  height: 40px;
+  border-radius: 50px;
+  margin: 15px 0 0 0;
+  // appearance: none;
+}
+
+select {
+  font-size: 1.1rem;
+  padding-left: 20px;
+  @include jost-default($dark);
+}
+
+// ---------------------- MEAL SELECT SCREEN ----------------------
+
+.meal-content {
+  @extend .people-content;
+}
+
+// ---------------------- REVIEW SCREEN ----------------------
+
+.review-content {
+  @extend .people-content;
+}
+
+// ---------------------- CONFIRMATION SCREEN ----------------------
+
+.confirmed-content {
+  @extend .welcome-content;
 }

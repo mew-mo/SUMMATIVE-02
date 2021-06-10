@@ -24,16 +24,22 @@ Gulp was used for various different functions that greatly enhanced my productio
 
 * **Minifying:** Automatically minifies CSS and JS files. This is efficient for reducing the file-size of these pieces of code, and follows industry best practices.
 * **JS Linting:** Automatically linted my JS code on save, which saves time that would've been spent manually copying my JS onto an online linting tool and waiting for it to run. The results are instant and greatly increase efficiency.
-* **Sass:** In the past, I have used Koala to watch my SASS files and convert them into CSS. While functional, it was always a touch buggy- using Gulp to watch my SASS and convert it saved on time greatly as I wasn't relying on an individual application and it runs through the terminal instantly on save without any hassle. This is also closer to an industry standard way of writing SASS compared to Koala.
+* **Sass:** In the past, I have used Koala to watch my SCSS files and convert them into CSS. While functional, it was always a touch buggy- using Gulp to watch my SCSS and convert it saved on time greatly as I wasn't relying on an individual application and it runs through the terminal instantly on save without any hassle. This is also closer to an industry standard way of writing SCSS compared to Koala.
 
 #### Github :octocat:
-This Github repo was used from start-to-end in order to access my project in it's full glory from both home and my school workspace. By pulling and pushing from terminal I constantly was able to update the files quickly and efficiently, barely having to wait for any upload / download time compared to more lengthy methods like using a USB or uploading to Google Drive- this greatly enhanced my workflow, as accessing files became a matter of simply pressing a few buttons. Since my terminal was constantly open for the project anyway, this was the most efficient method of not accessing my files between different workspaces, but being able to keep up to date with the commit messages and refreshed on things I had done, hadn't done and still needed to do.\
+This Github repo was used from start-to-end in order to access my project in it's full glory from both home and my school workspace. By pulling and pushing from terminal I constantly was able to update the files quickly and efficiently, barely having to wait for any upload / download time compared to more lengthy methods like using a USB or uploading to Google Drive- this greatly enhanced my workflow, as accessing files became a matter of simply pressing a few buttons. Since my terminal was constantly open for the project anyway, this was the most efficient method of not only accessing my files between different workspaces, but being able to keep up to date with the commit messages and refreshed on things I had done, hadn't done and still needed to do.\
 Github is also a very popular website in the world of developers, and could definitely be considered as an industry standard tool to utilize and understand.
 
 #### Sass :ski:
 Sass is a style of coding akin to CSS that I have become very font of for the shortcuts that it enables me to use that greatly save time. The main Sass methods I used were:
 * **Variables:** Sass variables save typing time and also make code more readable- I especially enjoy setting colour variables so that I do not have to type out hex codes.
-# add example. this is where I'm up to :)
+ ``` scss
+   $cyan: #51fbdf;
+   $turquoise: #51c1da;
+   $blue: #7093e3;
+   $purple: #7e65e6;
+ ```
+# this is where I'm up to :)
 
 
 * Description of project √
