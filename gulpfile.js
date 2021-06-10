@@ -39,7 +39,8 @@ function html (done) {
 // JS Lint Task for correcting and monitoring your custom.js
 // will Lint ANY js file for you
 function lint (done) {
-  gulp.src('js/*.js')
+  // gulp.src('js/*.js')
+	gulp.src('js/custom.js')
   .pipe(jshint())
 	.pipe(jshint.reporter('default'))
 	.pipe(connect.reload());

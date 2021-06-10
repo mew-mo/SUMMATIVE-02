@@ -18,7 +18,7 @@ body {
 
 body {
   background-color: $dark;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 // ---------------------- MIXINS AND EXTENDS ----------------------
@@ -43,6 +43,25 @@ body {
   width: 170px;
   border-radius: 80%;
   @include jost-default($color);
+}
+
+@mixin button($color: $cyan, $bg-color: $dark) {
+  color: $color;
+  height: 55px;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  padding: 3px 30px 3px 30px;
+  background: $bg-color;
+  border: 2px solid $color;
+  border-radius: 93px;
+  cursor: pointer;
+  @include jost-default($color)
+
+  a {
+    color: $color;
+    font-size: 1.4rem;
+    text-decoration: none;
+  }
 }
 
 // header set -----------------------------------------
@@ -76,12 +95,81 @@ p {
   @include jost-default;
 }
 
-// ---------------------- BUTTONS ----------------------
+// ---------------------- LOGO ----------------------
 
-.num-btn {
+.logo {
+  img {
+    position: absolute;
+    width: 20rem;
+    padding: 10px 0 0 10px;
+  }
+}
+
+// ---------------------- LOAD IN BUTTONS ----------------------
+
+.info-btn {
+  @include button;
+}
+
+.go-btn {
+  @include button($dark, $cyan);
+}
+
+// ---------------------- NEXT AND BACK BUTTONS ----------------------
+
+.controls {
+  i {
+    display: none;
+    position: absolute;
+    color: $white;
+    font-size: 150px;
+    top: 80%;
+    cursor: pointer;
+  }
+}
+
+.back {
+  i {
+    left: 10%;
+  }
+}
+
+.next {
+  i {
+    right: 10%;
+  }
+}
+
+// ---------------------- NUM BUTTONS ----------------------
+
+.one-btn {
   @include round-button;
 }
 
-.num-btn:hover {
+.two-btn {
+  @include round-button($dark, $turquoise);
+}
+
+.three-btn {
+  @include round-button($dark, $blue);
+}
+
+.four-btn {
+  @include round-button($dark, $purple);
+}
+
+.one-btn:hover {
   @include round-button($cyan, $dark);
+}
+
+.two-btn:hover {
+  @include round-button($turquoise, $dark);
+}
+
+.three-btn:hover {
+  @include round-button($blue, $dark);
+}
+
+.four-btn:hover {
+  @include round-button($purple, $dark);
 }
