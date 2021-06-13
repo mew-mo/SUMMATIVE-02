@@ -67,6 +67,19 @@
     slidesToScroll: 1
   });
 
+// --------------- LOAD IN MAP ---------------
+
+  mapboxgl.accessToken = 'pk.eyJ1IjoibWV3LW1vIiwiYSI6ImNrcDRvZGlvczA0bHQyb3J2czczaXk0cTUifQ.OFSA4kWW4IMpTG6MTy6TPQ';
+
+  var map = new mapboxgl.Map({
+    container: 'map',
+    zoom: 9,
+    center: [168.65997835410565, -45.03140568895895],
+    pitch: 0,
+    bearing: 80,
+    style: 'mapbox://styles/mew-mo/ckpui5rhp1gcl17p6rzvoqbbw'
+  });
+
 // --------------- APP OBJECT ---------------
 
   var app = {
@@ -84,7 +97,7 @@
     // init function ENDS
 
     next: function() {
-      console.log('works?');
+      console.log('next works?');
       app.nextBtn.style.display = 'block';
       app.backBtn.style.display = 'block';
       $('.screens').slick('slickNext');
@@ -92,7 +105,7 @@
     // next function ENDS
 
     back: function() {
-      console.log('back works');
+      console.log('back works?');
       $('.screens').slick('slickPrev');
     }
     // back function ENDS
