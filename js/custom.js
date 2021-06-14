@@ -44,41 +44,13 @@
 
 // user object to store user inputs later
   var user = {
-    people: false,
+    people: 0,
     checkIn: false,
     checkOut: false,
     stayLength: false,
     place: false
   };
   // user object ENDS
-
-// --------------- LOAD IN SLICK ---------------
-
-  $('.screens').slick({
-    accessibility: false,
-    arrows: false,
-    draggable: false,
-    swipe: false,
-    touchMove: false,
-    infinite: false,
-    speed: 300,
-    autoplay: false,
-    slidesToShow: 1,
-    slidesToScroll: 1
-  });
-
-// --------------- LOAD IN MAP ---------------
-
-  mapboxgl.accessToken = 'pk.eyJ1IjoibWV3LW1vIiwiYSI6ImNrcDRvZGlvczA0bHQyb3J2czczaXk0cTUifQ.OFSA4kWW4IMpTG6MTy6TPQ';
-
-  var map = new mapboxgl.Map({
-    container: 'map',
-    zoom: 9,
-    center: [168.65997835410565, -45.03140568895895],
-    pitch: 0,
-    bearing: 80,
-    style: 'mapbox://styles/mew-mo/ckpui5rhp1gcl17p6rzvoqbbw'
-  });
 
 // --------------- APP OBJECT ---------------
 
@@ -87,87 +59,165 @@
     startBtn: document.querySelector('.go-btn'),
     nextBtn: document.querySelector('.next i'),
     backBtn: document.querySelector('.back i'),
+    // pulling slide elements and setting slide index
+    slides: document.querySelectorAll('.full-screen'),
+    currentScreen: 0,
+    // pulling round buttons
+    oneBtn: document.querySelector('.one-btn'),
+    twoBtn: document.querySelector('.two-btn'),
+    threeBtn: document.querySelector('.three-btn'),
+    fourBtn: document.querySelector('.four-btn'),
 
     // initialisation function
     init: function() {
-      app.startBtn.addEventListener('click', app.next, false);
+      //  LOAD IN SLICK ---------------
+      $('.screens').slick({
+        accessibility: false,
+        arrows: false,
+        draggable: false,
+        swipe: false,
+        touchMove: false,
+        infinite: false,
+        speed: 300,
+        autoplay: false,
+        slidesToShow: 1,
+        slidesToScroll: 1
+      });
+
+      // LOAD IN MAP ---------------
+      mapboxgl.accessToken = 'pk.eyJ1IjoibWV3LW1vIiwiYSI6ImNrcDRvZGlvczA0bHQyb3J2czczaXk0cTUifQ.OFSA4kWW4IMpTG6MTy6TPQ';
+
+      var map = new mapboxgl.Map({
+        container: 'map',
+        zoom: 9,
+        center: [168.65997835410565, -45.03140568895895],
+        pitch: 0,
+        bearing: 80,
+        style: 'mapbox://styles/mew-mo/ckpui5rhp1gcl17p6rzvoqbbw'
+      });
+
+      // LOAD IN DATEPICKER ---------------
+      $(function() {
+        $("#datepicker").datepicker();
+      });
+
+      //  LOAD IN BTN FUNCTIONALITY ---------------
       app.nextBtn.addEventListener('click', app.next, false);
       app.backBtn.addEventListener('click', app.back, false);
+      app.checkScreen();
     },
     // init function ENDS
 
     next: function() {
-      console.log('next works?');
+      app.currentScreen += 1;
+      console.log(app.currentScreen);
       app.nextBtn.style.display = 'block';
       app.backBtn.style.display = 'block';
+      app.checkScreen();
       $('.screens').slick('slickNext');
     },
     // next function ENDS
 
     back: function() {
-      console.log('back works?');
+      app.currentScreen -= 1;
+      console.log(app.currentScreen);
+      app.nextBtn.style.display = 'block';
+      app.backBtn.style.display = 'block';
+      app.checkScreen();
       $('.screens').slick('slickPrev');
-    }
+    },
     // back function ENDS
+
+    checkScreen: function() {
+      if (app.currentScreen === 0) {
+        app.welcome();
+      } else if (app.currentScreen === 1) {
+        app.peopleBooking();
+      } else if (app.currentScreen === 2) {
+        app.dateBooking();
+      } else if (app.currentScreen === 3) {
+        app.placeBooking();
+      } else if (app.currentScreen === 4) {
+        app.mealBooking();
+      } else if (app.currentScreen === 5) {
+        app.reviewBooking();
+      } else if (app.currentScreen === 6) {
+        app.confirm();
+      }
+    },
+
+    welcome: function() {
+      app.nextBtn.style.display = 'none';
+      app.backBtn.style.display = 'none';
+      app.startBtn.addEventListener('click', app.next, false);
+    },
+    // welcome function ENDS
+
+    peopleBooking: function() {
+
+      console.log('peoplebooking is working');
+
+      app.oneBtn.onclick = function() {
+        app.setNum(1);
+      };
+
+      app.twoBtn.onclick = function() {
+        app.setNum(2);
+      };
+
+      app.threeBtn.onclick = function() {
+        app.setNum(3);
+      };
+
+      app.fourBtn.onclick = function() {
+        app.setNum(4);
+      };
+    },
+    // peopleBooking function ENDS
+
+    setNum: function(num) {
+      user.people = num;
+      console.log(user.people);
+    },
+
+    dateBooking: function() {
+      // always add class .show-calendar right away !
+      $('#datePicker').daterangepicker({
+        "maxSpan": {
+          "days": 14
+        },
+        "alwaysShowCalendars": true,
+        "drops": "center"
+      }, function(start, end, label) {
+        console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+      });
+      // daterangepicker ENDS
+    },
+    // dateBooking function ENDS
+
+    placeBooking: function() {
+
+    },
+    // placeBooking function ENDS
+
+    mealBooking: function() {
+
+    },
+    // mealBooking function ENDS
+
+    reviewBooking: function() {
+
+    },
+    // reviewBooking function ENDS
+
+    confirm: function() {
+      app.nextBtn.style.display = 'none';
+    }
+    // confirm function ENDS
   };
 
   // starts the code by calling the initialisation function
   app.init();
-
-//  slick code to bonk out later haha ----------------------
-  //
-  // function vertical() {
-  //   $('.slides').slick({
-  //     vertical: true,
-  //     accessibility: false,
-  //     draggable: false,
-  //     swipe: false,
-  //     touchMove: false,
-  //     infinite: true,
-  //     speed: 300,
-  //     slidesToShow: 1,
-  //     slidesToScroll: 1
-  //   });
-  //   console.log('vertical should be working');
-  // }
-  //
-  // function horizontal() {
-  //   $('.slides').slick({
-  //     accessibility: false,
-  //     draggable: false,
-  //     swipe: false,
-  //     touchMove: false,
-  //     infinite: true,
-  //     speed: 300,
-  //     slidesToShow: 1,
-  //     slidesToScroll: 1
-  //   });
-  //   console.log('horizontal is working..?');
-  // }
-  //
-  // // change the initialisation based on what slide theyre on? ormaybe thats too much and not so cool. maybe theres aninmations to be put in instead thatll make it look nice.
-  //
-  // var moveOne = document.querySelector('#forward'),
-  //   moveAgain = document.querySelector('#again'),
-  //   back = document.querySelector('#back'),
-  //   slideArea = document.querySelector('.slides');
-  //
-  // moveOne.addEventListener('click', toNext, false);
-  // back.addEventListener('click', backOne, false);
-  //
-  // function toNext() {
-  //   console.log('works');
-  //   horizontal(slideArea);
-  //   $('.slides').slick('slickNext');
-  //   // vertical can be true to create vertical option?
-  // }
-  //
-  // function backOne() {
-  //   console.log('goingback');
-  //   // vertical(slideArea);
-  //   $('.slides').slick('slickPrev');
-  // }
-
 
 }());
 // iife ENDS

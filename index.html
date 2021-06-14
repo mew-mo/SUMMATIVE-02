@@ -7,6 +7,7 @@
   <!-- add a favicon here !! -->
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/daterangepicker.css">
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&family=Viga&display=swap" rel="stylesheet">
@@ -40,7 +41,7 @@
     <div class="screens">
 
       <!-- first div- welcome STARTS -->
-      <div id="welcome">
+      <div id="welcome" class="full-screen">
         <!-- bootstrap col STARTS -->
         <div class="col-md-4 mx-auto welcome-content">
           <div class="hero-logo">
@@ -59,13 +60,13 @@
       <!-- welcome ENDS -->
 
       <!-- people select STARTS -->
-      <div id="peopleSelect">
+      <div id="peopleSelect" class="full-screen">
         <div class="col-md-12 mx-auto people-content">
           <h2>How many people are you booking for?</h2>
-          <button class="one-btn">1</button>
-          <button class="two-btn">2</button>
-          <button class="three-btn">3</button>
-          <button class="four-btn">4</button>
+          <button class="one-btn round-btn">1</button>
+          <button class="two-btn round-btn">2</button>
+          <button class="three-btn round-btn">3</button>
+          <button class="four-btn round-btn">4</button>
           <h6>*Note: The Sweet As Campaign only accepts <span class="max-people">0</span> travellers booked together maximum.</h6>
         </div>
         <!-- col ENDS -->
@@ -73,11 +74,12 @@
       <!-- people select ENDS -->
 
       <!-- date select STARTS -->
-      <div id="dateSelect">
+      <div id="dateSelect" class="full-screen">
         <div class="date-content row">
 
           <div class="check-in col-md-6 mx-auto">
             <h2>Select Check-In date</h2>
+            <input type="text" id="datePicker">
           </div>
 
           <div class="check-out col-md-6 mx-auto">
@@ -91,7 +93,7 @@
       <!-- date select ENDS -->
 
       <!-- place select STARTS -->
-      <div id="placeSelect">
+      <div id="placeSelect" class="full-screen">
 
         <div class="place-content row">
           <!-- map STARTS -->
@@ -131,7 +133,7 @@
       <!-- placeSelect ENDS -->
 
       <!-- mealSelect STARTS -->
-      <div id="mealSelect">
+      <div id="mealSelect" class="full-screen">
         <div class="col-md-12 mx-auto meal-content">
           <h2>Would you like our complimentary meals?</h2>
           <h6>For the first day of your trip, we offer meals day-round. Select those you'd like!</h6>
@@ -154,7 +156,7 @@
       <!-- mealSelect ENDS -->
 
       <!-- bookingReview STARTS -->
-      <div id="bookingReview">
+      <div id="bookingReview" class="full-screen">
         <div class="col-md-12 mx-auto review-content">
           <h3 class="rev-ppl"></h3>
           <h3 class="rev-stay"></h3>
@@ -168,7 +170,7 @@
       <!-- bookingReview ENDS -->
 
       <!-- confirmScreen STARTS -->
-      <div id="confirmScreen">
+      <div id="confirmScreen" class="full-screen">
         <div class="col-md-12 mx-auto confirmed-content">
           <h2>Thank you for booking with us, enjoy your trip!</h2>
           <h6>We'll be in touch with you via email soon!</h6>
@@ -184,8 +186,11 @@
   <!-- container ENDS -->
 
   <script src="js/jquery.min.js"></script>
+  <script src="js/jquery-ui.min.js"></script>
   <script src="slick/slick.min.js"></script>
   <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/moment.min.js"></script>
+  <script src="js/daterangepicker.js"></script>
   <script src="js/custom.js"></script>
   <!-- MINIFYTHISSSSSSDSDSHFHDJKHGJKFHGKFHGJKF -->
 </body>
