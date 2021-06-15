@@ -79,6 +79,7 @@ h2 {
 
 h3 {
   font-size: 2rem;
+  margin-top: 2.5rem;
   @include jost-default($cyan);
 }
 // h3 - slightly larger jost in cyan, displays dom feedback!!
@@ -184,27 +185,63 @@ p {
   @include round-button($dark, $purple);
 }
 
-.one-btn:hover {
+.one-btn:hover,
+.one-clicked {
   @include round-button($cyan, $dark);
 }
 
-.two-btn:hover {
+.two-btn:hover,
+.two-clicked {
   @include round-button($turquoise, $dark);
 }
 
-.three-btn:hover {
+.three-btn:hover,
+.three-clicked {
   @include round-button($blue, $dark);
 }
 
-.four-btn:hover {
+.four-btn:hover,
+.four-clicked {
   @include round-button($purple, $dark);
 }
+
 
 // ---------------------- DATE SELECT SCREEN ----------------------
 
 .date-content {
   @extend .people-content;
+
+  h6 {
+    margin-top: 26%;
+  }
 }
+
+#datePicker {
+  text-align: center;
+  width: 250px;
+  height: 40px;
+  border-radius: 50px;
+  margin: 15px 0 0 0;
+  @include jost-default($dark);
+}
+
+.daterangepicker {
+  margin-top: 30px;
+  margin-left: -6%;
+  @include jost-default($dark);
+
+  td.in-range {
+    background-color: $low-purple
+  }
+
+  td.active,
+  td.active:hover,
+  td.end-date,
+  td.start-date {
+    background-color: $purple;
+  }
+}
+// daterangepicker ENDS
 
 // ---------------------- PLACE SELECT SCREEN ----------------------
 
@@ -213,11 +250,7 @@ p {
 }
 
 #accommodation {
-  position: relative;
-  width: 190px;
-  height: 40px;
-  border-radius: 50px;
-  margin: 15px 0 0 0;
+  @extend #datePicker;
   // appearance: none;
 }
 

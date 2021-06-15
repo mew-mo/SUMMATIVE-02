@@ -1,6 +1,6 @@
 (function() {
 
-// --------------- DATA OBJECTS ---------------
+// ------------------------------ DATA OBJECTS ------------------------------
 
   var accommodation = {
     hotel: {
@@ -52,7 +52,7 @@
   };
   // user object ENDS
 
-// --------------- APP OBJECT ---------------
+// ------------------------------ APP OBJECT ------------------------------
 
   var app = {
     // pulling buttons from dom
@@ -62,11 +62,23 @@
     // pulling slide elements and setting slide index
     slides: document.querySelectorAll('.full-screen'),
     currentScreen: 0,
+    // PULLING FOR PEOPLE SELECT SCREEN ---------------
+    // pulling the screen div
+    peopleScreen: document.querySelector('#peopleSelect'),
     // pulling round buttons
     oneBtn: document.querySelector('.one-btn'),
     twoBtn: document.querySelector('.two-btn'),
     threeBtn: document.querySelector('.three-btn'),
     fourBtn: document.querySelector('.four-btn'),
+    // pulling feedback h3 and max ppl note
+    maxPeople: document.querySelector('.max-people'),
+    pplFeedback: document.querySelector('.people-feedback'),
+    // PULLING FOR DATE SELECT SCREEN ---------------
+    // creating empty calendar, will add on date picker init
+    calendar: false,
+    // pulling feedback h3 and max days span
+    maxDays: document.querySelector('.max-days'),
+    dateFeedback: document.querySelector('.date-feedback'),
 
     // initialisation function
     init: function() {
@@ -110,7 +122,6 @@
 
     next: function() {
       app.currentScreen += 1;
-      console.log(app.currentScreen);
       app.nextBtn.style.display = 'block';
       app.backBtn.style.display = 'block';
       app.checkScreen();
@@ -120,7 +131,6 @@
 
     back: function() {
       app.currentScreen -= 1;
-      console.log(app.currentScreen);
       app.nextBtn.style.display = 'block';
       app.backBtn.style.display = 'block';
       app.checkScreen();
@@ -145,6 +155,7 @@
         app.confirm();
       }
     },
+    // checkScreen function ENDS
 
     welcome: function() {
       app.nextBtn.style.display = 'none';
@@ -155,43 +166,85 @@
 
     peopleBooking: function() {
 
-      console.log('peoplebooking is working');
+      app.maxPeople.innerHTML = accommodation.house.maxPeople;
 
-      app.oneBtn.onclick = function() {
-        app.setNum(1);
-      };
+      app.peopleScreen.addEventListener('click', function(e) {
+        if (e.target === app.oneBtn) {
+          app.setNum(1);
+          app.oneBtn.classList.add('one-clicked');
+        } else {
+          app.oneBtn.classList.remove('one-clicked');
+        }
 
-      app.twoBtn.onclick = function() {
-        app.setNum(2);
-      };
+        if (e.target === app.twoBtn) {
+          app.setNum(2);
+          app.twoBtn.classList.add('two-clicked');
+        } else {
+          app.twoBtn.classList.remove('two-clicked');
+        }
 
-      app.threeBtn.onclick = function() {
-        app.setNum(3);
-      };
+        if (e.target === app.threeBtn) {
+          app.setNum(3);
+          app.threeBtn.classList.add('three-clicked');
+        } else {
+          app.threeBtn.classList.remove('three-clicked');
+        }
 
-      app.fourBtn.onclick = function() {
-        app.setNum(4);
-      };
+        if (e.target === app.fourBtn) {
+          app.setNum(4);
+          app.fourBtn.classList.add('four-clicked');
+        } else {
+          app.fourBtn.classList.remove('four-clicked');
+        }
+      }, false);
     },
     // peopleBooking function ENDS
 
     setNum: function(num) {
       user.people = num;
-      console.log(user.people);
+      if (num === 1) {
+        app.pplFeedback.innerHTML = 'Booking for ' + num + ' person';
+      } else {
+        app.pplFeedback.innerHTML = 'Booking for ' + num + ' people';
+      }
     },
+    // setNum function ENDS
 
     dateBooking: function() {
-      // always add class .show-calendar right away !
-      $('#datePicker').daterangepicker({
-        "maxSpan": {
-          "days": 14
+      app.maxDays.innerHTML = accommodation.house.maxNights;
+
+      app.calendar = $('#datePicker').daterangepicker({
+        'maxSpan': {
+          'days': 14
         },
-        "alwaysShowCalendars": true,
-        "drops": "center"
+        'autoApply': true,
+        'minDate': moment(),
+        'alwaysShowCalendars': true,
+        'drops': 'left'
       }, function(start, end, label) {
         console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
       });
       // daterangepicker ENDS
+      //
+      // var
+      //   startDate = start.format('DD-MM-YY'),
+      //   endDate = end.format('DD-MM-YY'),
+      //   stayLength = startDate - endDate;
+      //
+      // console.log(startDate);
+      // console.log(endDate);
+      // console.log(stayLength);
+      //
+      // app.maxDays.innerHTML = accommodation.house.maxNights;
+      //
+      // console.log(stayLength);
+
+      // ----------------------------
+      // app.dateFeedback.innerHTML = 'Booking for ' + stayLength + ' nights - From ' + start.format('DD-MM-YY') + ' to ' + end.format('DD-MM-YY');
+      // app.calendar.data('daterangepicker').hide = function() {};
+
+      // app.calendar.data('daterangepicker').show();
+
     },
     // dateBooking function ENDS
 

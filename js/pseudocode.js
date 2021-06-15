@@ -2,13 +2,14 @@
 
 -- PSEUDOCODE !!
 
-What i am doing right now: PEOPLE SELECTION
+What i am doing right now: DATE SELECTION
 
-1. Pull round buttons from DOM
-2. Assign appropriate values from 1-4 to each button
-3. Apply functionality that assigns appropriate value to userobject value -- log to ensure it's working
-4. celebrate successful code <3
-
+1. Position calendar properly and rejig layout to accommodate for it, mourn the fact that it doesn't match the design i had been thinking of
+2. Pull calendars from dom
+3. Create variables that calculate the date range that you selct :sparkles:
+4. Push user selection constantly into user object variables
+5. Display current selection on DOM accordingly uwu
+6. NO clicking next button unless there is a valid input, we need to make this the case for all of stuff and things tbh... like maybe if user.thing = false, next is non clickable? i'll figure it out.
 
 ToDo (probably at home):
 * hero Logo
@@ -42,3 +43,31 @@ ToDo (probably at home):
 // finishing getting DOM resources for my html document
 //   * calendars
 //   * mapbox stuff
+
+// PEOPLE SELECTION
+//
+// 1. Pull round buttons from DOM
+// 2. Assign appropriate values from 1-4 to each button
+// 3. Apply functionality that assigns appropriate value to userobject value -- log to ensure it's working
+// 4. celebrate successful code <3
+
+-- MOURNING MY HTML THAT HAD TO BE REDONE !!
+
+// <!-- date select STARTS -->
+// <div id="dateSelect" class="full-screen">
+//   <div class="date-content row">
+//
+//     <div class="check-in col-md-6 mx-auto">
+//       <h2>Select Check-In date</h2>
+//       <input type="text" id="datePicker">
+//     </div>
+//
+//     <div class="check-out col-md-6 mx-auto">
+//       <h2>Select Check-Out date</h2>
+//     </div>
+//
+//     <h6>*Note: The Sweet As Campaign only accepts <span class="max-days"></span> days booked maxiumum. Keep your trips sweet!</h6>
+//   </div>
+//   <!-- date content col ENDS -->
+// </div>
+// <!-- date select ENDS -->
