@@ -4,6 +4,8 @@
 
   var accommodation = {
     hotel: {
+      name: 'Novotel Queenstown Lakeside',
+      coordinates: [168.66260642950354, -45.03336634266233],
       minPeople: 1,
       maxPeople: 2,
       pricePerNight: 157,
@@ -11,6 +13,8 @@
       maxNights: 5
     },
     hostel: {
+      name: 'Haka Lodge Queenstown',
+      coordinates: [168.66277322589283, -45.030134427348074],
       minPeople: 1,
       maxPeople: 1,
       pricePerNight: 30,
@@ -18,6 +22,8 @@
       maxNights: 10
     },
     motel: {
+      name: 'Manata Lodge',
+      coordinates: [168.7565615118034, -44.99238458104406],
       minPeople: 2,
       maxPeople: 4,
       pricePerNight: 90,
@@ -25,6 +31,8 @@
       maxNights: 10
     },
     house: {
+      name: 'Shotover Country Cottages',
+      coordinates: [168.77857503612444, -45.00940820579655],
       minPeople: 1,
       maxPeople: 4,
       pricePerNight: 240,
@@ -44,7 +52,7 @@
 
 // user object to store user inputs later
   var user = {
-    people: 0,
+    people: false,
     checkIn: false,
     checkOut: false,
     stayLength: false,
@@ -122,6 +130,7 @@
     // init function ENDS
 
     next: function() {
+      // app.allowNext()
       app.currentScreen += 1;
       app.nextBtn.style.display = 'block';
       app.backBtn.style.display = 'block';
@@ -157,6 +166,18 @@
       }
     },
     // checkScreen function ENDS
+    //
+    // allowNext: function(huh) {
+    //   var huh;
+    //   if (huh === false) {
+    //     console.log('its false');
+    //     console.log(huh);
+    //   } else if (huh !== false) {
+    //     console.log(huh);
+    //     console.log('its true');
+    //     app.nextBtn.addEventListener('click', app.next, false);
+    //   }
+    // },
 
     welcome: function() {
       app.nextBtn.style.display = 'none';
@@ -244,6 +265,13 @@
     // dateBooking function ENDS
 
     placeBooking: function() {
+
+      // test marker
+      var marker1 = new mapboxgl.Marker()
+        .setLngLat(accommodation.hotel.coordinates)
+        .addTo(map);
+
+
       var geojson = {
         type: 'FeatureCollection',
         features: [
@@ -251,33 +279,44 @@
           type: 'Feature',
           geometry: {
             type: 'Point',
-            coordinates: [174.7765351806754, -41.27793929742888]
+            coordinates: accommodation.hotel.coordinates
           },
           properties: {
-            title: 'Mapbox',
-            description: 'Welly Parliament :)'
+            title: accommodation.hotel.name,
+            description: ''
           }
         },
         {
           type: 'Feature',
           geometry: {
             type: 'Point',
-            coordinates: [174.779799105385, -41.292276120962114]
+            coordinates: accommodation.hostel.coordinates
           },
           properties: {
-            title: 'Mapbox',
-            description: 'maccas yo. MACCAS'
+            title: accommodation.hostel.name,
+            description: ''
           }
         },
         {
           type: 'Feature',
           geometry: {
             type: 'Point',
-            coordinates: [174.77623868988232, -41.28335086982749]
+            coordinates: accommodation.motel.coordinates
           },
           properties: {
-            title: 'Mapbox',
-            description: 'te awe library'
+            title: accommodation.motel.name,
+            description: ''
+          }
+        },
+        {
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: accommodation.house.coordinates
+          },
+          properties: {
+            title: accommodation.house.name,
+            description: ''
           }
         }]
       };
