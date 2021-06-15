@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <!-- add a favicon here !! -->
-  <script src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
-  <link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet"/>
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.css' rel='stylesheet' />
   <link rel="stylesheet" href="css/daterangepicker.css">
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -79,7 +79,6 @@
         <div class="col-md-12 mx-auto date-content">
           <h2>Select Check-In and Check-Out dates</h2>
           <input type="text" id="datePicker">
-          <div class="calendar-container"></div>
           <h6>*Note: The Sweet As Campaign only accepts <span class="max-days"></span> days booked maxiumum. Keep your trips sweet!</h6>
           <h3 class="date-feedback"></h3>
         </div>
@@ -93,13 +92,13 @@
         <div class="place-content row">
           <!-- map STARTS -->
           <div class="map-area col-md-6 mx-auto">
-            <div id="map" style="width: 100%; height: 400px;"></div>
+            <div id="map" style="width: 100%; height: 650px;"></div>
           </div>
           <!-- map ENDS -->
           <!-- place info STARTS -->
           <div class="place-info col-md-6 mx-auto">
             <h2>Choose your accommodation</h2>
-
+            <h6>Accommodation available to <span class="user-people"></span></h6>
             <select name="accommodation" id="accommodation">
               <option selected disabled hidden class="placeholder">
                 Select

@@ -104,9 +104,10 @@
         zoom: 9,
         center: [168.65997835410565, -45.03140568895895],
         pitch: 0,
-        bearing: 80,
         style: 'mapbox://styles/mew-mo/ckpui5rhp1gcl17p6rzvoqbbw'
       });
+
+      var canvas = map.getCanvasContainer();
 
       // LOAD IN DATEPICKER ---------------
       $(function() {
@@ -217,38 +218,82 @@
         'maxSpan': {
           'days': 14
         },
-        'autoApply': true,
+        'autoApply': false,
         'minDate': moment(),
         'alwaysShowCalendars': true,
-        'drops': 'left'
-      }, function(start, end, label) {
-        console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+        'drops': 'left',
+        'opens': 'center'
+      },
+      function(start, end, label) {
+        var startDate = new Date (start.format('MM/DD/YYYY')),
+          endDate = new Date (end.format('MM/DD/YYYY')),
+          timeDifference = endDate.getTime() - startDate.getTime();
+
+        user.checkIn = start.format('DD-MM-YY');
+        user.checkOut = end.format('DD-MM-YY');
+        user.stayLength = timeDifference / (1000 * 3600 * 24) + 1;
+
+        if (user.stayLength === 1) {
+          app.dateFeedback.innerHTML = 'Booking for ' + user.stayLength + ' night - From ' + user.checkIn + ' to ' + user.checkOut;
+        } else {
+          app.dateFeedback.innerHTML = 'Booking for ' + user.stayLength + ' nights - From ' + user.checkIn + ' to ' + user.checkOut;
+        }
       });
       // daterangepicker ENDS
-      //
-      // var
-      //   startDate = start.format('DD-MM-YY'),
-      //   endDate = end.format('DD-MM-YY'),
-      //   stayLength = startDate - endDate;
-      //
-      // console.log(startDate);
-      // console.log(endDate);
-      // console.log(stayLength);
-      //
-      // app.maxDays.innerHTML = accommodation.house.maxNights;
-      //
-      // console.log(stayLength);
-
-      // ----------------------------
-      // app.dateFeedback.innerHTML = 'Booking for ' + stayLength + ' nights - From ' + start.format('DD-MM-YY') + ' to ' + end.format('DD-MM-YY');
-      // app.calendar.data('daterangepicker').hide = function() {};
-
-      // app.calendar.data('daterangepicker').show();
-
     },
     // dateBooking function ENDS
 
     placeBooking: function() {
+      var geojson = {
+        type: 'FeatureCollection',
+        features: [
+        {
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [174.7765351806754, -41.27793929742888]
+          },
+          properties: {
+            title: 'Mapbox',
+            description: 'Welly Parliament :)'
+          }
+        },
+        {
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [174.779799105385, -41.292276120962114]
+          },
+          properties: {
+            title: 'Mapbox',
+            description: 'maccas yo. MACCAS'
+          }
+        },
+        {
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [174.77623868988232, -41.28335086982749]
+          },
+          properties: {
+            title: 'Mapbox',
+            description: 'te awe library'
+          }
+        }]
+      };
+
+      // add markers to map -- looping through geojson object
+      geojson.features.forEach(function(marker) {
+
+      // create a HTML element for each feature
+      var el = document.createElement('div');
+      el.className = 'marker';
+
+      // make a marker for each feature and add to the map
+      new mapboxgl.Marker(el)
+        .setLngLat(marker.geometry.coordinates)
+        .addTo(map);
+      });
 
     },
     // placeBooking function ENDS

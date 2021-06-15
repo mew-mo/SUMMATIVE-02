@@ -227,7 +227,6 @@ p {
 
 .daterangepicker {
   margin-top: 30px;
-  margin-left: -6%;
   @include jost-default($dark);
 
   td.in-range {
@@ -242,6 +241,11 @@ p {
   }
 }
 // daterangepicker ENDS
+
+.applyBtn {
+  background-color: $purple;
+  border-radius: 20px;
+}
 
 // ---------------------- PLACE SELECT SCREEN ----------------------
 
