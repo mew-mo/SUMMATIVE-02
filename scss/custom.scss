@@ -254,8 +254,13 @@ p {
 }
 
 #accommodation {
+  width: 290px;
   @extend #datePicker;
   // appearance: none;
+}
+
+#map {
+  border-radius: 70px;
 }
 
 select {

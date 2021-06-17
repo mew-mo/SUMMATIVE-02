@@ -38,6 +38,15 @@
       pricePerNight: 240,
       minNights: 2,
       maxNights: 15
+    },
+    hotelTwo: {
+      name: 'Nugget Point Queenstown Hotel',
+      coordinates: [168.68462613895989, -44.98008714506038],
+      minPeople: 1,
+      maxPeople: 4,
+      pricePerNight: 139,
+      minNights: 1,
+      maxNights: 15
     }
   };
   // accommodation object ENDS
@@ -52,6 +61,7 @@
 
 // user object to store user inputs later
   var user = {
+    start: true,
     people: false,
     checkIn: false,
     checkOut: false,
@@ -67,9 +77,10 @@
     startBtn: document.querySelector('.go-btn'),
     nextBtn: document.querySelector('.next i'),
     backBtn: document.querySelector('.back i'),
-    // pulling slide elements and setting slide index
+    // pulling slide elements and setting slide index, setting blank error message
     slides: document.querySelectorAll('.full-screen'),
     currentScreen: 0,
+    needsFill: false,
     // PULLING FOR PEOPLE SELECT SCREEN ---------------
     // pulling the screen div
     peopleScreen: document.querySelector('#peopleSelect'),
@@ -87,6 +98,16 @@
     // pulling feedback h3 and max days span
     maxDays: document.querySelector('.max-days'),
     dateFeedback: document.querySelector('.date-feedback'),
+    // PULLING FOR ACCOMMODATION SELECT SCREEN ---------------
+    availableTo: document.querySelector('.user-people'),
+    // map to be added so that it can be pulled out of function scope
+    map: false,
+    accSelect: document.querySelector('#accommodation'),
+    hotelOpt: document.createElement('option'),
+    hostelOpt: document.createElement('option'),
+    motelOpt: document.createElement('option'),
+    houseOpt: document.createElement('option'),
+    hotelTwoOpt: document.createElement('option'),
 
     // initialisation function
     init: function() {
@@ -104,43 +125,51 @@
         slidesToScroll: 1
       });
 
-      // LOAD IN MAP ---------------
-      mapboxgl.accessToken = 'pk.eyJ1IjoibWV3LW1vIiwiYSI6ImNrcDRvZGlvczA0bHQyb3J2czczaXk0cTUifQ.OFSA4kWW4IMpTG6MTy6TPQ';
-
-      var map = new mapboxgl.Map({
-        container: 'map',
-        zoom: 9,
-        center: [168.65997835410565, -45.03140568895895],
-        pitch: 0,
-        style: 'mapbox://styles/mew-mo/ckpui5rhp1gcl17p6rzvoqbbw'
-      });
-
-      var canvas = map.getCanvasContainer();
-
       // LOAD IN DATEPICKER ---------------
       $(function() {
         $("#datepicker").datepicker();
       });
 
-      //  LOAD IN BTN FUNCTIONALITY ---------------
-      app.nextBtn.addEventListener('click', app.next, false);
-      app.backBtn.addEventListener('click', app.back, false);
+      // LOAD IN MAP ---------------
+      mapboxgl.accessToken = 'pk.eyJ1IjoibWV3LW1vIiwiYSI6ImNrcDRvZGlvczA0bHQyb3J2czczaXk0cTUifQ.OFSA4kWW4IMpTG6MTy6TPQ';
+
+      var map = new mapboxgl.Map({
+        container: 'map',
+        zoom: 11,
+        center: [168.70906691642736, -45.018670516814126],
+        pitch: 0,
+        style: 'mapbox://styles/mew-mo/ckpui5rhp1gcl17p6rzvoqbbw'
+      });
+
+      app.map = map;
+
+      //  LOAD IN BACK BTN FUNCTIONALITY ---------------
+      $(app.backBtn).off().on('click', function() {
+        app.back();
+      });
       app.checkScreen();
     },
     // init function ENDS
 
-    next: function() {
-      // app.allowNext()
-      app.currentScreen += 1;
-      app.nextBtn.style.display = 'block';
-      app.backBtn.style.display = 'block';
+    next: function(val) {
+      if (val) {
+        app.currentScreen += 1;
+        console.log(app.currentScreen + ' is the current screen');
+        app.nextBtn.style.display = 'block';
+        app.backBtn.style.display = 'block';
+        $('.screens').slick('slickNext');
+        console.log(val);
+      } else {
+        alert('Please select ' + app.needsFill + ' first.');
+        console.log(val);
+      }
       app.checkScreen();
-      $('.screens').slick('slickNext');
     },
     // next function ENDS
 
     back: function() {
       app.currentScreen -= 1;
+      console.log(app.currentScreen + ' is the current screen');
       app.nextBtn.style.display = 'block';
       app.backBtn.style.display = 'block';
       app.checkScreen();
@@ -166,29 +195,24 @@
       }
     },
     // checkScreen function ENDS
-    //
-    // allowNext: function(huh) {
-    //   var huh;
-    //   if (huh === false) {
-    //     console.log('its false');
-    //     console.log(huh);
-    //   } else if (huh !== false) {
-    //     console.log(huh);
-    //     console.log('its true');
-    //     app.nextBtn.addEventListener('click', app.next, false);
-    //   }
-    // },
 
     welcome: function() {
       app.nextBtn.style.display = 'none';
       app.backBtn.style.display = 'none';
-      app.startBtn.addEventListener('click', app.next, false);
+      $(app.startBtn).off().on('click', function() {
+        app.next(user.start);
+      });
     },
     // welcome function ENDS
 
     peopleBooking: function() {
 
+      app.needsFill = 'the number of people you are booking for';
       app.maxPeople.innerHTML = accommodation.house.maxPeople;
+      // jquery click event that ensures click only fires ONCE (removes issue that caused click to fire multiple times despite only being clicked once)
+      $(app.nextBtn).off().on('click', function() {
+        app.next(user.people);
+      });
 
       app.peopleScreen.addEventListener('click', function(e) {
         if (e.target === app.oneBtn) {
@@ -233,7 +257,13 @@
     // setNum function ENDS
 
     dateBooking: function() {
+
+      app.needsFill = 'your check-in and check-out dates';
       app.maxDays.innerHTML = accommodation.house.maxNights;
+
+      $(app.nextBtn).off().on('click', function() {
+        app.next(user.stayLength);
+      });
 
       app.calendar = $('#datePicker').daterangepicker({
         'maxSpan': {
@@ -255,7 +285,7 @@
         user.stayLength = timeDifference / (1000 * 3600 * 24) + 1;
 
         if (user.stayLength === 1) {
-          app.dateFeedback.innerHTML = 'Booking for ' + user.stayLength + ' night - From ' + user.checkIn + ' to ' + user.checkOut;
+          app.dateFeedback.innerHTML = 'Booking for ' + user.stayLength + ' night - For ' + user.checkIn;
         } else {
           app.dateFeedback.innerHTML = 'Booking for ' + user.stayLength + ' nights - From ' + user.checkIn + ' to ' + user.checkOut;
         }
@@ -265,75 +295,134 @@
     // dateBooking function ENDS
 
     placeBooking: function() {
+      // map markers
+      var allMarkers = [],
+        hotelMarker = new mapboxgl.Marker()
+          .setLngLat(accommodation.hotel.coordinates),
+        hostelMarker = new mapboxgl.Marker()
+          .setLngLat(accommodation.hostel.coordinates),
+        motelMarker = new mapboxgl.Marker()
+          .setLngLat(accommodation.motel.coordinates),
+        houseMarker = new mapboxgl.Marker()
+          .setLngLat(accommodation.house.coordinates),
+        hotelTwoMarker = new mapboxgl.Marker()
+          .setLngLat(accommodation.hotelTwo.coordinates),
+        options = [];
 
-      // test marker
-      var marker1 = new mapboxgl.Marker()
-        .setLngLat(accommodation.hotel.coordinates)
-        .addTo(map);
+      // app feedback conditionals
+      app.needsFill = 'your accommodation';
+      if (user.people === 1 && user.stayLength === 1) {
+        app.availableTo.innerHTML = user.people + ' person for ' + user.stayLength + ' night';
+      } else if (user.people === 1 && user.stayLength > 1) {
+        app.availableTo.innerHTML = user.people + ' person for ' + user.stayLength + ' nights';
+      } else if (user.people > 1 && user.stayLength === 1) {
+        app.availableTo.innerHTML = user.people + ' people for ' + user.stayLength + ' night';
+      } else {
+        app.availableTo.innerHTML = user.people + ' people for ' + user.stayLength + ' nights';
+      }
 
+      // HOTEL CONDITIONAL
+      if ((user.people >= accommodation.hotel.minPeople && user.people <= accommodation.hotel.maxPeople) && (user.stayLength >= accommodation.hotel.minNights && user.stayLength <= accommodation.hotel.maxNights)) {
 
-      var geojson = {
-        type: 'FeatureCollection',
-        features: [
-        {
-          type: 'Feature',
-          geometry: {
-            type: 'Point',
-            coordinates: accommodation.hotel.coordinates
-          },
-          properties: {
-            title: accommodation.hotel.name,
-            description: ''
-          }
-        },
-        {
-          type: 'Feature',
-          geometry: {
-            type: 'Point',
-            coordinates: accommodation.hostel.coordinates
-          },
-          properties: {
-            title: accommodation.hostel.name,
-            description: ''
-          }
-        },
-        {
-          type: 'Feature',
-          geometry: {
-            type: 'Point',
-            coordinates: accommodation.motel.coordinates
-          },
-          properties: {
-            title: accommodation.motel.name,
-            description: ''
-          }
-        },
-        {
-          type: 'Feature',
-          geometry: {
-            type: 'Point',
-            coordinates: accommodation.house.coordinates
-          },
-          properties: {
-            title: accommodation.house.name,
-            description: ''
-          }
-        }]
-      };
+        hotelMarker.addTo(app.map);
+        allMarkers.push(hotelMarker);
 
-      // add markers to map -- looping through geojson object
-      geojson.features.forEach(function(marker) {
+        app.hotelOpt.innerHTML = accommodation.hotel.name;
+        app.accSelect.appendChild(app.hotelOpt);
+        options.push(app.hotelOpt);
 
-      // create a HTML element for each feature
-      var el = document.createElement('div');
-      el.className = 'marker';
+        app.hotelOpt.addEventListener('click', function() {
+          app.map.flyTo({
+            center: accommodation.hotel.coordinates,
+            zoom: 15,
+            essential: true
+          });
+        }, false);
+        console.log('verycool, the hotel is SUITABLE');
 
-      // make a marker for each feature and add to the map
-      new mapboxgl.Marker(el)
-        .setLngLat(marker.geometry.coordinates)
-        .addTo(map);
+      } else {
+        console.log('lol??? looool lolololo');
+      }
+      // hotel conditional ENDS
+
+      // HOSTEL CONDITIONAL
+      if ((user.people >= accommodation.hostel.minPeople && user.people <= accommodation.hostel.maxPeople) && (user.stayLength >= accommodation.hostel.minNights && user.stayLength <= accommodation.hostel.maxNights)) {
+
+        hostelMarker.addTo(app.map);
+        allMarkers.push(hostelMarker);
+
+        app.hostelOpt.innerHTML = accommodation.hostel.name;
+        app.accSelect.appendChild(app.hostelOpt);
+        options.push(app.hostelOpt);
+
+        console.log('verycool, the hostel is SUITABLE');
+
+      } else {
+        console.log('lol??? looool lolololo');
+      }
+      // hostel conditional ENDS
+
+      // MOTEL CONDITIONAL
+      if ((user.people >= accommodation.motel.minPeople && user.people <= accommodation.motel.maxPeople) && (user.stayLength >= accommodation.motel.minNights && user.stayLength <= accommodation.motel.maxNights)) {
+
+        motelMarker.addTo(app.map);
+        allMarkers.push(motelMarker);
+
+        app.motelOpt.innerHTML = accommodation.motel.name;
+        app.accSelect.appendChild(app.motelOpt);
+        options.push(app.motelOpt);
+
+        console.log('verycool, the motel is SUITABLE');
+
+      } else {
+        console.log('lol??? looool lolololo');
+      }
+      // motel conditional ENDS
+
+      // HOUSE CONDITIONAL
+      if ((user.people >= accommodation.house.minPeople && user.people <= accommodation.house.maxPeople) && (user.stayLength >= accommodation.house.minNights && user.stayLength <= accommodation.house.maxNights)) {
+
+        houseMarker.addTo(app.map);
+        allMarkers.push(houseMarker);
+
+        app.houseOpt.innerHTML = accommodation.house.name;
+        app.accSelect.appendChild(app.houseOpt);
+        options.push(app.houseOpt);
+
+        console.log('verycool, the house is SUITABLE');
+
+      } else {
+        console.log('lol??? looool lolololo');
+      }
+      // house conditional ENDS
+
+      // HOTEL TWO CONDITIONAL
+      if ((user.people >= accommodation.hotelTwo.minPeople && user.people <= accommodation.hotelTwo.maxPeople) && (user.stayLength >= accommodation.hotelTwo.minNights && user.stayLength <= accommodation.hotelTwo.maxNights)) {
+
+        hotelTwoMarker.addTo(app.map);
+        allMarkers.push(hotelTwoMarker);
+
+        app.hotelTwoOpt.innerHTML = accommodation.hotelTwo.name;
+        app.accSelect.appendChild(app.hotelTwoOpt);
+        options.push(app.hotelTwoOpt);
+
+        console.log('verycool, the hotelTwo is SUITABLE');
+
+      } else {
+        console.log('lol??? looool lolololo');
+      }
+      // hotel two conditional ENDS
+
+      $(app.backBtn).off().on('click', function() {
+        app.back();
+        for (var i = allMarkers.length - 1; i >= 0; i--) {
+          console.log(allMarkers[i]);
+          allMarkers[i].remove();
+        }
+        for (var i = 0; i < options.length; i++) {
+          options[i].remove();
+        }
       });
-
     },
     // placeBooking function ENDS
 

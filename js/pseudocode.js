@@ -4,12 +4,13 @@
 
 What i am doing right now: LOCATION / ACCOMMODATION SELECTION
 
-1. Set up mapbox API
-2. Place relevant markers on map and in select box
-3. Create conditionals for relevant markers to be shows (ie whats available to the relevant user.people number and user.staylength number)
-4. Display place info on DOM
-5. Fly to place on map when it has been clicked on the selectbox
-6. don't stress because this step is a little bit overwhelming
+1. Set up mapbox API √
+2. Place relevant markers on map and in select box √
+3. Create conditionals for relevant markers to be shows (ie whats available to the relevant user.people number and user.staylength number) √
+4. Fly to place on map when it has been clicked on the selectbox
+5. Display place info on DOM and relevant things
+6. Push selection option to relevant user object item :D
+1332432. don't stress because this step is a little bit overwhelming
 
 0325. NO clicking next button unless there is a valid input, we need to make this the case for all of stuff and things tbh... like maybe if user.thing = false, next is non clickable? i'll figure it out.
 
@@ -32,7 +33,7 @@ ToDo (probably at home):
 2. loading prior to the actual page load-in
 3. extra fun animations on the next/back buttons and other buttons :)
 4. background image adjusting cleanly based on user interaction
-
+5. next arrow button greyed out until user inputs in each step
 
 -- COMPLETED PSEUDOCODE SECTIONS !!
 
