@@ -73,6 +73,8 @@
 // ------------------------------ APP OBJECT ------------------------------
 
   var app = {
+    // pulling accommodation data into a style of array :)
+    data: Object.keys(accommodation),
     // pulling buttons from dom
     startBtn: document.querySelector('.go-btn'),
     nextBtn: document.querySelector('.next i'),
@@ -99,15 +101,19 @@
     maxDays: document.querySelector('.max-days'),
     dateFeedback: document.querySelector('.date-feedback'),
     // PULLING FOR ACCOMMODATION SELECT SCREEN ---------------
+    placeScreen: document.querySelector('#placeSelect'),
     availableTo: document.querySelector('.user-people'),
     // map to be added so that it can be pulled out of function scope
     map: false,
     accSelect: document.querySelector('#accommodation'),
+    // creating new option elements to be added to dom conditionally
     hotelOpt: document.createElement('option'),
     hostelOpt: document.createElement('option'),
     motelOpt: document.createElement('option'),
     houseOpt: document.createElement('option'),
     hotelTwoOpt: document.createElement('option'),
+    allMarkers: [],
+    accNames: [],
 
     // initialisation function
     init: function() {
@@ -296,9 +302,8 @@
 
     placeBooking: function() {
       // map markers
-      var allMarkers = [],
-        hotelMarker = new mapboxgl.Marker()
-          .setLngLat(accommodation.hotel.coordinates),
+      var hotelMarker = new mapboxgl.Marker()
+        .setLngLat(accommodation.hotel.coordinates),
         hostelMarker = new mapboxgl.Marker()
           .setLngLat(accommodation.hostel.coordinates),
         motelMarker = new mapboxgl.Marker()
@@ -325,23 +330,13 @@
       if ((user.people >= accommodation.hotel.minPeople && user.people <= accommodation.hotel.maxPeople) && (user.stayLength >= accommodation.hotel.minNights && user.stayLength <= accommodation.hotel.maxNights)) {
 
         hotelMarker.addTo(app.map);
-        allMarkers.push(hotelMarker);
+        app.allMarkers.push(hotelMarker);
 
         app.hotelOpt.innerHTML = accommodation.hotel.name;
+        app.accNames.push('hotel');
+
         app.accSelect.appendChild(app.hotelOpt);
         options.push(app.hotelOpt);
-
-        app.hotelOpt.addEventListener('click', function() {
-          app.map.flyTo({
-            center: accommodation.hotel.coordinates,
-            zoom: 15,
-            essential: true
-          });
-        }, false);
-        console.log('verycool, the hotel is SUITABLE');
-
-      } else {
-        console.log('lol??? looool lolololo');
       }
       // hotel conditional ENDS
 
@@ -349,16 +344,13 @@
       if ((user.people >= accommodation.hostel.minPeople && user.people <= accommodation.hostel.maxPeople) && (user.stayLength >= accommodation.hostel.minNights && user.stayLength <= accommodation.hostel.maxNights)) {
 
         hostelMarker.addTo(app.map);
-        allMarkers.push(hostelMarker);
+        app.allMarkers.push(hostelMarker);
 
         app.hostelOpt.innerHTML = accommodation.hostel.name;
+        app.accNames.push('hostel');
+
         app.accSelect.appendChild(app.hostelOpt);
         options.push(app.hostelOpt);
-
-        console.log('verycool, the hostel is SUITABLE');
-
-      } else {
-        console.log('lol??? looool lolololo');
       }
       // hostel conditional ENDS
 
@@ -366,16 +358,13 @@
       if ((user.people >= accommodation.motel.minPeople && user.people <= accommodation.motel.maxPeople) && (user.stayLength >= accommodation.motel.minNights && user.stayLength <= accommodation.motel.maxNights)) {
 
         motelMarker.addTo(app.map);
-        allMarkers.push(motelMarker);
+        app.allMarkers.push(motelMarker);
 
         app.motelOpt.innerHTML = accommodation.motel.name;
+        app.accNames.push('motel');
+
         app.accSelect.appendChild(app.motelOpt);
         options.push(app.motelOpt);
-
-        console.log('verycool, the motel is SUITABLE');
-
-      } else {
-        console.log('lol??? looool lolololo');
       }
       // motel conditional ENDS
 
@@ -383,16 +372,13 @@
       if ((user.people >= accommodation.house.minPeople && user.people <= accommodation.house.maxPeople) && (user.stayLength >= accommodation.house.minNights && user.stayLength <= accommodation.house.maxNights)) {
 
         houseMarker.addTo(app.map);
-        allMarkers.push(houseMarker);
+        app.allMarkers.push(houseMarker);
 
         app.houseOpt.innerHTML = accommodation.house.name;
+        app.accNames.push('house');
+
         app.accSelect.appendChild(app.houseOpt);
         options.push(app.houseOpt);
-
-        console.log('verycool, the house is SUITABLE');
-
-      } else {
-        console.log('lol??? looool lolololo');
       }
       // house conditional ENDS
 
@@ -400,31 +386,50 @@
       if ((user.people >= accommodation.hotelTwo.minPeople && user.people <= accommodation.hotelTwo.maxPeople) && (user.stayLength >= accommodation.hotelTwo.minNights && user.stayLength <= accommodation.hotelTwo.maxNights)) {
 
         hotelTwoMarker.addTo(app.map);
-        allMarkers.push(hotelTwoMarker);
+        app.allMarkers.push(hotelTwoMarker);
 
         app.hotelTwoOpt.innerHTML = accommodation.hotelTwo.name;
+        app.accNames.push('hotelTwo');
+
         app.accSelect.appendChild(app.hotelTwoOpt);
         options.push(app.hotelTwoOpt);
-
-        console.log('verycool, the hotelTwo is SUITABLE');
-
-      } else {
-        console.log('lol??? looool lolololo');
       }
       // hotel two conditional ENDS
 
+      // e target selectbox click then call the accommodation checking and zoomies and all that WEHE
+
+      app.accSelect.addEventListener('change', function() {
+
+        var optIndex = app.accSelect.selectedIndex - 1;
+
+        if (options[optIndex].label === accommodation[app.accNames[optIndex]].name) {
+          app.map.flyTo({
+            center: accommodation[app.accNames[optIndex]].coordinates,
+            zoom: 15,
+            essential: true
+          });
+          // in here we can get more of the stuff and things to display on the dom !!
+        }
+      }, false);
+      // app on change function ENDS
+
       $(app.backBtn).off().on('click', function() {
         app.back();
-        for (var i = allMarkers.length - 1; i >= 0; i--) {
-          console.log(allMarkers[i]);
-          allMarkers[i].remove();
-        }
+        app.resetMarkers();
         for (var i = 0; i < options.length; i++) {
           options[i].remove();
+          app.accNames[i].remove();
         }
       });
     },
     // placeBooking function ENDS
+
+    resetMarkers: function() {
+      for (var i = app.allMarkers.length - 1; i >= 0; i--) {
+        app.allMarkers[i].remove();
+      }
+    },
+    // resetMarkers function ENDS
 
     mealBooking: function() {
 

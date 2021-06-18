@@ -7,9 +7,10 @@ What i am doing right now: LOCATION / ACCOMMODATION SELECTION
 1. Set up mapbox API √
 2. Place relevant markers on map and in select box √
 3. Create conditionals for relevant markers to be shows (ie whats available to the relevant user.people number and user.staylength number) √
-4. Fly to place on map when it has been clicked on the selectbox
+4. Fly to place on map when it has been clicked on the selectbox √
 5. Display place info on DOM and relevant things
 6. Push selection option to relevant user object item :D
+7. Dont allow to move on if user option is empty
 1332432. don't stress because this step is a little bit overwhelming
 
 0325. NO clicking next button unless there is a valid input, we need to make this the case for all of stuff and things tbh... like maybe if user.thing = false, next is non clickable? i'll figure it out.
@@ -25,6 +26,7 @@ ToDo (probably at home):
 
 1. figuring out how to minify my custom js with gulp.
 2. trying to force daterangepicker to stay open (it seems to really not want to do this)
+3. app.accNames[i].remove() doesn't want to do what /i/ want it to do. it will be punished accordingly
 
 
 -- EXTRAS !!
