@@ -39,12 +39,12 @@ Sass (SCSS) is a style of coding akin to CSS that I have become very font of for
    $blue: #7093e3;
    $purple: #7e65e6;
  ```
-* **Imports** Using sass imports allowed me to seperate my variables from the mass of my js code, which helped my code to be more clean. Additionally, it made it much easier to locate the variables whenever I needed to adjust them slightly.
+* **Imports:** Using sass imports allowed me to seperate my variables from the mass of my js code, which helped my code to be more clean. Additionally, it made it much easier to locate the variables whenever I needed to adjust them slightly.
 ``` scss
 @import 'vars';
 ```
 
-* **Mixins** Sass mixins are a great way to set a default to be used later in code multiple times, and save you from having to repeat code or break the logical order of your cascade- additionally, the ability to parse values is especially handy for fitting your different needs and creating different instances of a similar element much more efficiently.
+* **Mixins:** Sass mixins are a great way to set a default to be used later in code multiple times, and save you from having to repeat code or break the logical order of your cascade- additionally, the ability to parse values is especially handy for fitting your different needs and creating different instances of a similar element much more efficiently.
 ``` scss
 @mixin jost-default($color: $white) {
   color: $color;
@@ -52,8 +52,8 @@ Sass (SCSS) is a style of coding akin to CSS that I have become very font of for
   font-family: 'Jost', sans-serif;
 }
 ```
-* **Extends** Sass extends are similar to mixins, but you can use classes you've already created and include their code into a new element- this is efficient for it also reduces code repition and doesn't break the logical flow of your cascade. Example included in nesting.
-* **Nesting** Sass nesting allows you to target children elements similarly to how you would in vanilla css, but laid out more logically to show the child you are targeting literally inside the parent- this makes the code more readable.
+* **Extends:** Sass extends are similar to mixins, but you can use classes you've already created and include their code into a new element- this is efficient for it also reduces code repition and doesn't break the logical flow of your cascade. Example included in nesting.
+* **Nesting:** Sass nesting allows you to target children elements similarly to how you would in vanilla css, but laid out more logically to show the child you are targeting literally inside the parent- this makes the code more readable.
 ``` scss
 .date-content {
   @extend .people-content;
