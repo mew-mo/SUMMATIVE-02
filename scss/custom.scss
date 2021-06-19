@@ -18,6 +18,9 @@ body {
 
 body {
   background-color: $dark;
+  background-image: url('/img/qt-dark.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
   overflow: hidden;
 }
 
@@ -45,7 +48,7 @@ body {
   @include jost-default($color);
 }
 
-@mixin button($color: $cyan, $bg-color: $dark) {
+@mixin button($color: $cyan, $bg-color: $none) {
   color: $color;
   height: 55px;
   font-size: 1.4rem;
@@ -142,7 +145,7 @@ p {
 //  add bg images to #welcome later and all that good cool epic stuff >:D
 
 .welcome-content {
-  margin-top: 50%;
+  margin-top: 18%;
   text-align: center;
 }
 
@@ -154,6 +157,11 @@ p {
 
 .go-btn {
   @include button($dark, $cyan);
+}
+
+.info-btn,
+.go-btn {
+  margin-top: 30%;
 }
 
 // ---------------------- PEOPLE SELECT SCREEN ----------------------
@@ -174,15 +182,15 @@ p {
 }
 
 .two-btn {
-  @include round-button($dark, $turquoise);
+  @include round-button($none, $turquoise);
 }
 
 .three-btn {
-  @include round-button($dark, $blue);
+  @include round-button($none, $blue);
 }
 
 .four-btn {
-  @include round-button($dark, $purple);
+  @include round-button($none, $purple);
 }
 
 .one-btn:hover,

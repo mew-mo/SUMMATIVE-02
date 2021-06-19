@@ -16,7 +16,6 @@ What i am doing right now: LOCATION / ACCOMMODATION SELECTION
 0325. NO clicking next button unless there is a valid input, we need to make this the case for all of stuff and things tbh... like maybe if user.thing = false, next is non clickable? i'll figure it out.
 
 ToDo (probably at home):
-* hero Logo
 * attempt inline calendar -- https://jsfiddle.net/9m63neo2/
 
 // no pseudocode needed for this step > non js step!

@@ -20,7 +20,7 @@ The terminal was used extensively throughout the project alongside Gulp and Git,
 
 #### Gulp :ski:
 Gulp was used for various different functions that greatly enhanced my production workflow:
-* **Live refresh:** Refreshes HTML, JS and CSS on save, therefore reducing time spent saving and manually refreshing the page. Gulp does so by simulating a live-server environment, which follows industry best practices as the application would run through a server in a real scenario. Being able to instantly see changes saved time and allowed me to make changes faster and more efficiently.
+* **Live refresh:** Refreshes the HTML live page on HTML, JS and CSS save, therefore reducing time spent saving and manually refreshing the page. Gulp does so by simulating a live-server environment, which follows industry best practices as the application would run through a server in a real scenario. Being able to instantly see changes saved time and allowed me to make changes faster and more efficiently.
 
 * **Minifying:** Automatically minifies CSS and JS files. This is efficient for reducing the file-size of these pieces of code, and follows industry best practices.
 * **JS Linting:** Automatically linted my JS code on save, which saves time that would've been spent manually copying my JS onto an online linting tool and waiting for it to run. The results are instant and greatly increase efficiency.
@@ -31,7 +31,7 @@ This Github repo was used from start-to-end in order to access my project in it'
 Github is also a very popular website in the world of developers, and could definitely be considered as an industry standard tool to utilize and understand.
 
 #### Sass :ski:
-Sass is a style of coding akin to CSS that I have become very font of for the shortcuts that it enables me to use that greatly save time. The main Sass methods I used were:
+Sass (SCSS) is a style of coding akin to CSS that I have become very font of for the shortcuts that it enables me to use that greatly save time. The main Sass methods I used were:
 * **Variables:** Sass variables save typing time and also make code more readable- I especially enjoy setting colour variables so that I do not have to type out hex codes.
  ``` scss
    $cyan: #51fbdf;
@@ -39,6 +39,32 @@ Sass is a style of coding akin to CSS that I have become very font of for the sh
    $blue: #7093e3;
    $purple: #7e65e6;
  ```
+* **Imports** Using sass imports allowed me to seperate my variables from the mass of my js code, which helped my code to be more clean. Additionally, it made it much easier to locate the variables whenever I needed to adjust them slightly.
+``` scss
+@import 'vars';
+```
+
+* **Mixins** Sass mixins are a great way to set a default to be used later in code multiple times, and save you from having to repeat code or break the logical order of your cascade- additionally, the ability to parse values is especially handy for fitting your different needs and creating different instances of a similar element much more efficiently.
+``` scss
+@mixin jost-default($color: $white) {
+  color: $color;
+  font-weight: 300;
+  font-family: 'Jost', sans-serif;
+}
+```
+* **Extends** Sass extends are similar to mixins, but you can use classes you've already created and include their code into a new element- this is efficient for it also reduces code repition and doesn't break the logical flow of your cascade. Example included in nesting.
+* **Nesting** Sass nesting allows you to target children elements similarly to how you would in vanilla css, but laid out more logically to show the child you are targeting literally inside the parent- this makes the code more readable.
+``` scss
+.date-content {
+  @extend .people-content;
+
+  h6 {
+    margin-top: 26%;
+  }
+}
+```
+
+
 # this is where I'm up to :)
 
 
@@ -47,6 +73,7 @@ Sass is a style of coding akin to CSS that I have become very font of for the sh
 * Validation statement for .js/.css & html
 * Some detail of javascript style guide
 * Any other info you wish to add
+  * maybe all plugins, libraries and APIs included? :0 !!
 
 
 *This text will be italic* (forward slash to line break)\
