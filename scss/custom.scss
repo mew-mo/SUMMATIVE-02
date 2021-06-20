@@ -37,7 +37,7 @@ body {
   font-family: 'Viga', sans-serif;
 }
 
-@mixin round-button($bg-color: $dark, $color: $cyan) {
+@mixin round-button($bg-color: $none, $color: $cyan) {
   color: $color;
   background-color: $bg-color;
   border: 2px $color solid;
@@ -48,7 +48,7 @@ body {
   @include jost-default($color);
 }
 
-@mixin button($color: $cyan, $bg-color: $none) {
+@mixin button($color: $cyan, $bg-color: $dark) {
   color: $color;
   height: 55px;
   font-size: 1.4rem;

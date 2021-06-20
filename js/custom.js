@@ -10,7 +10,10 @@
       maxPeople: 2,
       pricePerNight: 157,
       minNights: 1,
-      maxNights: 5
+      maxNights: 5,
+      info: 'Centrally located on the shores of Lake Wakatipu, treat yourself to 4-star tranquility at Novotel Queenstown Lakeside Hotel. Start your day fresh with a breath of mountain air from your hotel room balcony and a delicious buffet breakfast in the airy restaurant. Your hotel room will be waiting for you after a long day of soaking up Queenstown\'s natural beauty.',
+      nearAttractions: ['Local Golf Course', 'Coronet Peak Ski  Resort', 'Lake Wakatipu', 'Skyline Luge']
+
     },
     hostel: {
       name: 'Haka Lodge Queenstown',
@@ -19,7 +22,9 @@
       maxPeople: 1,
       pricePerNight: 30,
       minNights: 1,
-      maxNights: 10
+      maxNights: 10,
+      info: 'You are invited to stay at our upmarket backpackers in Queenstown; Haka Lodge! Opened just a few years ago, close to the city centre and kitted out with top of the line facilities, this lodge is an absolute stunner. We offer accommodation suitable for everybody from luxury bunk beds to private rooms. We believe in offering affordable accommodation that is premium and up-scale. Come and see why we have been awarded a TripAdvisor 2019 Certificate of Excellence.',
+      nearAttractions: ['Lake Wakatipu', 'Fergburger', 'Shotover / Camp St intersection', 'Skyline Luge']
     },
     motel: {
       name: 'Manata Lodge',
@@ -28,7 +33,9 @@
       maxPeople: 4,
       pricePerNight: 90,
       minNights: 3,
-      maxNights: 10
+      maxNights: 10,
+      info: 'Manata Homestead & Lodge is nestled in the heart of Wakatipu Basin with stunning views of Coronet Peak and the Remarkables. Our beautiful property contains a large 4-bedroom house and 4 self-contained apartments. Manata is perfect for groups of families or friends, small weddings, after wedding BBQ\’s, family celebrations, ski teams, hiking groups, golfers, family reunions and tour groups.',
+      nearAttractions: ['Shotover River', 'The Remarkables Ski Area', 'Five Mile Shopping Centre', 'Coronet Peak Ski Area']
     },
     house: {
       name: 'Shotover Country Cottages',
@@ -37,7 +44,9 @@
       maxPeople: 4,
       pricePerNight: 240,
       minNights: 2,
-      maxNights: 15
+      maxNights: 15,
+      info: 'Shotover Country Cottages are a fantastic base to explore Queenstown and surroundings. Shotover Country Cottages provide boutique accommodation conveniently located between Queenstown and Arrowtown, NZ. Fully self-contained, the cottages are perfect for a weekend away or a longer stay.',
+      nearAttractions: ['The Queenstown Trail', 'The Remarkables and Coronet Peak Ski Areas', 'Shotover and Kawarau Rivers', 'Onsen Hot Pools', 'Lake Hayes']
     },
     hotelTwo: {
       name: 'Nugget Point Queenstown Hotel',
@@ -46,7 +55,9 @@
       maxPeople: 4,
       pricePerNight: 139,
       minNights: 1,
-      maxNights: 15
+      maxNights: 15,
+      info: 'Nugget Point, a THC Group Hotel, is located in Arthur\'s Point, New Zealand. The closest hotel to the stunning Coronet Peak Ski Area, within easy reach of central Queenstown, this property will allow you to experience this destination in a unique and unforgettable way. Our secluded location offers you peace and tranquility to relax during your stay, while also allowing you to enjoy the buzz of central Queenstown – just a 7 minute drive away.',
+      nearAttractions: ['Coronet Peak Ski Area', 'Shotover River', 'Onsen Hot Pools', 'Arthur\'s Point Gorge Scenic Reserve']
     }
   };
   // accommodation object ENDS
@@ -114,6 +125,10 @@
     hotelTwoOpt: document.createElement('option'),
     allMarkers: [],
     accNames: [],
+    // pulling DOM display text
+    price: document.querySelector('.price'),
+    locationInfo: document.querySelector('.location-info'),
+    attractionList: document.querySelector('.attractions'),
 
     // initialisation function
     init: function() {
@@ -326,6 +341,10 @@
         app.availableTo.innerHTML = user.people + ' people for ' + user.stayLength + ' nights';
       }
 
+      $(app.nextBtn).off().on('click', function() {
+        app.next(user.place);
+      });
+
       // HOTEL CONDITIONAL
       if ((user.people >= accommodation.hotel.minPeople && user.people <= accommodation.hotel.maxPeople) && (user.stayLength >= accommodation.hotel.minNights && user.stayLength <= accommodation.hotel.maxNights)) {
 
@@ -403,11 +422,20 @@
         var optIndex = app.accSelect.selectedIndex - 1;
 
         if (options[optIndex].label === accommodation[app.accNames[optIndex]].name) {
+
+          user.place = options[optIndex].label;
+          app.price.innerHTML = '$' + accommodation[app.accNames[optIndex]].pricePerNight + ' per night';
+          app.locationInfo.innerHTML = accommodation[app.accNames[optIndex]].info;
+
           app.map.flyTo({
             center: accommodation[app.accNames[optIndex]].coordinates,
             zoom: 15,
             essential: true
           });
+
+          // for (var i = 0; i < accommodation[app.accNames[optIndex]].nearAttractions.length; i++) {
+          //   array[i]
+          // }
           // in here we can get more of the stuff and things to display on the dom !!
         }
       }, false);
@@ -418,7 +446,7 @@
         app.resetMarkers();
         for (var i = 0; i < options.length; i++) {
           options[i].remove();
-          app.accNames[i].remove();
+          // app.accNames[i].remove();
         }
       });
     },
