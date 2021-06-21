@@ -45,7 +45,7 @@
         <!-- bootstrap col STARTS -->
         <div class="col-md-4 mx-auto welcome-content">
           <div class="hero-logo">
-            <img src="img/sweetas-logo.png" alt="Sweet As - Queenstown Getaways Campaign Logo">
+            <img src="img/sweetas-logo.png" alt="Sweet As - Queenstown Getaways Campaign Logo" class="sweet-as-logo">
           </div>
 
           <button class="info-btn">
@@ -110,12 +110,7 @@
             <p class="location-info"></p>
 
             <h5>Nearby Attractions</h5>
-            <ul class="attractions">
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-            </ul>
+            <ul class="attractions"></ul>
 
           </div>
           <!-- place info ENDS -->
@@ -131,18 +126,29 @@
           <h2>Would you like our complimentary meals?</h2>
           <h6>For the first day of your trip, we offer meals day-round. Select those you'd like!</h6>
 
-          <input type="checkbox" id="breakfast">
-          <label for="breakfast">Breakfast</label>
+          <div class="meal-options">
+            <div class="meal-checkbox breakfast">
+              <input type="checkbox" id="breakfast">
+              <label for="breakfast">Breakfast</label>
+            </div>
 
-          <input type="checkbox" id="lunch">
-          <label for="lunch">Lunch</label>
+            <div class="meal-checkbox lunch">
+              <input type="checkbox" id="lunch">
+              <label for="lunch">Lunch</label>
+            </div>
 
-          <input type="checkbox" id="dinner">
-          <label for="dinner">Dinner</label>
+            <div class="meal-checkbox dinner">
+              <input type="checkbox" id="dinner">
+              <label for="dinner">Dinner</label>
+            </div>
 
-          <input type="checkbox" id="noMeals">
-          <label for="noMeals">No thanks!</label>
-          <!-- ADD PRICE ADD PRICE ADD PRICE DISPLAY -->
+            <div class="meal-checkbox no-meals">
+              <input type="checkbox" id="noMeals">
+              <label for="noMeals">No thanks!</label>
+            </div>
+            <!-- ADD PRICE ADD PRICE ADD PRICE DISPLAY -->
+          </div>
+          <!-- meal options ENDS -->
         </div>
         <!-- col ENDS -->
       </div>

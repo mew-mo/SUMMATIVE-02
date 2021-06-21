@@ -149,6 +149,10 @@ p {
   text-align: center;
 }
 
+.sweet-as-logo {
+  margin-left: -85px;
+}
+
 // ---------------------- load in buttons
 
 .info-btn {
@@ -255,10 +259,20 @@ p {
   border-radius: 20px;
 }
 
+.btn-primary.disabled,
+.btn-primary:disabled {
+  color: $white;
+  background-color: $mid-purple;
+  border-color: $mid-purple;
+}
 // ---------------------- PLACE SELECT SCREEN ----------------------
 
 .place-content {
   margin-top: 11%;
+
+  h5 {
+    margin-top: 40px;
+  }
 }
 
 #accommodation {
@@ -277,11 +291,57 @@ select {
   @include jost-default($dark);
 }
 
+li {
+  @include jost-default;
+}
+
 // ---------------------- MEAL SELECT SCREEN ----------------------
 
 .meal-content {
   @extend .people-content;
 }
+
+.meal-options {
+  margin-top: 5%;
+}
+
+.meal-checkbox {
+  display: block;
+  text-align: left;
+  font-size: 1.5rem;
+  margin-left: 40%;
+  padding: 20px;
+  @include jost-default;
+
+  input {
+    position: absolute;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 40px;
+    width: 40px;
+    background-color: $white;
+    border-radius: 70px;
+    margin-right: 20px;
+  }
+
+  label {
+    margin-top: 3px;
+    margin-left: 60px;
+  }
+
+  input:active,
+  input:checked:active {
+    background-color: $blue;
+  }
+
+  input:checked {
+    background-color: $dark;
+    box-shadow: inset 0px 0px 0px 13px $cyan;
+    box-sizing: border-box;
+  }
+
+}
+// meal-checkbox ENDS
 
 // ---------------------- REVIEW SCREEN ----------------------
 

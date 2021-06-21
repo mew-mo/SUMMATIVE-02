@@ -2,30 +2,33 @@
 
 -- PSEUDOCODE !!
 
-What i am doing right now: LOCATION / ACCOMMODATION SELECTION
+What i am doing right now: MEAL SELECTION
 
-1. Set up mapbox API √
-2. Place relevant markers on map and in select box √
-3. Create conditionals for relevant markers to be shows (ie whats available to the relevant user.people number and user.staylength number) √
-4. Fly to place on map when it has been clicked on the selectbox √
-5. Display place info on DOM and relevant things
-6. Push selection option to relevant user object item :D
-7. Dont allow to move on if user option is empty
-1332432. don't stress because this step is a little bit overwhelming
+1. Pull checkboxes from DOM
+2. Conditionals - if 4th checkbox is selected, can't select any of the others. if any of the 1st three checked, cant select the 4th. this part is tricky already tbh
+3. Dynamically add prices into DOM display
+4. Add prices of selected thingo to user.totalPrice :)
+
 
 0325. NO clicking next button unless there is a valid input, we need to make this the case for all of stuff and things tbh... like maybe if user.thing = false, next is non clickable? i'll figure it out.
 
 ToDo (probably at home):
 * attempt inline calendar -- https://jsfiddle.net/9m63neo2/
+* grey out arrow key button if user.thing is false
 
 // no pseudocode needed for this step > non js step!
 
 
 -- CURRENT PROBLEMS !!
 
-1. figuring out how to minify my custom js with gulp.
-2. trying to force daterangepicker to stay open (it seems to really not want to do this)
+1. figuring out how to minify my custom js with gulp-- try to add this in at the end probably
+2. trying to force daterangepicker to stay open (it seems to really not want to do this)-- i have tried a lot of different things so it might not be possible, come back to it in the end
+3. every time i go back and forward, the meal prices append to the dom again. this is likely a result of += but i need to make sure it only happens ONCE
+
+-- SOLVED (to some extent) !!
+
 3. app.accNames[i].remove() doesn't want to do what /i/ want it to do. it will be punished accordingly
+
 
 
 -- EXTRAS !!
@@ -65,8 +68,20 @@ ToDo (probably at home):
 // 4. Push user selection constantly into user object variables
 // 5. Display current selection on DOM accordingly uwu
 
+// LOCATION / ACCOMMODATION SELECTION
+//
+// 1. Set up mapbox API √
+// 2. Place relevant markers on map and in select box √
+// 3. Create conditionals for relevant markers to be shows (ie whats available to the relevant user.people number and user.staylength number) √
+// 4. Fly to place on map when it has been clicked on the selectbox √
+// 5. Display place info on DOM and relevant things √
+// 6. Push selection option to relevant user object item :D √
+// 7. Dont allow to move on if user option is empty √
+// 8. make placeholder come back again :P
+// 1332432. don't stress because this step is a little bit overwhelming
 
--- MOURNING MY HTML THAT HAD TO BE REDONE !!
+
+-- MOURNING MY HTML AND JS THAT HAD TO BE REDONE !!
 
 // <!-- date select STARTS -->
 // <div id="dateSelect" class="full-screen">
@@ -86,3 +101,6 @@ ToDo (probably at home):
 //   <!-- date content col ENDS -->
 // </div>
 // <!-- date select ENDS -->
+
+// pulling accommodation data into a style of array :)
+// data: Object.keys(accommodation),

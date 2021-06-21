@@ -65,8 +65,7 @@
   var meals = {
     breakfast: 20,
     lunch: 20,
-    dinner: 25,
-    all: 65
+    dinner: 25
   };
   // meal object ENDS
 
@@ -77,15 +76,16 @@
     checkIn: false,
     checkOut: false,
     stayLength: false,
-    place: false
+    place: false,
+    price: false,
+    mealPrice: false,
+    totalPrice: false
   };
   // user object ENDS
 
 // ------------------------------ APP OBJECT ------------------------------
 
   var app = {
-    // pulling accommodation data into a style of array :)
-    data: Object.keys(accommodation),
     // pulling buttons from dom
     startBtn: document.querySelector('.go-btn'),
     nextBtn: document.querySelector('.next i'),
@@ -125,10 +125,20 @@
     hotelTwoOpt: document.createElement('option'),
     allMarkers: [],
     accNames: [],
+    options: [],
     // pulling DOM display text
     price: document.querySelector('.price'),
     locationInfo: document.querySelector('.location-info'),
     attractionList: document.querySelector('.attractions'),
+    // PULLING FOR MEAL SELECT SCREEN ---------------
+    breakfastCheck: document.querySelector('#breakfast'),
+    breakfastLabel: document.querySelector('.breakfast label'),
+    lunchCheck: document.querySelector('#lunch'),
+    lunchLabel: document.querySelector('.lunch label'),
+    dinnerCheck: document.querySelector('#dinner'),
+    dinnerLabel: document.querySelector('.dinner label'),
+    noMealsCheck: document.querySelector('#noMeals'),
+    noMealsLabel: document.querySelector('.no-meals label'),
 
     // initialisation function
     init: function() {
@@ -286,6 +296,7 @@
         app.next(user.stayLength);
       });
 
+      // daterangepicker STARTS
       app.calendar = $('#datePicker').daterangepicker({
         'maxSpan': {
           'days': 14
@@ -326,8 +337,7 @@
         houseMarker = new mapboxgl.Marker()
           .setLngLat(accommodation.house.coordinates),
         hotelTwoMarker = new mapboxgl.Marker()
-          .setLngLat(accommodation.hotelTwo.coordinates),
-        options = [];
+          .setLngLat(accommodation.hotelTwo.coordinates);
 
       // app feedback conditionals
       app.needsFill = 'your accommodation';
@@ -355,7 +365,7 @@
         app.accNames.push('hotel');
 
         app.accSelect.appendChild(app.hotelOpt);
-        options.push(app.hotelOpt);
+        app.options.push(app.hotelOpt);
       }
       // hotel conditional ENDS
 
@@ -369,7 +379,7 @@
         app.accNames.push('hostel');
 
         app.accSelect.appendChild(app.hostelOpt);
-        options.push(app.hostelOpt);
+        app.options.push(app.hostelOpt);
       }
       // hostel conditional ENDS
 
@@ -383,7 +393,7 @@
         app.accNames.push('motel');
 
         app.accSelect.appendChild(app.motelOpt);
-        options.push(app.motelOpt);
+        app.options.push(app.motelOpt);
       }
       // motel conditional ENDS
 
@@ -397,7 +407,7 @@
         app.accNames.push('house');
 
         app.accSelect.appendChild(app.houseOpt);
-        options.push(app.houseOpt);
+        app.options.push(app.houseOpt);
       }
       // house conditional ENDS
 
@@ -411,19 +421,23 @@
         app.accNames.push('hotelTwo');
 
         app.accSelect.appendChild(app.hotelTwoOpt);
-        options.push(app.hotelTwoOpt);
+        app.options.push(app.hotelTwoOpt);
       }
       // hotel two conditional ENDS
 
-      // e target selectbox click then call the accommodation checking and zoomies and all that WEHE
-
+      // selectbox change event STARTS
       app.accSelect.addEventListener('change', function() {
-
         var optIndex = app.accSelect.selectedIndex - 1;
 
-        if (options[optIndex].label === accommodation[app.accNames[optIndex]].name) {
+        // on change of option selection, resets the list by removing all children if the firstChild exists
+        while (app.attractionList.firstChild) {
+          app.attractionList.removeChild(app.attractionList.lastChild);
+        }
 
-          user.place = options[optIndex].label;
+        if (app.options[optIndex].label === accommodation[app.accNames[optIndex]].name) {
+
+          user.place = app.options[optIndex].label;
+          user.price = accommodation[app.accNames[optIndex]].pricePerNight;
           app.price.innerHTML = '$' + accommodation[app.accNames[optIndex]].pricePerNight + ' per night';
           app.locationInfo.innerHTML = accommodation[app.accNames[optIndex]].info;
 
@@ -433,24 +447,33 @@
             essential: true
           });
 
-          // for (var i = 0; i < accommodation[app.accNames[optIndex]].nearAttractions.length; i++) {
-          //   array[i]
-          // }
-          // in here we can get more of the stuff and things to display on the dom !!
+          for (var i = 0; i < accommodation[app.accNames[optIndex]].nearAttractions.length; i++) {
+            var attractionItem = document.createElement('li');
+            attractionItem.innerHTML = accommodation[app.accNames[optIndex]].nearAttractions[i];
+            app.attractionList.appendChild(attractionItem);
+          }
+          // attraction list loop ENDS
         }
       }, false);
-      // app on change function ENDS
+      // selectbox change event ENDS
 
       $(app.backBtn).off().on('click', function() {
         app.back();
-        app.resetMarkers();
-        for (var i = 0; i < options.length; i++) {
-          options[i].remove();
-          // app.accNames[i].remove();
-        }
+        app.placeReset();
       });
     },
     // placeBooking function ENDS
+
+    placeReset: function() {
+      while (app.currentScreen === 3) {
+        app.resetMarkers();
+        app.accNames.length = 0;
+        for (var i = 0; i < app.options.length; i++) {
+          app.options[i].remove();
+        }
+      }
+    },
+    // placeReset function ENDS
 
     resetMarkers: function() {
       for (var i = app.allMarkers.length - 1; i >= 0; i--) {
@@ -461,19 +484,53 @@
 
     mealBooking: function() {
 
+      app.needsFill = 'the meal options you want';
+
+      app.breakfastLabel.innerHTML += ' - $' + meals.breakfast;
+      app.lunchLabel.innerHTML += ' - $' + meals.lunch;
+      app.dinnerLabel.innerHTML += ' - $' + meals.dinner;
+
+      if (app.noMealsCheck.checked) {
+        console.log('no meals was checked?!??!?! cmon =()');
+        app.breakfastCheck.disabled = true;
+        app.lunchCheck.disabled = true;
+        app.dinnerCheck.disabled = true;
+        // instead could add attribute of disabled-----? google that , but also CHECKED isnt working why is that so, must lookinto it
+      } else {
+        app.breakfastCheck.disabled = false;
+        app.lunchCheck.disabled = false;
+        app.dinnerCheck.disabled = false;
+      }
+
+      if (app.breakfastCheck.checked || app.lunchCheck.checked || app.dinnerCheck.checked) {
+        app.noMealsCheck.disabled = true;
+      } else {
+        app.noMealsCheck.disabled = false;
+      }
+
+      $(app.backBtn).off().on('click', function() {
+        app.back();
+      });
     },
     // mealBooking function ENDS
 
     reviewBooking: function() {
-
+      $(app.backBtn).off().on('click', function() {
+        app.back();
+      });
     },
     // reviewBooking function ENDS
 
     confirm: function() {
       app.nextBtn.style.display = 'none';
+
+      $(app.backBtn).off().on('click', function() {
+        app.back();
+      });
     }
     // confirm function ENDS
   };
+  // app object ENDS
 
   // starts the code by calling the initialisation function
   app.init();
