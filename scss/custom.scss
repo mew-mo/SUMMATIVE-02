@@ -340,6 +340,11 @@ li {
     box-sizing: border-box;
   }
 
+  input:disabled {
+    background-color: $white;
+    box-shadow: none;
+  }
+
 }
 // meal-checkbox ENDS
 

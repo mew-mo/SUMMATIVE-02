@@ -65,7 +65,8 @@
   var meals = {
     breakfast: 20,
     lunch: 20,
-    dinner: 25
+    dinner: 25,
+    none: 0
   };
   // meal object ENDS
 
@@ -78,8 +79,8 @@
     stayLength: false,
     place: false,
     price: false,
-    mealPrice: false,
-    totalPrice: false
+    meals: false,
+    total: false
   };
   // user object ENDS
 
@@ -139,6 +140,9 @@
     dinnerLabel: document.querySelector('.dinner label'),
     noMealsCheck: document.querySelector('#noMeals'),
     noMealsLabel: document.querySelector('.no-meals label'),
+    showPrices: false,
+    mealPrices: [meals.breakfast, meals.lunch, meals.dinner, meals.none],
+    checkClicks: 0,
 
     // initialisation function
     init: function() {
@@ -292,10 +296,6 @@
       app.needsFill = 'your check-in and check-out dates';
       app.maxDays.innerHTML = accommodation.house.maxNights;
 
-      $(app.nextBtn).off().on('click', function() {
-        app.next(user.stayLength);
-      });
-
       // daterangepicker STARTS
       app.calendar = $('#datePicker').daterangepicker({
         'maxSpan': {
@@ -323,6 +323,9 @@
         }
       });
       // daterangepicker ENDS
+      $(app.nextBtn).off().on('click', function() {
+        app.next(user.stayLength);
+      });
     },
     // dateBooking function ENDS
 
@@ -350,10 +353,6 @@
       } else {
         app.availableTo.innerHTML = user.people + ' people for ' + user.stayLength + ' nights';
       }
-
-      $(app.nextBtn).off().on('click', function() {
-        app.next(user.place);
-      });
 
       // HOTEL CONDITIONAL
       if ((user.people >= accommodation.hotel.minPeople && user.people <= accommodation.hotel.maxPeople) && (user.stayLength >= accommodation.hotel.minNights && user.stayLength <= accommodation.hotel.maxNights)) {
@@ -457,6 +456,10 @@
       }, false);
       // selectbox change event ENDS
 
+      $(app.nextBtn).off().on('click', function() {
+        app.next(user.place);
+      });
+
       $(app.backBtn).off().on('click', function() {
         app.back();
         app.placeReset();
@@ -486,33 +489,109 @@
 
       app.needsFill = 'the meal options you want';
 
-      app.breakfastLabel.innerHTML += ' - $' + meals.breakfast;
-      app.lunchLabel.innerHTML += ' - $' + meals.lunch;
-      app.dinnerLabel.innerHTML += ' - $' + meals.dinner;
-
-      if (app.noMealsCheck.checked) {
-        console.log('no meals was checked?!??!?! cmon =()');
-        app.breakfastCheck.disabled = true;
-        app.lunchCheck.disabled = true;
-        app.dinnerCheck.disabled = true;
-        // instead could add attribute of disabled-----? google that , but also CHECKED isnt working why is that so, must lookinto it
-      } else {
-        app.breakfastCheck.disabled = false;
-        app.lunchCheck.disabled = false;
-        app.dinnerCheck.disabled = false;
+      if (!app.showPrices) {
+        app.showPrices = true;
+        app.breakfastLabel.innerHTML += ' - $' + meals.breakfast;
+        app.lunchLabel.innerHTML += ' - $' + meals.lunch;
+        app.dinnerLabel.innerHTML += ' - $' + meals.dinner;
       }
 
-      if (app.breakfastCheck.checked || app.lunchCheck.checked || app.dinnerCheck.checked) {
-        app.noMealsCheck.disabled = true;
-      } else {
-        app.noMealsCheck.disabled = false;
-      }
+      app.addListeners();
+
+      $(app.nextBtn).off().on('click', function() {
+        app.next(user.meals);
+      });
 
       $(app.backBtn).off().on('click', function() {
         app.back();
       });
     },
     // mealBooking function ENDS
+
+    addListeners: function() {
+
+      app.breakfastCheck.addEventListener('click', function() {
+        app.breakfastCheck.classList.toggle('clicked-box');
+        app.checkItems(app.mealPrices);
+      }, false);
+
+      app.lunchCheck.addEventListener('click', function() {
+        app.lunchCheck.classList.toggle('clicked-box');
+        app.checkItems(app.mealPrices);
+      }, false);
+
+      app.dinnerCheck.addEventListener('click', function() {
+        app.dinnerCheck.classList.toggle('clicked-box');
+        app.checkItems(app.mealPrices);
+      }, false);
+
+      app.noMealsCheck.addEventListener('click', function() {
+        app.noMealsCheck.classList.toggle('clicked-box');
+        app.checkItems(app.mealPrices);
+      }, false);
+
+    },
+
+    checkItems: function(items) {
+
+      // maybe make a new class for disabled and like, barkbarkbbark. like when nomeals is clicked, the others all go blank, remove class clicked box and toggle to be like, empty.
+
+      // then the same thing happens if break/lunch/dins are clicked, my friend nomeals goes empty. this works better, i just need to make sure that the price resets when nomeals is clicked. resets to normal. doesnt add the stuff and things that we do not want to see. lets pray yeah
+
+      user.total = user.price;
+
+      if (app.breakfastCheck.classList.contains('clicked-box')) {
+        user.total = user.total + items[0];
+        user.meals = true;
+        app.noMealsCheck.setAttribute('disabled', 'true');
+        console.log(user.total);
+      }
+
+      if (app.lunchCheck.classList.contains('clicked-box')) {
+        user.total = user.total + items[1];
+        user.meals = true;
+        app.noMealsCheck.setAttribute('disabled', 'true');
+        console.log(user.total);
+      }
+
+      if (app.dinnerCheck.classList.contains('clicked-box')) {
+        user.total = user.total + items[2];
+        user.meals = true;
+        app.noMealsCheck.setAttribute('disabled', 'true');
+        console.log(user.total);
+      }
+
+      if (app.noMealsCheck.classList.contains('clicked-box')) {
+        user.total = user.total + items[3];
+        user.meals = true;
+        app.breakfastCheck.setAttribute('disabled', 'true');
+        app.lunchCheck.setAttribute('disabled', 'true');
+        app.dinnerCheck.setAttribute('disabled', 'true');
+        console.log(user.total);
+      } else {
+        app.breakfastCheck.removeAttribute('disabled');
+        app.lunchCheck.removeAttribute('disabled');
+        app.dinnerCheck.removeAttribute('disabled');
+      }
+    },
+
+    // calculateMealCosts: function(checkbox, cost) {
+    //   checkbox.addEventListener('change', function() {
+    //
+    //     app.checkClicks += 1;
+    //     console.log(app.checkClicks);
+    //
+    //     if (app.checkClicks % 2 === 0) {
+    //       // even number identifier (unchecked)
+    //       user.total = user.price - cost;
+    //       console.log(user.total);
+    //     } else {
+    //       // odd number identifier (checked)
+    //       user.total = user.price + cost;
+    //       console.log(user.total);
+    //     }
+    //   }, false)
+    // },
 
     reviewBooking: function() {
       $(app.backBtn).off().on('click', function() {

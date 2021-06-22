@@ -6,8 +6,19 @@ What i am doing right now: MEAL SELECTION
 
 1. Pull checkboxes from DOM
 2. Conditionals - if 4th checkbox is selected, can't select any of the others. if any of the 1st three checked, cant select the 4th. this part is tricky already tbh
-3. Dynamically add prices into DOM display
+3. Dynamically add prices into DOM display √
+
+
+
+
 4. Add prices of selected thingo to user.totalPrice :)
+  - Since my checkboxes are custom, .checked doesn't work!
+  - Pass checkbox into if statement, append 1 to clicks when checked and unchecked:
+  - if clicks is even (unchecked), then take the price away.
+  - if clicks is odd (checked), add the price of checked item to user.total
+
+
+
 
 
 0325. NO clicking next button unless there is a valid input, we need to make this the case for all of stuff and things tbh... like maybe if user.thing = false, next is non clickable? i'll figure it out.
@@ -23,12 +34,12 @@ ToDo (probably at home):
 
 1. figuring out how to minify my custom js with gulp-- try to add this in at the end probably
 2. trying to force daterangepicker to stay open (it seems to really not want to do this)-- i have tried a lot of different things so it might not be possible, come back to it in the end
-3. every time i go back and forward, the meal prices append to the dom again. this is likely a result of += but i need to make sure it only happens ONCE
+
 
 -- SOLVED (to some extent) !!
 
 3. app.accNames[i].remove() doesn't want to do what /i/ want it to do. it will be punished accordingly
-
+3. every time i go back and forward, the meal prices append to the dom again. this is likely a result of += but i need to make sure it only happens ONCE
 
 
 -- EXTRAS !!
