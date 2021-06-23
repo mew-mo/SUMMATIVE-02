@@ -80,7 +80,7 @@
     place: false,
     price: false,
     meals: false,
-    gettingMeals: false,
+    gettingMeals: [],
     total: false
   };
   // user object ENDS
@@ -567,7 +567,7 @@
       if (app.noMealsCheck.classList.contains('clicked-box')) {
         user.total = user.total + items[3];
         user.meals = true;
-        console.log(user.meals);
+        user.gettingMeals = ['No extra meals'];
       }
 
       if (!app.dinnerCheck.classList.contains('clicked-box') && !app.lunchCheck.classList.contains('clicked-box') && !app.breakfastCheck.classList.contains('clicked-box') && !app.noMealsCheck.classList.contains('clicked-box')) {
@@ -575,7 +575,8 @@
         user.meals = false;
       }
 
-      // console.log(user.total);
+      console.log(user.gettingMeals);
+      console.log(user.total);
 
 // ------------------------------------------------------------
 
@@ -630,35 +631,35 @@
 
 // ------------------------------------------------------------
 
-      if (app.breakfastCheck.classList.contains('clicked-box') || app.lunchCheck.classList.contains('clicked-box') || app.dinnerCheck.classList.contains('clicked-box') ) {
-        app.noMealsCheck.classList.add('undo');
-      } else {
-        app.noMealsCheck.classList.remove('undo');
-        app.noMealsCheck.classList.add('undo');
-      }
+      // if (app.breakfastCheck.classList.contains('clicked-box') || app.lunchCheck.classList.contains('clicked-box') || app.dinnerCheck.classList.contains('clicked-box') ) {
+      //   app.noMealsCheck.classList.add('undo');
+      // } else {
+      //   app.noMealsCheck.classList.remove('undo');
+      //   app.noMealsCheck.classList.add('undo');
+      // }
+      //
+      // if (app.breakfastCheck.classList.contains('clicked-box')) {
+      //   app.breakfastCheck.classList.remove('undo');
+      //   app.noMealsCheck.classList.add('undo');
+      // }
+      //
+      // if (app.dinnerCheck.classList.contains('clicked-box')) {
+      //   app.dinnerCheck.classList.remove('undo');
+      //   app.noMealsCheck.classList.add('undo');
+      // }
+      //
+      // if (app.noMealsCheck.classList.contains('clicked-box')) {
+      //   app.noMealsCheck.classList.remove('undo');
+      //   app.breakfastCheck.classList.add('undo');
+      //   app.lunchCheck.classList.add('undo');
+      //   app.dinnerCheck.classList.add('undo');
+      // } else {
+      //   app.breakfastCheck.classList.remove('undo');
+      //   app.lunchCheck.classList.remove('undo');
+      //   app.dinnerCheck.classList.remove('undo');
+      // }
 
-      if (app.breakfastCheck.classList.contains('clicked-box')) {
-        app.breakfastCheck.classList.remove('undo');
-        app.noMealsCheck.classList.add('undo');
-      }
-
-      if (app.dinnerCheck.classList.contains('clicked-box')) {
-        app.dinnerCheck.classList.remove('undo');
-        app.noMealsCheck.classList.add('undo');
-      }
-
-      if (app.noMealsCheck.classList.contains('clicked-box')) {
-        app.noMealsCheck.classList.remove('undo');
-        app.breakfastCheck.classList.add('undo');
-        app.lunchCheck.classList.add('undo');
-        app.dinnerCheck.classList.add('undo');
-      } else {
-        app.breakfastCheck.classList.remove('undo');
-        app.lunchCheck.classList.remove('undo');
-        app.dinnerCheck.classList.remove('undo');
-      }
-
-      console.log(user.total);
+      // console.log(user.total);
 
     },
     // checkItems function ENDS
