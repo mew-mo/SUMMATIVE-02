@@ -80,6 +80,7 @@
     place: false,
     price: false,
     meals: false,
+    gettingMeals: false,
     total: false
   };
   // user object ENDS
@@ -143,6 +144,12 @@
     showPrices: false,
     mealPrices: [meals.breakfast, meals.lunch, meals.dinner, meals.none],
     checkClicks: 0,
+    // PULLING FOR REVIEW SCREEN ---------------
+    revPeople: document.querySelector('.rev-ppl'),
+    revStay: document.querySelector('.rev-stay'),
+    revPlace: document.querySelector('.rev-place'),
+    revMeals: document.querySelector('.rev-meals'),
+    finalPrice: document.querySelector('.final-price'),
 
     // initialisation function
     init: function() {
@@ -436,8 +443,8 @@
         if (app.options[optIndex].label === accommodation[app.accNames[optIndex]].name) {
 
           user.place = app.options[optIndex].label;
-          user.price = accommodation[app.accNames[optIndex]].pricePerNight;
-          app.price.innerHTML = '$' + accommodation[app.accNames[optIndex]].pricePerNight + ' per night';
+          user.price = accommodation[app.accNames[optIndex]].pricePerNight * user.stayLength;
+          app.price.innerHTML = '$' + accommodation[app.accNames[optIndex]].pricePerNight + ' per night ($' + user.price + ')';
           app.locationInfo.innerHTML = accommodation[app.accNames[optIndex]].info;
 
           app.map.flyTo({
@@ -534,66 +541,152 @@
 
     checkItems: function(items) {
 
-      // maybe make a new class for disabled and like, barkbarkbbark. like when nomeals is clicked, the others all go blank, remove class clicked box and toggle to be like, empty.
+      // maybe make a new class for disabled btns. like when nomeals is clicked, the others all go blank, remove class clicked box and toggle to be like, empty.
 
       // then the same thing happens if break/lunch/dins are clicked, my friend nomeals goes empty. this works better, i just need to make sure that the price resets when nomeals is clicked. resets to normal. doesnt add the stuff and things that we do not want to see. lets pray yeah
 
       user.total = user.price;
 
+      // this is in need of help, Desperately LOL
+
       if (app.breakfastCheck.classList.contains('clicked-box')) {
         user.total = user.total + items[0];
         user.meals = true;
-        app.noMealsCheck.setAttribute('disabled', 'true');
-        console.log(user.total);
       }
 
       if (app.lunchCheck.classList.contains('clicked-box')) {
         user.total = user.total + items[1];
         user.meals = true;
-        app.noMealsCheck.setAttribute('disabled', 'true');
-        console.log(user.total);
       }
 
       if (app.dinnerCheck.classList.contains('clicked-box')) {
         user.total = user.total + items[2];
         user.meals = true;
-        app.noMealsCheck.setAttribute('disabled', 'true');
-        console.log(user.total);
       }
 
       if (app.noMealsCheck.classList.contains('clicked-box')) {
         user.total = user.total + items[3];
         user.meals = true;
-        app.breakfastCheck.setAttribute('disabled', 'true');
-        app.lunchCheck.setAttribute('disabled', 'true');
-        app.dinnerCheck.setAttribute('disabled', 'true');
-        console.log(user.total);
-      } else {
-        app.breakfastCheck.removeAttribute('disabled');
-        app.lunchCheck.removeAttribute('disabled');
-        app.dinnerCheck.removeAttribute('disabled');
+        console.log(user.meals);
       }
-    },
 
-    // calculateMealCosts: function(checkbox, cost) {
-    //   checkbox.addEventListener('change', function() {
-    //
-    //     app.checkClicks += 1;
-    //     console.log(app.checkClicks);
-    //
-    //     if (app.checkClicks % 2 === 0) {
-    //       // even number identifier (unchecked)
-    //       user.total = user.price - cost;
-    //       console.log(user.total);
-    //     } else {
-    //       // odd number identifier (checked)
-    //       user.total = user.price + cost;
-    //       console.log(user.total);
-    //     }
-    //   }, false)
-    // },
+      if (!app.dinnerCheck.classList.contains('clicked-box') && !app.lunchCheck.classList.contains('clicked-box') && !app.breakfastCheck.classList.contains('clicked-box') && !app.noMealsCheck.classList.contains('clicked-box')) {
+        console.log('all unchecked');
+        user.meals = false;
+      }
+
+      // console.log(user.total);
+
+// ------------------------------------------------------------
+
+      // if (app.breakfastCheck.classList.contains('clicked-box')) {
+      //   user.total = user.total + items[0];
+      //   user.meals = true;
+      //   user.gettingMeals = true;
+      //   app.breakfastCheck.classList.remove('undo');
+      //   app.noMealsCheck.classList.add('undo');
+      // }
+      //
+      // if (app.lunchCheck.classList.contains('clicked-box')) {
+      //   user.total = user.total + items[1];
+      //   user.meals = true;
+      //   user.gettingMeals = true;
+      //   app.lunchCheck.classList.remove('undo');
+      //   app.noMealsCheck.classList.add('undo');
+      // }
+      //
+      // if (app.dinnerCheck.classList.contains('clicked-box')) {
+      //   user.total = user.total + items[2];
+      //   user.meals = true;
+      //   user.gettingMeals = true;
+      //   app.dinnerCheck.classList.remove('undo');
+      //   app.noMealsCheck.classList.add('undo');
+      // }
+      //
+      // if (!app.dinnerCheck.classList.contains('clicked-box') && !app.lunchCheck.classList.contains('clicked-box') && !app.breakfastCheck.classList.contains('clicked-box')) {
+      //   console.log('all unchecked ok..!!');
+      //   app.noMealsCheck.classList.remove('undo');
+      // }
+      //
+      // if (!app.noMealsCheck.classList.contains('clicked-box')) {
+      //   app.breakfastCheck.classList.remove('undo');
+      //   app.lunchCheck.classList.remove('undo');
+      //   app.dinnerCheck.classList.remove('undo');
+      // }
+      //
+      // if (app.noMealsCheck.classList.contains('clicked-box')) {
+      //   user.total = user.total + items[3];
+      //   user.meals = true;
+      //   user.gettingMeals = false;
+      //   app.noMealsCheck.classList.remove('undo');
+      //   app.breakfastCheck.classList.add('undo');
+      //   app.lunchCheck.classList.add('undo');
+      //   app.dinnerCheck.classList.add('undo');
+      // } else {
+      //   app.breakfastCheck.classList.remove('undo');
+      //   app.lunchCheck.classList.remove('undo');
+      //   app.dinnerCheck.classList.remove('undo');
+      // }
+
+// ------------------------------------------------------------
+
+      if (app.breakfastCheck.classList.contains('clicked-box') || app.lunchCheck.classList.contains('clicked-box') || app.dinnerCheck.classList.contains('clicked-box') ) {
+        app.noMealsCheck.classList.add('undo');
+      } else {
+        app.noMealsCheck.classList.remove('undo');
+        app.noMealsCheck.classList.add('undo');
+      }
+
+      if (app.breakfastCheck.classList.contains('clicked-box')) {
+        app.breakfastCheck.classList.remove('undo');
+        app.noMealsCheck.classList.add('undo');
+      }
+
+      if (app.dinnerCheck.classList.contains('clicked-box')) {
+        app.dinnerCheck.classList.remove('undo');
+        app.noMealsCheck.classList.add('undo');
+      }
+
+      if (app.noMealsCheck.classList.contains('clicked-box')) {
+        app.noMealsCheck.classList.remove('undo');
+        app.breakfastCheck.classList.add('undo');
+        app.lunchCheck.classList.add('undo');
+        app.dinnerCheck.classList.add('undo');
+      } else {
+        app.breakfastCheck.classList.remove('undo');
+        app.lunchCheck.classList.remove('undo');
+        app.dinnerCheck.classList.remove('undo');
+      }
+
+      console.log(user.total);
+
+    },
+    // checkItems function ENDS
 
     reviewBooking: function() {
+
+      if (user.people === 1) {
+        app.revPeople.innerHTML = '- Booking for ' + user.people + ' person';
+      } else {
+        app.revPeople.innerHTML = '- Booking for ' + user.people + ' people';
+      }
+
+      if (user.stayLength === 1) {
+        app.revStay.innerHTML = '- ' + user.stayLength + ' night, for ' + user.checkIn;
+      } else {
+        app.revStay.innerHTML = '- ' + user.stayLength + ' nights, from ' + user.checkIn + ' to ' + user.checkOut;
+      }
+
+      app.revPlace.innerHTML = '- Staying at ' + user.place;
+
+      if (!user.gettingMeals) {
+        app.revMeals.innerHTML = '- No extra meals';
+      } else {
+        app.revMeals.innerHTML = '- Extra Meals - ' + user.gettingMeals;
+      }
+
+      app.finalPrice.innerHTML = '$' + user.total;
+
       $(app.backBtn).off().on('click', function() {
         app.back();
       });

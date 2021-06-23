@@ -6,6 +6,7 @@ var gulp = require('gulp');
  	jshint = require('gulp-jshint');
   rename = require('gulp-rename');
   minifyCss = require('gulp-minify-css');
+	minify = require('gulp-minify');
 
 // Server Task
 function serve (done) {
@@ -47,6 +48,13 @@ function lint (done) {
 	done();
 };
 
+function minJs (done) {
+	gulp.src('js/custom.js')
+	.pipe(minify())
+	.pipe(gulp.dest('js/'))
+	.pipe(connect.reload());
+};
+
 // Watch task to watch for file changes
 function watch (done) {
 	gulp.watch('scss/**/*.scss', gulp.series(styles));
@@ -57,3 +65,5 @@ function watch (done) {
 
 // Tasks that Gulp will run
 gulp.task('default', gulp.series(serve, watch, lint, html, styles));
+
+gulp.task('compress', minJs);

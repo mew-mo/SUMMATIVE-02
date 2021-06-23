@@ -32,6 +32,13 @@ ToDo (probably at home):
 
 -- CURRENT PROBLEMS !!
 
+
+RIGHT N O W !!
+
+trying to make it so that when breakfast / lunch / dinner buttons are clicked, NO THANKS! button resets. Also so that when NO THANKS! button is clicked, breakfast / lunch / dinner buttons reset. the buttons are unhappy and do not want to do this.
+
+
+
 1. figuring out how to minify my custom js with gulp-- try to add this in at the end probably
 2. trying to force daterangepicker to stay open (it seems to really not want to do this)-- i have tried a lot of different things so it might not be possible, come back to it in the end
 

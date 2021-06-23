@@ -322,6 +322,7 @@ li {
     background-color: $white;
     border-radius: 70px;
     margin-right: 20px;
+    cursor: pointer;
   }
 
   label {
@@ -340,10 +341,10 @@ li {
     box-sizing: border-box;
   }
 
-  input:disabled {
-    background-color: $white;
-    box-shadow: none;
-  }
+  // input.undo {
+  //   background-color: $white;
+  //   box-shadow: none;
+  // }
 
 }
 // meal-checkbox ENDS
@@ -352,10 +353,28 @@ li {
 
 .review-content {
   @extend .people-content;
+
+  h3 {
+    text-align: left;
+    margin: 0 0 40px 30%;
+  }
+
+  .review {
+    margin: 100px 0 80px 0;
+  }
 }
 
 // ---------------------- CONFIRMATION SCREEN ----------------------
 
 .confirmed-content {
   @extend .welcome-content;
+
+  h2 {
+    margin-top: 70px;
+  }
+}
+
+.sweet-as-logo-end {
+  margin-top: -20px;
+  margin-left: 30%;
 }
