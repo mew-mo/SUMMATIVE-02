@@ -335,17 +335,12 @@ li {
     background-color: $blue;
   }
 
-  input:checked {
+  // input:checked,
+  .clicked-box {
     background-color: $dark;
     box-shadow: inset 0px 0px 0px 13px $cyan;
     box-sizing: border-box;
   }
-
-  // input.undo {
-  //   background-color: $white;
-  //   box-shadow: none;
-  // }
-
 }
 // meal-checkbox ENDS
 

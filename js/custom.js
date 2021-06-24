@@ -2,6 +2,7 @@
 
 // ------------------------------ DATA OBJECTS ------------------------------
 
+// ACCOMMODATION OBJECT -------------------------------
   var accommodation = {
     hotel: {
       name: 'Novotel Queenstown Lakeside',
@@ -62,6 +63,7 @@
   };
   // accommodation object ENDS
 
+// MEAL OBJECT -------------------------------
   var meals = {
     breakfast: 20,
     lunch: 20,
@@ -80,13 +82,12 @@
     place: false,
     price: false,
     meals: false,
-    gettingMeals: [],
+    gettingMeals: ['', '', ''],
     total: false
   };
   // user object ENDS
 
-// ------------------------------ APP OBJECT ------------------------------
-
+// APP OBJECT -------------------------------
   var app = {
     // pulling buttons from dom
     startBtn: document.querySelector('.go-btn'),
@@ -96,6 +97,7 @@
     slides: document.querySelectorAll('.full-screen'),
     currentScreen: 0,
     needsFill: false,
+
     // PULLING FOR PEOPLE SELECT SCREEN ---------------
     // pulling the screen div
     peopleScreen: document.querySelector('#peopleSelect'),
@@ -107,12 +109,11 @@
     // pulling feedback h3 and max ppl note
     maxPeople: document.querySelector('.max-people'),
     pplFeedback: document.querySelector('.people-feedback'),
+
     // PULLING FOR DATE SELECT SCREEN ---------------
-    // creating empty calendar, will add on date picker init
-    calendar: false,
-    // pulling feedback h3 and max days span
     maxDays: document.querySelector('.max-days'),
     dateFeedback: document.querySelector('.date-feedback'),
+
     // PULLING FOR ACCOMMODATION SELECT SCREEN ---------------
     placeScreen: document.querySelector('#placeSelect'),
     availableTo: document.querySelector('.user-people'),
@@ -128,11 +129,16 @@
     allMarkers: [],
     accNames: [],
     options: [],
+    optIndex: false,
+    resetIndex: false,
     // pulling DOM display text
     price: document.querySelector('.price'),
     locationInfo: document.querySelector('.location-info'),
     attractionList: document.querySelector('.attractions'),
+    needsReset: true,
+
     // PULLING FOR MEAL SELECT SCREEN ---------------
+    mealScreen: document.querySelector('#mealSelect'),
     breakfastCheck: document.querySelector('#breakfast'),
     breakfastLabel: document.querySelector('.breakfast label'),
     lunchCheck: document.querySelector('#lunch'),
@@ -143,7 +149,7 @@
     noMealsLabel: document.querySelector('.no-meals label'),
     showPrices: false,
     mealPrices: [meals.breakfast, meals.lunch, meals.dinner, meals.none],
-    checkClicks: 0,
+
     // PULLING FOR REVIEW SCREEN ---------------
     revPeople: document.querySelector('.rev-ppl'),
     revStay: document.querySelector('.rev-stay'),
@@ -188,6 +194,7 @@
       //  LOAD IN BACK BTN FUNCTIONALITY ---------------
       $(app.backBtn).off().on('click', function() {
         app.back();
+        console.log('appgoesbackallthetime');
       });
       app.checkScreen();
     },
@@ -200,10 +207,8 @@
         app.nextBtn.style.display = 'block';
         app.backBtn.style.display = 'block';
         $('.screens').slick('slickNext');
-        console.log(val);
       } else {
         alert('Please select ' + app.needsFill + ' first.');
-        console.log(val);
       }
       app.checkScreen();
     },
@@ -211,9 +216,11 @@
 
     back: function() {
       app.currentScreen -= 1;
+
       console.log(app.currentScreen + ' is the current screen');
       app.nextBtn.style.display = 'block';
       app.backBtn.style.display = 'block';
+
       app.checkScreen();
       $('.screens').slick('slickPrev');
     },
@@ -251,10 +258,6 @@
 
       app.needsFill = 'the number of people you are booking for';
       app.maxPeople.innerHTML = accommodation.house.maxPeople;
-      // jquery click event that ensures click only fires ONCE (removes issue that caused click to fire multiple times despite only being clicked once)
-      $(app.nextBtn).off().on('click', function() {
-        app.next(user.people);
-      });
 
       app.peopleScreen.addEventListener('click', function(e) {
         if (e.target === app.oneBtn) {
@@ -285,6 +288,10 @@
           app.fourBtn.classList.remove('four-clicked');
         }
       }, false);
+
+      $(app.nextBtn).off().on('click', function() {
+        app.next(user.people);
+      });
     },
     // peopleBooking function ENDS
 
@@ -304,7 +311,7 @@
       app.maxDays.innerHTML = accommodation.house.maxNights;
 
       // daterangepicker STARTS
-      app.calendar = $('#datePicker').daterangepicker({
+      $('#datePicker').daterangepicker({
         'maxSpan': {
           'days': 14
         },
@@ -433,33 +440,43 @@
 
       // selectbox change event STARTS
       app.accSelect.addEventListener('change', function() {
-        var optIndex = app.accSelect.selectedIndex - 1;
 
-        // on change of option selection, resets the list by removing all children if the firstChild exists
+        if (app.resetIndex) {
+          app.optIndex = app.accSelect.selectedIndex;
+        } else {
+          app.optIndex = app.accSelect.selectedIndex - 1;
+        }
+
+        // on change of option selection, resets the list by removing all children if the firstChild exists --> this is so the list doesn't print multiple times
         while (app.attractionList.firstChild) {
           app.attractionList.removeChild(app.attractionList.lastChild);
         }
 
-        if (app.options[optIndex].label === accommodation[app.accNames[optIndex]].name) {
+        if (app.options[app.optIndex].label === accommodation[app.accNames[app.optIndex]].name) {
 
-          user.place = app.options[optIndex].label;
-          user.price = accommodation[app.accNames[optIndex]].pricePerNight * user.stayLength;
-          app.price.innerHTML = '$' + accommodation[app.accNames[optIndex]].pricePerNight + ' per night ($' + user.price + ')';
-          app.locationInfo.innerHTML = accommodation[app.accNames[optIndex]].info;
+          console.log(app.optIndex);
+          user.place = app.options[app.optIndex].label;
+
+          user.price = accommodation[app.accNames[app.optIndex]].pricePerNight * user.stayLength;
+
+          app.price.innerHTML = '$' + accommodation[app.accNames[app.optIndex]].pricePerNight + ' per night ($' + user.price + ')';
+
+          app.locationInfo.innerHTML = accommodation[app.accNames[app.optIndex]].info;
 
           app.map.flyTo({
-            center: accommodation[app.accNames[optIndex]].coordinates,
+            center: accommodation[app.accNames[app.optIndex]].coordinates,
             zoom: 15,
             essential: true
           });
 
-          for (var i = 0; i < accommodation[app.accNames[optIndex]].nearAttractions.length; i++) {
+          for (var i = 0; i < accommodation[app.accNames[app.optIndex]].nearAttractions.length; i++) {
             var attractionItem = document.createElement('li');
-            attractionItem.innerHTML = accommodation[app.accNames[optIndex]].nearAttractions[i];
+            attractionItem.innerHTML = accommodation[app.accNames[app.optIndex]].nearAttractions[i];
             app.attractionList.appendChild(attractionItem);
           }
           // attraction list loop ENDS
         }
+        // if conditional for accommodation options ENDS
       }, false);
       // selectbox change event ENDS
 
@@ -468,20 +485,27 @@
       });
 
       $(app.backBtn).off().on('click', function() {
+        app.needsReset = true;
         app.back();
         app.placeReset();
+        app.resetIndex = true;
       });
     },
     // placeBooking function ENDS
 
     placeReset: function() {
-      while (app.currentScreen === 3) {
+      if (app.needsReset) {
+        app.optIndex = app.accSelect.selectedIndex;
+        console.log('RESETTING');
         app.resetMarkers();
-        app.accNames.length = 0;
-        for (var i = 0; i < app.options.length; i++) {
-          app.options[i].remove();
+        app.accNames = [];
+        app.options = [];
+        app.needsReset = false;
+        while (app.accSelect.firstChild) {
+          app.accSelect.removeChild(app.accSelect.lastChild);
         }
       }
+      // if loop ENDS
     },
     // placeReset function ENDS
 
@@ -511,6 +535,7 @@
 
       $(app.backBtn).off().on('click', function() {
         app.back();
+        console.log('meals appback');
       });
     },
     // mealBooking function ENDS
@@ -535,136 +560,80 @@
       app.noMealsCheck.addEventListener('click', function() {
         app.noMealsCheck.classList.toggle('clicked-box');
         app.checkItems(app.mealPrices);
+        // app.onlyNoMeals();
       }, false);
-
     },
+    // addListeners function ENDS
 
     checkItems: function(items) {
 
-      // maybe make a new class for disabled btns. like when nomeals is clicked, the others all go blank, remove class clicked box and toggle to be like, empty.
-
-      // then the same thing happens if break/lunch/dins are clicked, my friend nomeals goes empty. this works better, i just need to make sure that the price resets when nomeals is clicked. resets to normal. doesnt add the stuff and things that we do not want to see. lets pray yeah
-
       user.total = user.price;
-
-      // this is in need of help, Desperately LOL
 
       if (app.breakfastCheck.classList.contains('clicked-box')) {
         user.total = user.total + items[0];
-        user.meals = true;
+        user.gettingMeals[0] = ' Breakfast';
+        app.hasMeals();
+      } else {
+        user.gettingMeals[0] = '';
       }
 
       if (app.lunchCheck.classList.contains('clicked-box')) {
         user.total = user.total + items[1];
-        user.meals = true;
+        user.gettingMeals[1] = ' Lunch';
+        app.hasMeals();
+      } else {
+        user.gettingMeals[1] = '';
       }
 
       if (app.dinnerCheck.classList.contains('clicked-box')) {
         user.total = user.total + items[2];
-        user.meals = true;
+        user.gettingMeals[2] = ' Dinner';
+        app.hasMeals();
+      } else {
+        user.gettingMeals[2] = '';
       }
 
       if (app.noMealsCheck.classList.contains('clicked-box')) {
         user.total = user.total + items[3];
-        user.meals = true;
-        user.gettingMeals = ['No extra meals'];
+        user.gettingMeals = ['No extra meals', '', ''];
+        app.onlyNoMeals();
       }
 
       if (!app.dinnerCheck.classList.contains('clicked-box') && !app.lunchCheck.classList.contains('clicked-box') && !app.breakfastCheck.classList.contains('clicked-box') && !app.noMealsCheck.classList.contains('clicked-box')) {
         console.log('all unchecked');
         user.meals = false;
+      } else {
+        console.log('something is checked');
+        user.meals = true;
       }
 
       console.log(user.gettingMeals);
       console.log(user.total);
-
-// ------------------------------------------------------------
-
-      // if (app.breakfastCheck.classList.contains('clicked-box')) {
-      //   user.total = user.total + items[0];
-      //   user.meals = true;
-      //   user.gettingMeals = true;
-      //   app.breakfastCheck.classList.remove('undo');
-      //   app.noMealsCheck.classList.add('undo');
-      // }
-      //
-      // if (app.lunchCheck.classList.contains('clicked-box')) {
-      //   user.total = user.total + items[1];
-      //   user.meals = true;
-      //   user.gettingMeals = true;
-      //   app.lunchCheck.classList.remove('undo');
-      //   app.noMealsCheck.classList.add('undo');
-      // }
-      //
-      // if (app.dinnerCheck.classList.contains('clicked-box')) {
-      //   user.total = user.total + items[2];
-      //   user.meals = true;
-      //   user.gettingMeals = true;
-      //   app.dinnerCheck.classList.remove('undo');
-      //   app.noMealsCheck.classList.add('undo');
-      // }
-      //
-      // if (!app.dinnerCheck.classList.contains('clicked-box') && !app.lunchCheck.classList.contains('clicked-box') && !app.breakfastCheck.classList.contains('clicked-box')) {
-      //   console.log('all unchecked ok..!!');
-      //   app.noMealsCheck.classList.remove('undo');
-      // }
-      //
-      // if (!app.noMealsCheck.classList.contains('clicked-box')) {
-      //   app.breakfastCheck.classList.remove('undo');
-      //   app.lunchCheck.classList.remove('undo');
-      //   app.dinnerCheck.classList.remove('undo');
-      // }
-      //
-      // if (app.noMealsCheck.classList.contains('clicked-box')) {
-      //   user.total = user.total + items[3];
-      //   user.meals = true;
-      //   user.gettingMeals = false;
-      //   app.noMealsCheck.classList.remove('undo');
-      //   app.breakfastCheck.classList.add('undo');
-      //   app.lunchCheck.classList.add('undo');
-      //   app.dinnerCheck.classList.add('undo');
-      // } else {
-      //   app.breakfastCheck.classList.remove('undo');
-      //   app.lunchCheck.classList.remove('undo');
-      //   app.dinnerCheck.classList.remove('undo');
-      // }
-
-// ------------------------------------------------------------
-
-      // if (app.breakfastCheck.classList.contains('clicked-box') || app.lunchCheck.classList.contains('clicked-box') || app.dinnerCheck.classList.contains('clicked-box') ) {
-      //   app.noMealsCheck.classList.add('undo');
-      // } else {
-      //   app.noMealsCheck.classList.remove('undo');
-      //   app.noMealsCheck.classList.add('undo');
-      // }
-      //
-      // if (app.breakfastCheck.classList.contains('clicked-box')) {
-      //   app.breakfastCheck.classList.remove('undo');
-      //   app.noMealsCheck.classList.add('undo');
-      // }
-      //
-      // if (app.dinnerCheck.classList.contains('clicked-box')) {
-      //   app.dinnerCheck.classList.remove('undo');
-      //   app.noMealsCheck.classList.add('undo');
-      // }
-      //
-      // if (app.noMealsCheck.classList.contains('clicked-box')) {
-      //   app.noMealsCheck.classList.remove('undo');
-      //   app.breakfastCheck.classList.add('undo');
-      //   app.lunchCheck.classList.add('undo');
-      //   app.dinnerCheck.classList.add('undo');
-      // } else {
-      //   app.breakfastCheck.classList.remove('undo');
-      //   app.lunchCheck.classList.remove('undo');
-      //   app.dinnerCheck.classList.remove('undo');
-      // }
-
-      // console.log(user.total);
-
     },
     // checkItems function ENDS
 
+    onlyNoMeals: function() {
+      // app.noMealsCheck.classList.add('clicked-box');
+      app.breakfastCheck.classList.remove('clicked-box');
+      app.lunchCheck.classList.remove('clicked-box');
+      app.dinnerCheck.classList.remove('clicked-box');
+      // app.checkItems(app.mealPrices);
+    },
+    // only no meals function ENDS
+
+    hasMeals: function() {
+      app.noMealsCheck.classList.remove('clicked-box');
+    },
+    // has meals function ENDS
+
     reviewBooking: function() {
+      var printMeals = '';
+
+      for (var i = 0; i < user.gettingMeals.length; i++) {
+        if (user.gettingMeals[i] != '') {
+          printMeals += user.gettingMeals[i];
+        }
+      }
 
       if (user.people === 1) {
         app.revPeople.innerHTML = '- Booking for ' + user.people + ' person';
@@ -680,16 +649,13 @@
 
       app.revPlace.innerHTML = '- Staying at ' + user.place;
 
-      if (!user.gettingMeals) {
-        app.revMeals.innerHTML = '- No extra meals';
-      } else {
-        app.revMeals.innerHTML = '- Extra Meals - ' + user.gettingMeals;
-      }
+      app.revMeals.innerHTML = '- Extra Meals: ' + printMeals;
 
       app.finalPrice.innerHTML = '$' + user.total;
 
       $(app.backBtn).off().on('click', function() {
         app.back();
+        console.log('reviewappback');
       });
     },
     // reviewBooking function ENDS
@@ -699,6 +665,7 @@
 
       $(app.backBtn).off().on('click', function() {
         app.back();
+        console.log('confirm appback');
       });
     }
     // confirm function ENDS

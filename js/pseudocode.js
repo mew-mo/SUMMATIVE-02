@@ -26,6 +26,9 @@ What i am doing right now: MEAL SELECTION
 ToDo (probably at home):
 * attempt inline calendar -- https://jsfiddle.net/9m63neo2/
 * grey out arrow key button if user.thing is false
+* favicon -- gradiented fern mayhaps
+* redo user flows, ensure they are comprehensive and accurate
+* MINIFICATION
 
 // no pseudocode needed for this step > non js step!
 
