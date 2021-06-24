@@ -21,7 +21,6 @@ The terminal was used extensively throughout the project alongside Gulp and Git,
 #### Gulp :ski:
 Gulp was used for various different functions that greatly enhanced my production workflow:
 * **Live refresh:** Refreshes the HTML live page on HTML, JS and CSS save, therefore reducing time spent saving and manually refreshing the page. Gulp does so by simulating a live-server environment, which follows industry best practices as the application would run through a server in a real scenario. Being able to instantly see changes saved time and allowed me to make changes faster and more efficiently.
-
 * **Minifying:** Automatically minifies CSS and JS files. This is efficient for reducing the file-size of these pieces of code, and follows industry best practices.
 * **JS Linting:** Automatically linted my JS code on save, which saves time that would've been spent manually copying my JS onto an online linting tool and waiting for it to run. The results are instant and greatly increase efficiency.
 * **Sass:** In the past, I have used Koala to watch my SCSS files and convert them into CSS. While functional, it was always a touch buggy- using Gulp to watch my SCSS and convert it saved on time greatly as I wasn't relying on an individual application and it runs through the terminal instantly on save without any hassle. This is also closer to an industry standard way of writing SCSS compared to Koala.
@@ -64,14 +63,72 @@ Sass (SCSS) is a style of coding akin to CSS that I have become very font of for
 }
 ```
 
+---
+## Code Validation
+#### HTML :ski:
+worms
+
+#### CSS :ski:
+worms
+
+#### JS :ski:
+worms
+
+---
+## JS Code Style Guide
+#### Idiomatic JS :ski:
+The Javascript Style Guide I adhered by in this project was idiomatic.js, with the ruleset found [here](https://github.com/rwaldron/idiomatic.js/).
+In my project I chose to use tabs rather than soft indents, and worked with ‘show invisibles’ turned on inside of atom to ensure that no blank line or end of line whitespaces were present.
+In section 2.D.1.1 it is declared that the ‘inner whitespace’ rule is optional, so I chose to not do this (including a space after the beginning and before the end of round brackets ( like so )) but ensured that the spacing of the contents remained spaced like in 2.A.1.1. I applied this consistently, as that is the primary rule stressed in section 2.D.
+## more worms
+
+---
+## Libraries, Plugins and APIs
+#### Libraries :ski:
+* bootstrap
+* jquery
+* jquery UI
+* fontawesome
+```html
+<!-- head links -->
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/font-awesome.min.css">
+
+<!-- links before </body> -->
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/moment.min.js"></script>
+```
+
+#### Plugins :ski:
+* slick
+* daterangepicker
+```html
+<!-- head links -->
+<link rel="stylesheet" href="css/daterangepicker.css">
+<link rel="stylesheet" type="text/css" href="slick/slick.css"/>
+
+<!-- links before </body> -->
+<script src="slick/slick.min.js"></script>
+<script src="js/daterangepicker.js"></script>
+```
+
+#### APIs :ski:
+* mapbox
+```html
+<!-- head links -->
+<script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.js"></script>
+<link href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.css" rel="stylesheet" />
+```
 
 # this is where I'm up to :)
 
 
 * Description of project √
-* Productions tools [RETURN HERE AT SOME POINT]
+* Productions tools [RETURN HERE AT SOME POINT] √
 * Validation statement for .js/.css & html
-* Some detail of javascript style guide
+* Some detail of javascript style guide --idiomatic and examples??
 * Any other info you wish to add
   * maybe all plugins, libraries and APIs included? :0 !!
 
@@ -82,18 +139,4 @@ _This will also be italic_\
 __This will also be bold__\
 *You **can** combine them*
 
-* Item 1
-* Item 2
- * Item 2a
- * Item 2b
-
-http://github.com - automatic!
-[GitHub](http://github.com)
-
 ✨
-
-```javascript
-function test() {
- console.log("look ma’, no spaces");
-}
-```

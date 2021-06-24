@@ -5,19 +5,8 @@
 What i am doing right now: MEAL SELECTION
 
 1. Pull checkboxes from DOM
-2. Conditionals - if 4th checkbox is selected, can't select any of the others. if any of the 1st three checked, cant select the 4th. this part is tricky already tbh
+2. Conditionals - if 4th checkbox is selected, can't select any of the others. if any of the 1st three checked, cant select the 4th. this part is tricky already tbh !! BIG PROBLEM
 3. Dynamically add prices into DOM display √
-
-
-
-
-4. Add prices of selected thingo to user.totalPrice :)
-  - Since my checkboxes are custom, .checked doesn't work!
-  - Pass checkbox into if statement, append 1 to clicks when checked and unchecked:
-  - if clicks is even (unchecked), then take the price away.
-  - if clicks is odd (checked), add the price of checked item to user.total
-
-
 
 
 
@@ -26,7 +15,6 @@ What i am doing right now: MEAL SELECTION
 ToDo (probably at home):
 * attempt inline calendar -- https://jsfiddle.net/9m63neo2/
 * grey out arrow key button if user.thing is false
-* favicon -- gradiented fern mayhaps
 * redo user flows, ensure they are comprehensive and accurate
 * MINIFICATION
 
@@ -41,15 +29,14 @@ RIGHT N O W !!
 trying to make it so that when breakfast / lunch / dinner buttons are clicked, NO THANKS! button resets. Also so that when NO THANKS! button is clicked, breakfast / lunch / dinner buttons reset. the buttons are unhappy and do not want to do this.
 
 
-
 1. figuring out how to minify my custom js with gulp-- try to add this in at the end probably
 2. trying to force daterangepicker to stay open (it seems to really not want to do this)-- i have tried a lot of different things so it might not be possible, come back to it in the end
 
 
 -- SOLVED (to some extent) !!
 
-3. app.accNames[i].remove() doesn't want to do what /i/ want it to do. it will be punished accordingly
-3. every time i go back and forward, the meal prices append to the dom again. this is likely a result of += but i need to make sure it only happens ONCE
+// 3. app.accNames[i].remove() doesn't want to do what /i/ want it to do. it will be punished accordingly
+// 3. every time i go back and forward, the meal prices append to the dom again. this is likely a result of += but i need to make sure it only happens ONCE
 
 
 -- EXTRAS !!
@@ -61,7 +48,7 @@ trying to make it so that when breakfast / lunch / dinner buttons are clicked, N
 5. next arrow button greyed out until user inputs in each step
 
 -- COMPLETED PSEUDOCODE SECTIONS !!
-
+    > and todos <
 // TRANSITIONS
 //
 // 1. Pull back and next buttons from DOM
@@ -100,6 +87,14 @@ trying to make it so that when breakfast / lunch / dinner buttons are clicked, N
 // 7. Dont allow to move on if user option is empty √
 // 8. make placeholder come back again :P
 // 1332432. don't stress because this step is a little bit overwhelming
+
+// 4. Add prices of selected thingo to user.totalPrice :)
+//   - Since my checkboxes are custom, .checked doesn't work!
+//   - Pass checkbox into if statement, append 1 to clicks when checked and unchecked:
+//   - if clicks is even (unchecked), then take the price away.
+//   - if clicks is odd (checked), add the price of checked item to user.total
+
+// * favicon -- gradiented fern mayhaps
 
 
 -- MOURNING MY HTML AND JS THAT HAD TO BE REDONE !!
