@@ -190,12 +190,6 @@
       });
 
       app.map = map;
-
-      //  LOAD IN BACK BTN FUNCTIONALITY ---------------
-      $(app.backBtn).off().on('click', function() {
-        app.back();
-        console.log('appgoesbackallthetime');
-      });
       app.checkScreen();
     },
     // init function ENDS
@@ -258,8 +252,11 @@
 
       app.needsFill = 'the number of people you are booking for';
       app.maxPeople.innerHTML = accommodation.house.maxPeople;
+      app.nextBtn.style.opacity = '0.3';
 
       app.peopleScreen.addEventListener('click', function(e) {
+      app.nextBtn.style.opacity = '1';
+
         if (e.target === app.oneBtn) {
           app.setNum(1);
           app.oneBtn.classList.add('one-clicked');
@@ -289,6 +286,12 @@
         }
       }, false);
 
+
+      $(app.backBtn).off().on('click', function() {
+        app.back();
+        app.nextBtn.style.opacity = '1';
+      });
+
       $(app.nextBtn).off().on('click', function() {
         app.next(user.people);
       });
@@ -309,6 +312,7 @@
 
       app.needsFill = 'your check-in and check-out dates';
       app.maxDays.innerHTML = accommodation.house.maxNights;
+      app.nextBtn.style.opacity = '0.3';
 
       // daterangepicker STARTS
       $('#datePicker').daterangepicker({
@@ -329,6 +333,7 @@
         user.checkIn = start.format('DD-MM-YY');
         user.checkOut = end.format('DD-MM-YY');
         user.stayLength = timeDifference / (1000 * 3600 * 24) + 1;
+        app.nextBtn.style.opacity = '1';
 
         if (user.stayLength === 1) {
           app.dateFeedback.innerHTML = 'Booking for ' + user.stayLength + ' night - For ' + user.checkIn;
@@ -337,6 +342,16 @@
         }
       });
       // daterangepicker ENDS
+
+      if (user.stayLength) {
+        app.nextBtn.style.opacity = '1';
+      }
+
+      $(app.backBtn).off().on('click', function() {
+        app.back();
+        app.nextBtn.style.opacity = '1';
+      });
+
       $(app.nextBtn).off().on('click', function() {
         app.next(user.stayLength);
       });
@@ -358,6 +373,8 @@
 
       // app feedback conditionals
       app.needsFill = 'your accommodation';
+      app.nextBtn.style.opacity = '0.3';
+
       if (user.people === 1 && user.stayLength === 1) {
         app.availableTo.innerHTML = user.people + ' person for ' + user.stayLength + ' night';
       } else if (user.people === 1 && user.stayLength > 1) {
@@ -454,7 +471,8 @@
 
         if (app.options[app.optIndex].label === accommodation[app.accNames[app.optIndex]].name) {
 
-          console.log(app.optIndex);
+          app.nextBtn.style.opacity = '1';
+
           user.place = app.options[app.optIndex].label;
 
           user.price = accommodation[app.accNames[app.optIndex]].pricePerNight * user.stayLength;
@@ -480,15 +498,16 @@
       }, false);
       // selectbox change event ENDS
 
-      $(app.nextBtn).off().on('click', function() {
-        app.next(user.place);
-      });
-
       $(app.backBtn).off().on('click', function() {
         app.needsReset = true;
+        app.nextBtn.style.opacity = '1';
         app.back();
         app.placeReset();
         app.resetIndex = true;
+      });
+
+      $(app.nextBtn).off().on('click', function() {
+        app.next(user.place);
       });
     },
     // placeBooking function ENDS
@@ -496,7 +515,6 @@
     placeReset: function() {
       if (app.needsReset) {
         app.optIndex = app.accSelect.selectedIndex;
-        console.log('RESETTING');
         app.resetMarkers();
         app.accNames = [];
         app.options = [];
@@ -519,6 +537,7 @@
     mealBooking: function() {
 
       app.needsFill = 'the meal options you want';
+      app.nextBtn.style.opacity = '0.3';
 
       if (!app.showPrices) {
         app.showPrices = true;
@@ -529,13 +548,14 @@
 
       app.addListeners();
 
-      $(app.nextBtn).off().on('click', function() {
-        app.next(user.meals);
-      });
-
       $(app.backBtn).off().on('click', function() {
         app.back();
+        app.nextBtn.style.opacity = '1';
         console.log('meals appback');
+      });
+
+      $(app.nextBtn).off().on('click', function() {
+        app.next(user.meals);
       });
     },
     // mealBooking function ENDS
@@ -545,22 +565,25 @@
       app.breakfastCheck.addEventListener('click', function() {
         app.breakfastCheck.classList.toggle('clicked-box');
         app.checkItems(app.mealPrices);
+        app.hasMeals();
       }, false);
 
       app.lunchCheck.addEventListener('click', function() {
         app.lunchCheck.classList.toggle('clicked-box');
         app.checkItems(app.mealPrices);
+        app.hasMeals();
       }, false);
 
       app.dinnerCheck.addEventListener('click', function() {
         app.dinnerCheck.classList.toggle('clicked-box');
         app.checkItems(app.mealPrices);
+        app.hasMeals();
       }, false);
 
       app.noMealsCheck.addEventListener('click', function() {
         app.noMealsCheck.classList.toggle('clicked-box');
         app.checkItems(app.mealPrices);
-        // app.onlyNoMeals();
+        app.onlyNoMeals();
       }, false);
     },
     // addListeners function ENDS
@@ -568,11 +591,11 @@
     checkItems: function(items) {
 
       user.total = user.price;
+      app.nextBtn.style.opacity = '1';
 
       if (app.breakfastCheck.classList.contains('clicked-box')) {
         user.total = user.total + items[0];
         user.gettingMeals[0] = ' Breakfast';
-        app.hasMeals();
       } else {
         user.gettingMeals[0] = '';
       }
@@ -580,7 +603,6 @@
       if (app.lunchCheck.classList.contains('clicked-box')) {
         user.total = user.total + items[1];
         user.gettingMeals[1] = ' Lunch';
-        app.hasMeals();
       } else {
         user.gettingMeals[1] = '';
       }
@@ -588,7 +610,6 @@
       if (app.dinnerCheck.classList.contains('clicked-box')) {
         user.total = user.total + items[2];
         user.gettingMeals[2] = ' Dinner';
-        app.hasMeals();
       } else {
         user.gettingMeals[2] = '';
       }
@@ -596,14 +617,11 @@
       if (app.noMealsCheck.classList.contains('clicked-box')) {
         user.total = user.total + items[3];
         user.gettingMeals = ['No extra meals', '', ''];
-        app.onlyNoMeals();
       }
 
       if (!app.dinnerCheck.classList.contains('clicked-box') && !app.lunchCheck.classList.contains('clicked-box') && !app.breakfastCheck.classList.contains('clicked-box') && !app.noMealsCheck.classList.contains('clicked-box')) {
-        console.log('all unchecked');
         user.meals = false;
       } else {
-        console.log('something is checked');
         user.meals = true;
       }
 
@@ -613,11 +631,9 @@
     // checkItems function ENDS
 
     onlyNoMeals: function() {
-      // app.noMealsCheck.classList.add('clicked-box');
       app.breakfastCheck.classList.remove('clicked-box');
       app.lunchCheck.classList.remove('clicked-box');
       app.dinnerCheck.classList.remove('clicked-box');
-      // app.checkItems(app.mealPrices);
     },
     // only no meals function ENDS
 
@@ -628,11 +644,25 @@
 
     reviewBooking: function() {
       var printMeals = '';
+      app.nextBtn.style.opacity = '1';
 
       for (var i = 0; i < user.gettingMeals.length; i++) {
         if (user.gettingMeals[i] != '') {
           printMeals += user.gettingMeals[i];
         }
+      }
+
+      // small problem --> when go back and click no meals, prints breakfast & lunch always
+      if (printMeals === user.gettingMeals[0] + user.gettingMeals[1] && user.gettingMeals[1] != '') {
+        printMeals = ' Breakfast & Lunch';
+      } else if (printMeals === user.gettingMeals[0] + user.gettingMeals[2] && user.gettingMeals[2] != '') {
+        printMeals = ' Breakfast & Dinner';
+      } else if (printMeals === user.gettingMeals[1] + user.gettingMeals[2]) {
+        printMeals = ' Lunch & Dinner';
+      } else if (printMeals === user.gettingMeals[0] + user.gettingMeals[1] + user.gettingMeals[2] && user.gettingMeals[1] != '') {
+        printMeals = ' Breakfast, Lunch & Dinner';
+      } else {
+        printMeals = user.gettingMeals[0];
       }
 
       if (user.people === 1) {
@@ -655,6 +685,7 @@
 
       $(app.backBtn).off().on('click', function() {
         app.back();
+        app.nextBtn.style.opacity = '1';
         console.log('reviewappback');
       });
     },
@@ -665,6 +696,7 @@
 
       $(app.backBtn).off().on('click', function() {
         app.back();
+        app.nextBtn.style.opacity = '1';
         console.log('confirm appback');
       });
     }
