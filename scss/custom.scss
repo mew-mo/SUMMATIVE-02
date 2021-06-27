@@ -104,6 +104,42 @@ p {
   @include jost-default;
 }
 
+// ----------------------LOADING SCREEN ----------------------
+
+.loading-screen {
+  height: 100%;
+  background-color: $dark;
+  -webkit-transition: all .5s ease-in-out;
+  -moz-transition: all .5s ease-in-out;
+  -o-transition: all .5s ease-in-out;
+  transition: all .5s ease-in-out;
+
+  .loading-icon {
+    margin-top: 200%;
+    -webkit-transition: all .5s ease-out;
+    -moz-transition: all .5s ease-out;
+    -o-transition: all .5s ease-out;
+    transition: all .5s ease-out;
+  }
+}
+
+.hide-loading-screen {
+  // width: 0;
+  opacity: 0;
+  height: 0;
+  // margin: 0;
+  // padding: 0;
+}
+
+.hide-loading-icon {
+  -webkit-transition: all .5s ease-out;
+  -moz-transition: all .5s ease-out;
+  -o-transition: all .5s ease-out;
+  transition: all .5s ease-out;
+  opacity: 0;
+}
+
+
 // ---------------------- LOGO ----------------------
 
 .logo {

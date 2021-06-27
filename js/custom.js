@@ -89,6 +89,9 @@
 
 // APP OBJECT -------------------------------
   var app = {
+    // pulling loading screen from dom
+    loadingScreen: document.querySelector('.loading-screen'),
+    loadingIcon: document.querySelector('.loading-icon'),
     // pulling buttons from dom
     startBtn: document.querySelector('.go-btn'),
     nextBtn: document.querySelector('.next i'),
@@ -159,6 +162,16 @@
 
     // initialisation function
     init: function() {
+
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          app.loadingIcon.classList.add('hide-loading-icon');
+        }, 2000);
+        setTimeout(function() {
+          app.loadingScreen.classList.add('hide-loading-screen');
+        }, 3000);
+      });
+
       //  LOAD IN SLICK ---------------
       $('.screens').slick({
         accessibility: false,
