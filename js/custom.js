@@ -621,7 +621,6 @@
       });
 
       $(app.dinnerCheck).off().on('click', function() {
-        console.log('dindin clicked HELLOW?');
         app.dinnerCheck.classList.toggle('clicked-box');
         app.checkItems(app.mealPrices);
         app.hasMeals();
@@ -656,16 +655,18 @@
 
       if (app.dinnerCheck.classList.contains('clicked-box')) {
         user.total = user.total + items[2];
-        console.log(items[2]);
         user.gettingMeals[2] = ' Dinner';
       } else {
         user.gettingMeals[2] = '';
       }
 
-      if (app.noMealsCheck.classList.contains('clicked-box')) {
-        user.total = user.price;
-        user.gettingMeals = ['No extra meals', '', ''];
-      }
+      setTimeout(function () {
+        if (app.noMealsCheck.classList.contains('clicked-box')) {
+          user.total = user.price;
+          user.gettingMeals = ['No extra meals', '', ''];
+        }
+      }, 500);
+      // there was an issue with this firing too fast before the DOM had even changed when trying to select off noMeals, so a setTimeOut had to be added to ensure this conditional doesn't overwrite the others without meaning to or being correct.
 
       if (!app.dinnerCheck.classList.contains('clicked-box') && !app.lunchCheck.classList.contains('clicked-box') && !app.breakfastCheck.classList.contains('clicked-box') && !app.noMealsCheck.classList.contains('clicked-box')) {
         user.meals = false;
@@ -674,9 +675,6 @@
         user.meals = true;
         app.nextBtn.style.opacity = '1';
       }
-
-      console.log(user.gettingMeals);
-      console.log(user.total);
     },
     // checkItems function ENDS
 
@@ -702,15 +700,20 @@
         }
       }
 
-      // small problem --> when go back and click no meals, prints breakfast & lunch always
-      if (printMeals === user.gettingMeals[0] + user.gettingMeals[1] && user.gettingMeals[1] != '') {
+      if ((printMeals === user.gettingMeals[0] + user.gettingMeals[1]) && (user.gettingMeals[1] != '') && (user.gettingMeals[0] != '')) {
         printMeals = ' Breakfast & Lunch';
-      } else if (printMeals === user.gettingMeals[0] + user.gettingMeals[2] && user.gettingMeals[2] != '') {
+      } else if ((printMeals === user.gettingMeals[0] + user.gettingMeals[2]) && (user.gettingMeals[2] != '') && (user.gettingMeals[0] != '')) {
         printMeals = ' Breakfast & Dinner';
-      } else if (printMeals === user.gettingMeals[1] + user.gettingMeals[2]) {
+      } else if ((printMeals === user.gettingMeals[1] + user.gettingMeals[2]) && (user.gettingMeals[1] != '') && (user.gettingMeals[2] != '')) {
         printMeals = ' Lunch & Dinner';
-      } else if (printMeals === user.gettingMeals[0] + user.gettingMeals[1] + user.gettingMeals[2] && user.gettingMeals[1] != '') {
+      } else if ((printMeals === user.gettingMeals[0] + user.gettingMeals[1] + user.gettingMeals[2]) && (user.gettingMeals[0] != '') && (user.gettingMeals[1] != '') && (user.gettingMeals[2] != '')) {
         printMeals = ' Breakfast, Lunch & Dinner';
+      } else if (printMeals === user.gettingMeals[0]) {
+        printMeals = user.gettingMeals[0];
+      } else if (printMeals === user.gettingMeals[1]) {
+        printMeals = user.gettingMeals[1];
+      } else if (printMeals === user.gettingMeals[2]) {
+        printMeals = user.gettingMeals[2];
       } else {
         printMeals = user.gettingMeals[0];
       }

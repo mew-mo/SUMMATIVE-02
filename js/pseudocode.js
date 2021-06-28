@@ -21,6 +21,10 @@ ToDo (probably at home):
 
 RIGHT N O W !!
 
+
+SO for example. When I select No Meals, then select ONE other meal after (works properly if i select two), the meal doesn't get added as No Meals fires again despite not containing the class when the function checks for it. I have only made the example logging for dinner but this is the case for each of the buttons. They do fire, but then are overwritten by No Meals. how ANNOYINF
+
+
 THERE IS A PROBLEM ! the calculation for selecting meals after selecting no thanks do not fire immediately. they are dormant for no good reason
 
 1. figuring out how to minify my custom js with gulp-- try to add this in at the end probably

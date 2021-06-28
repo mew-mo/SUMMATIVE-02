@@ -22,12 +22,12 @@ The terminal was used extensively throughout the project alongside Gulp and Git,
 Gulp was used for various different functions that greatly enhanced my production workflow:
 * **Live refresh:** Refreshes the HTML live page on HTML, JS and CSS save, therefore reducing time spent saving and manually refreshing the page. Gulp does so by simulating a live-server environment, which follows industry best practices as the application would run through a server in a real scenario. Being able to instantly see changes saved time and allowed me to make changes faster and more efficiently.
 * **Minifying:** Automatically minifies CSS and JS files. This is efficient for reducing the file-size of these pieces of code, and follows industry best practices.
-* **JS Linting:** Automatically linted my JS code on save, which saves time that would've been spent manually copying my JS onto an online linting tool and waiting for it to run. The results are instant and greatly increase efficiency.
+* **JS Linting:** Automatically linted my JS code on save, which saves time that would've been spent manually copying my JS onto an online linting tool and waiting for it to run. The results are instant and greatly increase efficiency, pointing out errors and their exact line and column position. I was able to eliminate errors nearly the instant they appeared.
 * **Sass:** In the past, I have used Koala to watch my SCSS files and convert them into CSS. While functional, it was always a touch buggy- using Gulp to watch my SCSS and convert it saved on time greatly as I wasn't relying on an individual application and it runs through the terminal instantly on save without any hassle. This is also closer to an industry standard way of writing SCSS compared to Koala.
 1,665 companies use gulp, showcasing how it is an industry standard tool utilised professionally for a similar purpose of making workflow more efficient.
 
 #### Node.js and npm :ski:
-Node.js is a hugely popular open-source platform for executing JS server-side (back-end). It is absolutely an industry standard tool, used by huge companies such as Netflix, LinkedIn and Paypal. I personally used node.js in order to access npm installs, which greatly decreased the amount of time I had to spend searching for specific plugins or libraries as I could download them straight into my project using the 'npm i' command- this follows best practises as I didn't waste any time and was able to have quick, easy access to all the files I needed.
+Node.js is a hugely popular open-source platform for executing JS server-side (back-end). It is absolutely an industry standard tool, used by huge companies such as Netflix, LinkedIn and Paypal. I personally used node.js in order to access npm installs, which greatly decreased the amount of time I had to spend searching for specific plugins or libraries as I could download them straight into my project using the 'npm i' command- this follows best practices as I didn't waste any time and was able to have quick, easy access to all the files I needed.
 
 #### Github :octocat:
 This Github repo was used from start-to-end in order to access my project in it's full glory from both home and my school workspace. By pulling and pushing from terminal I constantly was able to update the files quickly and efficiently, barely having to wait for any upload / download time compared to more lengthy methods like using a USB or uploading to Google Drive- this greatly enhanced my workflow, as accessing files became a matter of simply pressing a few buttons. Since my terminal was constantly open for the project anyway, this was the most efficient method of not only accessing my files between different workspaces, but being able to keep up to date with the commit messages and refreshed on things I had done, hadn't done and still needed to do.\
@@ -42,7 +42,7 @@ Sass (SCSS) is a style of coding akin to CSS that I have become very font of for
    $blue: #7093e3;
    $purple: #7e65e6;
  ```
-* **Imports:** Using sass imports allowed me to seperate my variables from the mass of my js code, which helped my code to be more clean. Additionally, it made it much easier to locate the variables whenever I needed to adjust them slightly.
+* **Imports:** Using sass imports allowed me to separate my variables from the mass of my js code, which helped my code to be more clean. Additionally, it made it much easier to locate the variables whenever I needed to adjust them slightly.
 ``` scss
 @import 'vars';
 ```
@@ -55,7 +55,7 @@ Sass (SCSS) is a style of coding akin to CSS that I have become very font of for
   font-family: 'Jost', sans-serif;
 }
 ```
-* **Extends:** Sass extends are similar to mixins, but you can use classes you've already created and include their code into a new element- this is efficient for it also reduces code repition and doesn't break the logical flow of your cascade. Example included in nesting.
+* **Extends:** Sass extends are similar to mixins, but you can use classes you've already created and include their code into a new element- this is efficient for it also reduces code repetition and doesn't break the logical flow of your cascade. Example included in nesting.
 * **Nesting:** Sass nesting allows you to target children elements similarly to how you would in vanilla css, but laid out more logically to show the child you are targeting literally inside the parent- this makes the code more readable.
 ``` scss
 .date-content {
@@ -70,13 +70,17 @@ Sass (SCSS) is a style of coding akin to CSS that I have become very font of for
 ---
 ## Code Validation
 #### HTML :ski:
-worms
+I ran my HTML through the [w3 schools HTML validator](https://validator.w3.org/nu/#textarea),and resulted with no errors.
+![Screenshot of my w3 HTML approval](img/html-valid.png?raw=true)
+At first there were warnings for empty titles as they were left empty to dynamically change through js based on user inputs, but this was easily resolved by adding spaces in manually.
 
 #### CSS :ski:
-worms
+I ran my CSS through the [w3 schools CSS validator](https://jigsaw.w3.org/css-validator/validator),and resulted with no errors.
+![Screenshot of my w3 CSS approval](img/css-valid.png?raw=true)
+There are a few warnings, mostly for extension transitions, which were included for the sake of the broadest use of my outcome. Additionally, some warnings for the styles I had to create to overwrite daterangepicker and bootstrap's styles (setting the border colour to the same as the background colour), but this was necessary in order to keep the style in line with my website's style overall.
 
 #### JS :ski:
-worms
+Throughout my coding process, as mentioned previously, my JS was ran through a linter via gulp. This was constantly open on my terminal and checked, so I could quickly and easily resolve errors as soon as they did pop up. In the end, the final lint came out clean, which I had expected as I always worked to remove errors as soon as they appeared.
 
 ---
 ## JS Code Style Guide
