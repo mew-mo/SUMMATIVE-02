@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&family=Viga&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/hover.css"/>
   <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
   <link rel="stylesheet" href="css/font-awesome.min.css">
   <link rel="stylesheet" href="css/custom.min.css">
@@ -36,10 +37,10 @@
     <!-- controls START -->
     <div class="controls">
       <div class="back">
-        <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+        <i class="fa fa-long-arrow-left hvr-wobble-horizontal" aria-hidden="true"></i>
       </div>
       <div class="next">
-        <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+        <i class="fa fa-long-arrow-right hvr-wobble-horizontal" aria-hidden="true"></i>
       </div>
     </div>
     <!-- controls END -->
@@ -55,13 +56,14 @@
             <img src="img/sweetas-logo.png" alt="Sweet As - Queenstown Getaways Campaign Logo" class="sweet-as-logo">
           </div>
 
-          <button class="info-btn" data-bs-target="modal" data-toggle="#infoModal">
+          <button class="info-btn hvr-push">
             What's This?
           </button>
 
-          <button class="go-btn">
+          <button class="go-btn hvr-push">
             Let's Go!
           </button>
+
         </div>
         <!-- col ENDS -->
       </div>
@@ -71,10 +73,23 @@
       <div id="peopleSelect" class="full-screen">
         <div class="col-md-12 mx-auto people-content">
           <h2>How many people are you booking for?</h2>
-          <button class="one-btn round-btn">1</button>
-          <button class="two-btn round-btn">2</button>
-          <button class="three-btn round-btn">3</button>
-          <button class="four-btn round-btn">4</button>
+
+          <span data-tilt>
+            <button class="one-btn round-btn">1</button>
+          </span>
+
+          <span data-tilt>
+            <button class="two-btn round-btn">2</button>
+          </span>
+
+          <span data-tilt>
+            <button class="three-btn round-btn">3</button>
+          </span>
+
+          <span data-tilt>
+            <button class="four-btn round-btn">4</button>
+          </span>
+
           <h6>*Note: The Sweet As Campaign only accepts <span class="max-people">0</span> travellers booked together maximum.</h6>
           <h3 class="people-feedback"></h3>
         </div>
@@ -200,14 +215,14 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="infoModalLabel">Modal title</h5>
+          <h5 class="modal-title" id="infoModalLabel">Sweet As! Queenstown Getaways</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p></p>
+          <p>Tourism New Zealand presents our latest campaign, providing the sweetest deals you can get for a nice short getaway to NZ's tourism capital, Queenstown! We're giving you all the best offers for an amazing short trip for a limited time only, and you can book your way right here! <br> <span class="italic">Please note: Limited booking to 4 people max and 15 nights max.</span></p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary hvr-push" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
@@ -216,6 +231,7 @@
 
   <script src="js/jquery.min.js"></script>
   <script src="js/jquery-ui.min.js"></script>
+  <script src="js/tilt.jquery.min.js"></script>
   <script src="slick/slick.min.js"></script>
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/moment.min.js"></script>

@@ -48,7 +48,7 @@ body {
   @include jost-default($color);
 }
 
-@mixin button($color: $cyan, $bg-color: $dark) {
+@mixin button($color: $cyan, $bg-color: $none) {
   color: $color;
   height: 55px;
   font-size: 1.4rem;
@@ -58,6 +58,7 @@ body {
   border: 2px solid $color;
   border-radius: 93px;
   cursor: pointer;
+  transition: all .2s ease-out;
   @include jost-default($color)
 
   a {
@@ -104,6 +105,10 @@ p {
   @include jost-default;
 }
 
+.italic {
+  font-style: italic;
+}
+
 // ----------------------LOADING SCREEN ----------------------
 
 .loading-screen {
@@ -124,11 +129,8 @@ p {
 }
 
 .hide-loading-screen {
-  // width: 0;
   opacity: 0;
   height: 0;
-  // margin: 0;
-  // padding: 0;
 }
 
 .hide-loading-icon {
@@ -137,6 +139,33 @@ p {
   -o-transition: all .5s ease-out;
   transition: all .5s ease-out;
   opacity: 0;
+}
+
+// ---------------------- MODAL ----------------------
+
+#infoModal {
+
+  margin-top: 12%;
+
+  h5 {
+    color: $purple;
+  }
+
+  p {
+    color: $dark;
+  }
+}
+
+.btn-secondary {
+  @include button($white, $blue);
+  height: 40px;
+  font-size: 1.2rem;
+  padding: 3px 20px 3px 20px;
+}
+
+.btn-secondary:hover {
+  background: $purple;
+  border-color: $purple;
 }
 
 
@@ -192,11 +221,17 @@ p {
 // ---------------------- load in buttons
 
 .info-btn {
+  margin-right: 30px;
   @include button;
 }
 
 .go-btn {
   @include button($dark, $cyan);
+}
+
+.info-btn:hover,
+.go-btn:hover {
+  @include button($dark, $turquoise);
 }
 
 .info-btn,
@@ -291,8 +326,16 @@ p {
 // daterangepicker ENDS
 
 .applyBtn {
-  background-color: $purple;
+  background-color: $blue;
   border-radius: 20px;
+  border-color: $blue;
+  transition: all .5s ease-out;
+}
+
+.applyBtn:hover {
+  background-color: $purple;
+  border-color: $purple;
+  transition: all .2s ease-out;
 }
 
 .btn-primary.disabled,
@@ -371,7 +414,6 @@ li {
     background-color: $blue;
   }
 
-  // input:checked,
   .clicked-box {
     background-color: $dark;
     box-shadow: inset 0px 0px 0px 13px $cyan;

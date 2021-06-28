@@ -94,10 +94,10 @@
     loadingIcon: document.querySelector('.loading-icon'),
     // pulling buttons from dom
     startBtn: document.querySelector('.go-btn'),
+    infoBtn: document.querySelector('.info-btn'),
     nextBtn: document.querySelector('.next i'),
     backBtn: document.querySelector('.back i'),
     // pulling slide elements and setting slide index, setting blank error message
-    slides: document.querySelectorAll('.full-screen'),
     currentScreen: 0,
     needsFill: false,
 
@@ -162,7 +162,20 @@
 
     // initialisation function
     init: function() {
+      // LOAD IN MAP ---------------
+      mapboxgl.accessToken = 'pk.eyJ1IjoibWV3LW1vIiwiYSI6ImNrcDRvZGlvczA0bHQyb3J2czczaXk0cTUifQ.OFSA4kWW4IMpTG6MTy6TPQ';
 
+      var map = new mapboxgl.Map({
+        container: 'map',
+        zoom: 11,
+        center: [168.70906691642736, -45.018670516814126],
+        pitch: 0,
+        style: 'mapbox://styles/mew-mo/ckpui5rhp1gcl17p6rzvoqbbw'
+      });
+
+      app.map = map;
+
+      // LOAD IN WINDOW ---------------
       window.addEventListener('load', function() {
         setTimeout(function() {
           app.loadingIcon.classList.add('hide-loading-icon');
@@ -171,6 +184,11 @@
           app.loadingScreen.classList.add('hide-loading-screen');
         }, 3000);
       });
+
+      // LOAD IN MODAL ---------------
+      app.infoBtn.addEventListener('click', function() {
+        $('#infoModal').modal('show');
+      }, false);
 
       //  LOAD IN SLICK ---------------
       $('.screens').slick({
@@ -191,18 +209,6 @@
         $("#datepicker").datepicker();
       });
 
-      // LOAD IN MAP ---------------
-      mapboxgl.accessToken = 'pk.eyJ1IjoibWV3LW1vIiwiYSI6ImNrcDRvZGlvczA0bHQyb3J2czczaXk0cTUifQ.OFSA4kWW4IMpTG6MTy6TPQ';
-
-      var map = new mapboxgl.Map({
-        container: 'map',
-        zoom: 11,
-        center: [168.70906691642736, -45.018670516814126],
-        pitch: 0,
-        style: 'mapbox://styles/mew-mo/ckpui5rhp1gcl17p6rzvoqbbw'
-      });
-
-      app.map = map;
       app.checkScreen();
     },
     // init function ENDS
@@ -267,6 +273,26 @@
       app.maxPeople.innerHTML = accommodation.house.maxPeople;
       app.nextBtn.style.opacity = '0.3';
 
+      if (user.people) {
+        app.nextBtn.style.opacity = '1';
+      }
+
+      $(app.oneBtn).tilt({
+        scale: 1.2
+      });
+
+      $(app.twoBtn).tilt({
+        scale: 1.2
+      });
+
+      $(app.threeBtn).tilt({
+        scale: 1.2
+      });
+
+      $(app.fourBtn).tilt({
+        scale: 1.2
+      });
+
       app.peopleScreen.addEventListener('click', function(e) {
       app.nextBtn.style.opacity = '1';
 
@@ -327,6 +353,10 @@
       app.maxDays.innerHTML = accommodation.house.maxNights;
       app.nextBtn.style.opacity = '0.3';
 
+      if (user.stayLength) {
+        app.nextBtn.style.opacity = '1';
+      }
+
       // daterangepicker STARTS
       $('#datePicker').daterangepicker({
         'maxSpan': {
@@ -356,10 +386,6 @@
       });
       // daterangepicker ENDS
 
-      if (user.stayLength) {
-        app.nextBtn.style.opacity = '1';
-      }
-
       $(app.backBtn).off().on('click', function() {
         app.back();
         app.nextBtn.style.opacity = '1';
@@ -387,6 +413,10 @@
       // app feedback conditionals
       app.needsFill = 'your accommodation';
       app.nextBtn.style.opacity = '0.3';
+
+      if (user.place) {
+        app.nextBtn.style.opacity = '1';
+      }
 
       if (user.people === 1 && user.stayLength === 1) {
         app.availableTo.innerHTML = user.people + ' person for ' + user.stayLength + ' night';
@@ -552,6 +582,10 @@
       app.needsFill = 'the meal options you want';
       app.nextBtn.style.opacity = '0.3';
 
+      if (user.meals) {
+        app.nextBtn.style.opacity = '1';
+      }
+
       if (!app.showPrices) {
         app.showPrices = true;
         app.breakfastLabel.innerHTML += ' - $' + meals.breakfast;
@@ -564,7 +598,6 @@
       $(app.backBtn).off().on('click', function() {
         app.back();
         app.nextBtn.style.opacity = '1';
-        console.log('meals appback');
       });
 
       $(app.nextBtn).off().on('click', function() {
@@ -575,29 +608,30 @@
 
     addListeners: function() {
 
-      app.breakfastCheck.addEventListener('click', function() {
+      $(app.breakfastCheck).off().on('click', function() {
         app.breakfastCheck.classList.toggle('clicked-box');
         app.checkItems(app.mealPrices);
         app.hasMeals();
-      }, false);
+      });
 
-      app.lunchCheck.addEventListener('click', function() {
+      $(app.lunchCheck).off().on('click', function() {
         app.lunchCheck.classList.toggle('clicked-box');
         app.checkItems(app.mealPrices);
         app.hasMeals();
-      }, false);
+      });
 
-      app.dinnerCheck.addEventListener('click', function() {
+      $(app.dinnerCheck).off().on('click', function() {
+        console.log('dindin clicked HELLOW?');
         app.dinnerCheck.classList.toggle('clicked-box');
         app.checkItems(app.mealPrices);
         app.hasMeals();
-      }, false);
+      });
 
-      app.noMealsCheck.addEventListener('click', function() {
+      $(app.noMealsCheck).off().on('click', function() {
         app.noMealsCheck.classList.toggle('clicked-box');
         app.checkItems(app.mealPrices);
         app.onlyNoMeals();
-      }, false);
+      });
     },
     // addListeners function ENDS
 
@@ -622,20 +656,23 @@
 
       if (app.dinnerCheck.classList.contains('clicked-box')) {
         user.total = user.total + items[2];
+        console.log(items[2]);
         user.gettingMeals[2] = ' Dinner';
       } else {
         user.gettingMeals[2] = '';
       }
 
       if (app.noMealsCheck.classList.contains('clicked-box')) {
-        user.total = user.total + items[3];
+        user.total = user.price;
         user.gettingMeals = ['No extra meals', '', ''];
       }
 
       if (!app.dinnerCheck.classList.contains('clicked-box') && !app.lunchCheck.classList.contains('clicked-box') && !app.breakfastCheck.classList.contains('clicked-box') && !app.noMealsCheck.classList.contains('clicked-box')) {
         user.meals = false;
+        app.nextBtn.style.opacity = '0.3';
       } else {
         user.meals = true;
+        app.nextBtn.style.opacity = '1';
       }
 
       console.log(user.gettingMeals);
@@ -699,7 +736,6 @@
       $(app.backBtn).off().on('click', function() {
         app.back();
         app.nextBtn.style.opacity = '1';
-        console.log('reviewappback');
       });
     },
     // reviewBooking function ENDS
@@ -710,7 +746,6 @@
       $(app.backBtn).off().on('click', function() {
         app.back();
         app.nextBtn.style.opacity = '1';
-        console.log('confirm appback');
       });
     }
     // confirm function ENDS

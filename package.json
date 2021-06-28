@@ -24,6 +24,8 @@
   "dependencies": {
     "animejs": "^3.2.1",
     "bootstrap": "^5.0.1",
-    "jquery": "^3.6.0"
+    "hover.css": "^2.3.2",
+    "jquery": "^3.6.0",
+    "tilt.js": "^1.2.1"
   }
 }

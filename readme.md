@@ -81,10 +81,29 @@ worms
 ---
 ## JS Code Style Guide
 #### Idiomatic JS :ski:
-The Javascript Style Guide I adhered by in this project was idiomatic.js, with the ruleset found [here](https://github.com/rwaldron/idiomatic.js/).
+The Javascript Style Guide I adhered by in this project was idiomatic.js, with the ruleset found [here](https://github.com/rwaldron/idiomatic.js/).\
 In my project I chose to use tabs rather than soft indents, and worked with ‘show invisibles’ turned on inside of atom to ensure that no blank line or end of line whitespaces were present.
-In section 2.D.1.1 it is declared that the ‘inner whitespace’ rule is optional, so I chose to not do this (including a space after the beginning and before the end of round brackets ( like so )) but ensured that the spacing of the contents remained spaced like in 2.A.1.1. I applied this consistently, as that is the primary rule stressed in section 2.D.
-## more worms
+Other Main principles I needed to follow from the manifesto in my project included:
+* Declaring variables at the top of functions
+* Consistently using only single quotes
+* Evaluating directly for truthy and falsy, with el and !el
+```javascript
+if (user.meals) {
+  app.nextBtn.style.opacity = '1';
+}
+
+if (!app.showPrices) {
+  app.showPrices = true;
+  app.breakfastLabel.innerHTML += ' - $' + meals.breakfast;
+  app.lunchLabel.innerHTML += ' - $' + meals.lunch;
+  app.dinnerLabel.innerHTML += ' - $' + meals.dinner;
+}
+```
+* Consistently using strict equals (===)
+* Using readable var names and camelCase for function and var declarations
+* Array variable names using 's' at the end to indicate they are an array of multiple items
+
+In section 2.D.1.1 it is declared that the ‘inner whitespace’ rule is optional, so I chose to not do this (including a space after the beginning and before the end of round brackets ( like so )) but ensured that the spacing of the contents remained spaced like in 2.A.1.1. I applied this consistently, as that is the primary rule stressed in section.
 
 ---
 ## Libraries, Plugins and APIs
@@ -108,12 +127,16 @@ In section 2.D.1.1 it is declared that the ‘inner whitespace’ rule is option
 #### Plugins :ski:
 * slick
 * daterangepicker
+* tilt.js
+* hover.css
 ```html
 <!-- head links -->
 <link rel="stylesheet" href="css/daterangepicker.css">
+<link rel="stylesheet" type="text/css" href="css/hover.css"/>
 <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
 
 <!-- links before </body> -->
+<script src="js/tilt.jquery.min.js"></script>
 <script src="slick/slick.min.js"></script>
 <script src="js/daterangepicker.js"></script>
 ```

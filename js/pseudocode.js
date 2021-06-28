@@ -9,13 +9,8 @@ What i am doing right now: MEAL SELECTION
 3. Dynamically add prices into DOM display √
 
 
-
-0325. NO clicking next button unless there is a valid input, we need to make this the case for all of stuff and things tbh... like maybe if user.thing = false, next is non clickable? i'll figure it out.
-
 ToDo (probably at home):
 * attempt inline calendar -- https://jsfiddle.net/9m63neo2/
-* grey out arrow key button if user.thing is false
-* redo user flows, ensure they are comprehensive and accurate
 * MINIFICATION
 
 // no pseudocode needed for this step > non js step!
@@ -26,7 +21,7 @@ ToDo (probably at home):
 
 RIGHT N O W !!
 
-Checkboxes break if you click next then go back, but will be chillin if you go back a screen from the checkbox screen. weird?
+THERE IS A PROBLEM ! the calculation for selecting meals after selecting no thanks do not fire immediately. they are dormant for no good reason
 
 1. figuring out how to minify my custom js with gulp-- try to add this in at the end probably
 2. trying to force daterangepicker to stay open (it seems to really not want to do this)-- i have tried a lot of different things so it might not be possible, come back to it in the end
@@ -38,7 +33,7 @@ Checkboxes break if you click next then go back, but will be chillin if you go b
 // 3. every time i go back and forward, the meal prices append to the dom again. this is likely a result of += but i need to make sure it only happens ONCE
 //
 // trying to make it so that when breakfast / lunch / dinner buttons are clicked, NO THANKS! button resets. Also so that when NO THANKS! button is clicked, breakfast / lunch / dinner buttons reset. the buttons are unhappy and do not want to do this.
-
+// Checkboxes break if you click next then go back, but will be chillin if you go back a screen from the checkbox screen. weird?
 
 -- EXTRAS !!
 
@@ -96,6 +91,11 @@ Checkboxes break if you click next then go back, but will be chillin if you go b
 //   - if clicks is odd (checked), add the price of checked item to user.total
 
 // * favicon -- gradiented fern mayhaps
+
+// * grey out arrow key button if user.thing is false
+// * redo user flows, ensure they are comprehensive and accurate
+
+// 0325. NO clicking next button unless there is a valid input, we need to make this the case for all of stuff and things tbh... like maybe if user.thing = false, next is non clickable? i'll figure it out.
 
 
 -- MOURNING MY HTML AND JS THAT HAD TO BE REDONE !!
