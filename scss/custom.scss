@@ -109,6 +109,12 @@ p {
   font-style: italic;
 }
 
+.purple {
+  text-align: center;
+  font-size: 1.2rem;
+  color: $purple;
+}
+
 // ----------------------LOADING SCREEN ----------------------
 
 .loading-screen {
@@ -145,10 +151,12 @@ p {
 
 #infoModal {
 
-  margin-top: 5%;
+  margin-top: 1%;
 
   h5 {
-    color: $purple;
+    text-transform: capitalize;
+    padding-left: 28px;
+    @include viga-default($purple);
   }
 
   img {
@@ -376,7 +384,6 @@ p {
 
 .mapboxgl-popup {
   text-align: center;
-  // width: 500px;
 
   p {
     padding-bottom: 5px;

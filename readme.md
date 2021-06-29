@@ -87,7 +87,7 @@ I ran my CSS through the [w3 schools CSS validator](https://jigsaw.w3.org/css-va
 There are a few warnings, mostly for extension transitions, which were included for the sake of the broadest use of my outcome. Additionally, some warnings for the styles I had to create to overwrite daterangepicker and bootstrap's styles (setting the border colour to the same as the background colour), but this was necessary in order to keep the style in line with my website's style overall.
 
 #### JS :ski:
-Throughout my coding process, as mentioned previously, my JS was ran through a linter via gulp. This was constantly open on my terminal and checked, so I could quickly and easily resolve errors as soon as they did pop up. In the end, the final lint came out clean, which I had expected as I always worked to remove errors as soon as they appeared.
+Throughout my coding process, as mentioned previously, my JS was ran through a linter via gulp. This was constantly open on my terminal and checked, so I could quickly and easily resolve errors as soon as they did pop up. As of finishing my project, the lint was clean and showed no errors.
 
 ---
 ## JS Code Style Guide
@@ -185,7 +185,8 @@ if (!app.showPrices) {
 :ski:
 
 I learned a lot throughout this project, and am mostly satisfied with the outcome- although there are a few things I would do differently or improve on (potentially to be updated in the future), as follows:
-* Adding images of the accommodation places that appear upon clicking map markers
+* Making the code auto select the accommodation based on what map marker you've clicked
+* Working more images of the accommodation and details into the design
 * Reducing code by using more functions with arguments and parameters
 * Working more with returns
 * Making slick's transitions more interesting / animated

@@ -232,7 +232,6 @@
       app.currentScreen -= 1;
       app.nextBtn.style.display = 'block';
       app.backBtn.style.display = 'block';
-
       app.checkScreen();
       $('.screens').slick('slickPrev');
     },
@@ -275,6 +274,7 @@
       if (user.people) {
         app.nextBtn.style.opacity = '1';
       }
+      // this will fire if the user has already had an input and returned to this screen again- ensures the arrow doesn't display as if it's unavailable to click. This is the case in other functions as well.
 
       $(app.oneBtn).tilt({
         scale: 1.2
@@ -365,6 +365,7 @@
         },
         'autoApply': false,
         'minDate': moment(),
+        // sets the min date to the current date
         'alwaysShowCalendars': true,
         'drops': 'left',
         'opens': 'center'
@@ -377,10 +378,13 @@
         user.checkIn = start.format('DD-MM-YY');
         user.checkOut = end.format('DD-MM-YY');
         user.stayLength = timeDifference / (1000 * 3600 * 24) + 1;
+        // calculates the number of days between check in and out dates
         app.nextBtn.style.opacity = '1';
+        // if this function fires, it means an input has been applied, so the arrow should display as clickable.
 
         if (user.stayLength === 1) {
           app.dateFeedback.innerHTML = 'Booking for ' + user.stayLength + ' night - For ' + user.checkIn;
+          // this conditional is to ensure the grammar is correct on the DOM display depending on if the user has selected 1 night only or not.
         } else {
           app.dateFeedback.innerHTML = 'Booking for ' + user.stayLength + ' nights - From ' + user.checkIn + ' to ' + user.checkOut;
         }
@@ -389,6 +393,7 @@
 
       $(app.backBtn).off().on('click', function() {
         app.nextBtn.style.opacity = '1';
+        // if the user is going back, it means they have already entered an input on the previous step, therefore the next arrow should display as clickable.
         app.back();
       });
 
@@ -445,6 +450,7 @@
         app.nextBtn.style.opacity = '1';
       }
 
+      // conditional to ensure correct grammar is used
       if (user.people === 1 && user.stayLength === 1) {
         app.availableTo.innerHTML = user.people + ' person for ' + user.stayLength + ' night';
       } else if (user.people === 1 && user.stayLength > 1) {
@@ -463,6 +469,7 @@
 
         app.hotelOpt.innerHTML = accommodation.hotel.name;
         app.accNames.push('hotel');
+        // accNames is an array of the current available accommodation data options to the user. accNames is used to ensure only the relevant names are targeted later.
 
         app.accSelect.appendChild(app.hotelOpt);
         app.options.push(app.hotelOpt);
@@ -533,13 +540,15 @@
         } else {
           app.optIndex = app.accSelect.selectedIndex - 1;
         }
+        // when resetting, the index number changes- on the first runthrough of the website, the index is offset, though I couldn't figure out why. This statement fixes it that so errors aren't thrown when the index resets if you go back a step from selecting accommodation, while still running properly on the first try.
 
-        // on change of option selection, resets the list by removing all children if the firstChild exists --> this is so the list doesn't print multiple times each time the user makes a new selection
         while (app.attractionList.firstChild) {
           app.attractionList.removeChild(app.attractionList.lastChild);
         }
+        // on change of option selection, resets the list by removing all children if the firstChild exists --> this is so the list doesn't print multiple times each time the user makes a new selection
 
         if (app.options[app.optIndex].label === accommodation[app.accNames[app.optIndex]].name) {
+          // checks if the label of the option matches the type of accommodation within the newly defined accNames array based on the user case, and fires when they match.
 
           app.nextBtn.style.opacity = '1';
 
@@ -562,6 +571,7 @@
             attractionItem.innerHTML = accommodation[app.accNames[app.optIndex]].nearAttractions[i];
             app.attractionList.appendChild(attractionItem);
           }
+          // loop that displays the relevant near attractions from the accommodation data in a list on the DOM
           // attraction list loop ENDS
         }
         // if conditional for accommodation options ENDS
@@ -572,8 +582,10 @@
         app.needsReset = true;
         app.nextBtn.style.opacity = '1';
         app.resetIndex = true;
+        // resetting the index, since going back means this is no longer the first time the placeBooking function is being run. Corrects the issue previously mentioned.
         app.back();
         app.placeReset();
+        // on this screen, going back means that several items will need to reset in preparation for the user changing some of their previous inputs, so it can update to new inputs.
       });
 
       $(app.nextBtn).off().on('click', function() {
@@ -601,6 +613,7 @@
       for (var i = app.allMarkers.length - 1; i >= 0; i--) {
         app.allMarkers[i].remove();
       }
+      // resetting markers in a different scope as to not re-use variable i
     },
     // resetMarkers function ENDS
 
@@ -693,11 +706,12 @@
           user.gettingMeals = ['No extra meals', '', ''];
         }
       }, 500);
-      // there was an issue with this firing too fast before the DOM had even changed when trying to select off noMeals, so a setTimeOut had to be added to ensure this conditional doesn't overwrite the others without meaning to or being correct.
+      // there was an issue with this firing too fast before the DOM had even changed when trying to select off noMeals, so a setTimeOut had to be added to ensure this conditional doesn't overwrite the others without being correct.
 
       if (!app.dinnerCheck.classList.contains('clicked-box') && !app.lunchCheck.classList.contains('clicked-box') && !app.breakfastCheck.classList.contains('clicked-box') && !app.noMealsCheck.classList.contains('clicked-box')) {
         user.meals = false;
         app.nextBtn.style.opacity = '0.3';
+        // makes it so the user must select an option before they can click the 'next' button
       } else {
         user.meals = true;
         app.nextBtn.style.opacity = '1';
@@ -727,23 +741,32 @@
         }
       }
 
+      // printMeals conditional
       if ((printMeals === user.gettingMeals[0] + user.gettingMeals[1]) && (user.gettingMeals[1] != '') && (user.gettingMeals[0] != '')) {
         printMeals = ' Breakfast & Lunch';
+
       } else if ((printMeals === user.gettingMeals[0] + user.gettingMeals[2]) && (user.gettingMeals[2] != '') && (user.gettingMeals[0] != '')) {
         printMeals = ' Breakfast & Dinner';
+
       } else if ((printMeals === user.gettingMeals[1] + user.gettingMeals[2]) && (user.gettingMeals[1] != '') && (user.gettingMeals[2] != '')) {
         printMeals = ' Lunch & Dinner';
+
       } else if ((printMeals === user.gettingMeals[0] + user.gettingMeals[1] + user.gettingMeals[2]) && (user.gettingMeals[0] != '') && (user.gettingMeals[1] != '') && (user.gettingMeals[2] != '')) {
         printMeals = ' Breakfast, Lunch & Dinner';
+
       } else if (printMeals === user.gettingMeals[0]) {
         printMeals = user.gettingMeals[0];
+
       } else if (printMeals === user.gettingMeals[1]) {
         printMeals = user.gettingMeals[1];
+
       } else if (printMeals === user.gettingMeals[2]) {
         printMeals = user.gettingMeals[2];
+
       } else {
         printMeals = user.gettingMeals[0];
       }
+      // printMeals conditional ENDS
 
       if (user.people === 1) {
         app.revPeople.innerHTML = '- Booking for ' + user.people + ' person';

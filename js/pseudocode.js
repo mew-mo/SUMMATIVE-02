@@ -2,11 +2,7 @@
 
 -- PSEUDOCODE !!
 
-What i am doing right now: MEAL SELECTION
-
-1. Pull checkboxes from DOM
-2. Conditionals - if 4th checkbox is selected, can't select any of the others. if any of the 1st three checked, cant select the 4th. this part is tricky already tbh !! BIG PROBLEM
-3. Dynamically add prices into DOM display √
+What i am doing right now: FINISHING UP >:3
 
 
 ToDo (probably at home):
@@ -22,11 +18,6 @@ ToDo (probably at home):
 RIGHT N O W !!
 
 
-SO for example. When I select No Meals, then select ONE other meal after (works properly if i select two), the meal doesn't get added as No Meals fires again despite not containing the class when the function checks for it. I have only made the example logging for dinner but this is the case for each of the buttons. They do fire, but then are overwritten by No Meals. how ANNOYINF
-
-
-THERE IS A PROBLEM ! the calculation for selecting meals after selecting no thanks do not fire immediately. they are dormant for no good reason
-
 1. figuring out how to minify my custom js with gulp-- try to add this in at the end probably
 2. trying to force daterangepicker to stay open (it seems to really not want to do this)-- i have tried a lot of different things so it might not be possible, come back to it in the end
 
@@ -39,13 +30,17 @@ THERE IS A PROBLEM ! the calculation for selecting meals after selecting no than
 // trying to make it so that when breakfast / lunch / dinner buttons are clicked, NO THANKS! button resets. Also so that when NO THANKS! button is clicked, breakfast / lunch / dinner buttons reset. the buttons are unhappy and do not want to do this.
 // Checkboxes break if you click next then go back, but will be chillin if you go back a screen from the checkbox screen. weird?
 
+// THERE IS A PROBLEM ! the calculation for selecting meals after selecting no thanks do not fire immediately. they are dormant for no good reason
+
+// SO for example. When I select No Meals, then select ONE other meal after (works properly if i select two), the meal doesn't get added as No Meals fires again despite not containing the class when the function checks for it. I have only made the example logging for dinner but this is the case for each of the buttons. They do fire, but then are overwritten by No Meals. how ANNOYINF
+
+
 -- EXTRAS !!
 
-1. animated transitions, make it more exciting
-2. loading prior to the actual page load-in
-3. extra fun animations on the next/back buttons and other buttons :)
-4. background image adjusting cleanly based on user interaction
-5. next arrow button greyed out until user inputs in each step
+1. animated transitions, make it more exciting √
+2. loading prior to the actual page load-in √
+3. extra fun animations on the next/back buttons and other buttons :) √
+4. next arrow button greyed out until user inputs in each step √
 
 -- COMPLETED PSEUDOCODE SECTIONS !!
     > and todos <
@@ -100,6 +95,12 @@ THERE IS A PROBLEM ! the calculation for selecting meals after selecting no than
 // * redo user flows, ensure they are comprehensive and accurate
 
 // 0325. NO clicking next button unless there is a valid input, we need to make this the case for all of stuff and things tbh... like maybe if user.thing = false, next is non clickable? i'll figure it out.
+
+// MEAL SELECTION
+//
+// 1. Pull checkboxes from DOM
+// 2. Conditionals - if 4th checkbox is selected, can't select any of the others. if any of the 1st three checked, cant select the 4th. this part is tricky already tbh !! BIG PROBLEM
+// 3. Dynamically add prices into DOM display √
 
 
 -- MOURNING MY HTML AND JS THAT HAD TO BE REDONE !!
