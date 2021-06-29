@@ -14,8 +14,7 @@
       maxNights: 5,
       info: 'Centrally located on the shores of Lake Wakatipu, treat yourself to 4-star tranquility at Novotel Queenstown Lakeside Hotel. Start your day fresh with a breath of mountain air from your hotel room balcony and a delicious buffet breakfast in the airy restaurant. Your hotel room will be waiting for you after a long day of soaking up Queenstown\'s natural beauty.',
       nearAttractions: ['Local Golf Course', 'Coronet Peak Ski  Resort', 'Lake Wakatipu', 'Skyline Luge'],
-      img: 'img/invisibles-ex.png'
-
+      img: 'img/novotel.jpg'
     },
     hostel: {
       name: 'Haka Lodge Queenstown',
@@ -26,7 +25,8 @@
       minNights: 1,
       maxNights: 10,
       info: 'You are invited to stay at our upmarket backpackers in Queenstown; Haka Lodge! Opened just a few years ago, close to the city centre and kitted out with top of the line facilities, this lodge is an absolute stunner. We offer accommodation suitable for everybody from luxury bunk beds to private rooms. We believe in offering affordable accommodation that is premium and up-scale. Come and see why we have been awarded a TripAdvisor 2019 Certificate of Excellence.',
-      nearAttractions: ['Lake Wakatipu', 'Fergburger', 'Shotover / Camp St intersection', 'Skyline Luge']
+      nearAttractions: ['Lake Wakatipu', 'Fergburger', 'Shotover / Camp St intersection', 'Skyline Luge'],
+      img: 'img/haka.jpg'
     },
     motel: {
       name: 'Manata Lodge',
@@ -37,7 +37,8 @@
       minNights: 3,
       maxNights: 10,
       info: 'Manata Homestead & Lodge is nestled in the heart of Wakatipu Basin with stunning views of Coronet Peak and the Remarkables. Our beautiful property contains a large 4-bedroom house and 4 self-contained apartments. Manata is perfect for groups of families or friends, small weddings, after wedding BBQ\’s, family celebrations, ski teams, hiking groups, golfers, family reunions and tour groups.',
-      nearAttractions: ['Shotover River', 'The Remarkables Ski Area', 'Five Mile Shopping Centre', 'Coronet Peak Ski Area']
+      nearAttractions: ['Shotover River', 'The Remarkables Ski Area', 'Five Mile Shopping Centre', 'Coronet Peak Ski Area'],
+      img: 'img/manata.jpg'
     },
     house: {
       name: 'Shotover Country Cottages',
@@ -48,7 +49,8 @@
       minNights: 2,
       maxNights: 15,
       info: 'Shotover Country Cottages are a fantastic base to explore Queenstown and surroundings. Shotover Country Cottages provide boutique accommodation conveniently located between Queenstown and Arrowtown, NZ. Fully self-contained, the cottages are perfect for a weekend away or a longer stay.',
-      nearAttractions: ['The Queenstown Trail', 'The Remarkables and Coronet Peak Ski Areas', 'Shotover and Kawarau Rivers', 'Onsen Hot Pools', 'Lake Hayes']
+      nearAttractions: ['The Queenstown Trail', 'The Remarkables and Coronet Peak Ski Areas', 'Shotover and Kawarau Rivers', 'Onsen Hot Pools', 'Lake Hayes'],
+      img: 'img/shotover.jpg'
     },
     hotelTwo: {
       name: 'Nugget Point Queenstown Hotel',
@@ -59,7 +61,8 @@
       minNights: 1,
       maxNights: 15,
       info: 'Nugget Point, a THC Group Hotel, is located in Arthur\'s Point, New Zealand. The closest hotel to the stunning Coronet Peak Ski Area, within easy reach of central Queenstown, this property will allow you to experience this destination in a unique and unforgettable way. Our secluded location offers you peace and tranquility to relax during your stay, while also allowing you to enjoy the buzz of central Queenstown – just a 7 minute drive away.',
-      nearAttractions: ['Coronet Peak Ski Area', 'Shotover River', 'Onsen Hot Pools', 'Arthur\'s Point Gorge Scenic Reserve']
+      nearAttractions: ['Coronet Peak Ski Area', 'Shotover River', 'Onsen Hot Pools', 'Arthur\'s Point Gorge Scenic Reserve'],
+      img: 'img/nuggetpoint.jpg'
     }
   };
   // accommodation object ENDS
@@ -401,22 +404,38 @@
         '<p>' + accommodation.hotel.name + '</p>' +
         '<img src="' + accommodation.hotel.img + '">'
       ),
-        // hostelPopup = new mapboxgl.Popup({ offset: 25 }).setHTML(
-        //   '<p>' + accommodation.hostel.name + '</p>' +
-        //   '<img src="' + accommodation.hostel.img + '">'
-        // ),
+        hostelPopup = new mapboxgl.Popup({ offset: 25 }).setHTML(
+          '<p>' + accommodation.hostel.name + '</p>' +
+          '<img src="' + accommodation.hostel.img + '">'
+        ),
+        motelPopup = new mapboxgl.Popup({ offset: 25 }).setHTML(
+          '<p>' + accommodation.motel.name + '</p>' +
+          '<img src="' + accommodation.motel.img + '">'
+        ),
+        housePopup = new mapboxgl.Popup({ offset: 25 }).setHTML(
+          '<p>' + accommodation.house.name + '</p>' +
+          '<img src="' + accommodation.house.img + '">'
+        ),
+        hotelTwoPopup = new mapboxgl.Popup({ offset: 25 }).setHTML(
+          '<p>' + accommodation.hotelTwo.name + '</p>' +
+          '<img src="' + accommodation.hotelTwo.img + '">'
+        ),
       // map markers
         hotelMarker = new mapboxgl.Marker()
           .setLngLat(accommodation.hotel.coordinates)
           .setPopup(hotelPopup),
         hostelMarker = new mapboxgl.Marker()
-          .setLngLat(accommodation.hostel.coordinates),
+          .setLngLat(accommodation.hostel.coordinates)
+          .setPopup(hostelPopup),
         motelMarker = new mapboxgl.Marker()
-          .setLngLat(accommodation.motel.coordinates),
+          .setLngLat(accommodation.motel.coordinates)
+          .setPopup(motelPopup),
         houseMarker = new mapboxgl.Marker()
-          .setLngLat(accommodation.house.coordinates),
+          .setLngLat(accommodation.house.coordinates)
+          .setPopup(housePopup),
         hotelTwoMarker = new mapboxgl.Marker()
-          .setLngLat(accommodation.hotelTwo.coordinates);
+          .setLngLat(accommodation.hotelTwo.coordinates)
+          .setPopup(hotelTwoPopup);
 
       // app feedback conditionals
       app.needsFill = 'your accommodation';

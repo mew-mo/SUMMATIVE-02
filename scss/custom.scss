@@ -145,11 +145,27 @@ p {
 
 #infoModal {
 
-  margin-top: 12%;
+  margin-top: 5%;
 
   h5 {
     color: $purple;
   }
+
+  img {
+    margin: 0 auto;
+    padding-top: 10px;
+    width: 95%;
+    border-radius: 30px;
+  }
+
+  #infoModalLabel {
+    margin-left: 20px;
+  }
+}
+// infomodal ENDS
+
+.modal-content {
+  border-radius: 30px;
 }
 
 .btn-secondary {
@@ -352,6 +368,29 @@ p {
 
 .location-info {
   color: $white;
+}
+
+.mapboxgl-popup-content {
+  border-radius: 10px;
+}
+
+.mapboxgl-popup {
+  text-align: center;
+  // width: 500px;
+
+  p {
+    padding-bottom: 5px;
+    border-bottom: 1px solid $purple;
+  }
+
+  img {
+    width: 220px;
+    border-radius: 10px;
+  }
+}
+
+.mapboxgl-popup-close-button {
+  padding: 5px 10px 0 0;
 }
 
 #accommodation {
