@@ -18,7 +18,7 @@ body {
 
 body {
   background-color: $dark;
-  background-image: url('/img/qt-dark.jpg');
+  background-image: url('../img/qt-dark.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   overflow: hidden;
@@ -102,7 +102,7 @@ h6 {
 // h6 - regular white jost - for informational notes on slides
 
 p {
-  @include jost-default;
+  @include jost-default($dark);
 }
 
 .italic {
@@ -149,10 +149,6 @@ p {
 
   h5 {
     color: $purple;
-  }
-
-  p {
-    color: $dark;
   }
 }
 
@@ -352,6 +348,10 @@ p {
   h5 {
     margin-top: 40px;
   }
+}
+
+.location-info {
+  color: $white;
 }
 
 #accommodation {

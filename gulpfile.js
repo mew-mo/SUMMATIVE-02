@@ -44,16 +44,26 @@ function lint (done) {
 	gulp.src('js/custom.js')
   .pipe(jshint())
 	.pipe(jshint.reporter('default'))
+	// .pipe(minify({
+	// 	ext: {
+	// 		min: '.min.js'
+	// 	}
+	// }))
+	// .pipe(gulp.dest('js/'))
 	.pipe(connect.reload());
 	done();
 };
 
-function minJs (done) {
-	gulp.src('js/custom.js')
-	.pipe(minify())
-	.pipe(gulp.dest('js/'))
-	.pipe(connect.reload());
-};
+// function minJs (done) {
+// 	gulp.src('js/custom.js')
+// 	.pipe(minify({
+// 		ext: {
+// 			min: '.min.js'
+// 		}
+// 	}))
+// 	.pipe(gulp.dest('js/'))
+// 	.pipe(connect.reload());
+// };
 
 // Watch task to watch for file changes
 function watch (done) {
@@ -66,4 +76,4 @@ function watch (done) {
 // Tasks that Gulp will run
 gulp.task('default', gulp.series(serve, watch, lint, html, styles));
 
-gulp.task('compress', minJs);
+// gulp.task('compress', minJs);

@@ -13,7 +13,8 @@
       minNights: 1,
       maxNights: 5,
       info: 'Centrally located on the shores of Lake Wakatipu, treat yourself to 4-star tranquility at Novotel Queenstown Lakeside Hotel. Start your day fresh with a breath of mountain air from your hotel room balcony and a delicious buffet breakfast in the airy restaurant. Your hotel room will be waiting for you after a long day of soaking up Queenstown\'s natural beauty.',
-      nearAttractions: ['Local Golf Course', 'Coronet Peak Ski  Resort', 'Lake Wakatipu', 'Skyline Luge']
+      nearAttractions: ['Local Golf Course', 'Coronet Peak Ski  Resort', 'Lake Wakatipu', 'Skyline Luge'],
+      img: 'img/invisibles-ex.png'
 
     },
     hostel: {
@@ -67,8 +68,7 @@
   var meals = {
     breakfast: 20,
     lunch: 20,
-    dinner: 25,
-    none: 0
+    dinner: 25
   };
   // meal object ENDS
 
@@ -118,7 +118,6 @@
     dateFeedback: document.querySelector('.date-feedback'),
 
     // PULLING FOR ACCOMMODATION SELECT SCREEN ---------------
-    placeScreen: document.querySelector('#placeSelect'),
     availableTo: document.querySelector('.user-people'),
     // map to be added so that it can be pulled out of function scope
     map: false,
@@ -151,7 +150,7 @@
     noMealsCheck: document.querySelector('#noMeals'),
     noMealsLabel: document.querySelector('.no-meals label'),
     showPrices: false,
-    mealPrices: [meals.breakfast, meals.lunch, meals.dinner, meals.none],
+    mealPrices: [meals.breakfast, meals.lunch, meals.dinner],
 
     // PULLING FOR REVIEW SCREEN ---------------
     revPeople: document.querySelector('.rev-ppl'),
@@ -216,7 +215,6 @@
     next: function(val) {
       if (val) {
         app.currentScreen += 1;
-        console.log(app.currentScreen + ' is the current screen');
         app.nextBtn.style.display = 'block';
         app.backBtn.style.display = 'block';
         $('.screens').slick('slickNext');
@@ -229,8 +227,6 @@
 
     back: function() {
       app.currentScreen -= 1;
-
-      console.log(app.currentScreen + ' is the current screen');
       app.nextBtn.style.display = 'block';
       app.backBtn.style.display = 'block';
 
@@ -293,6 +289,7 @@
         scale: 1.2
       });
 
+      // peopleScreen eventListener
       app.peopleScreen.addEventListener('click', function(e) {
       app.nextBtn.style.opacity = '1';
 
@@ -324,11 +321,11 @@
           app.fourBtn.classList.remove('four-clicked');
         }
       }, false);
-
+      // peopleScreen eventListener ENDS
 
       $(app.backBtn).off().on('click', function() {
-        app.back();
         app.nextBtn.style.opacity = '1';
+        app.back();
       });
 
       $(app.nextBtn).off().on('click', function() {
@@ -339,6 +336,7 @@
 
     setNum: function(num) {
       user.people = num;
+
       if (num === 1) {
         app.pplFeedback.innerHTML = 'Booking for ' + num + ' person';
       } else {
@@ -387,8 +385,8 @@
       // daterangepicker ENDS
 
       $(app.backBtn).off().on('click', function() {
-        app.back();
         app.nextBtn.style.opacity = '1';
+        app.back();
       });
 
       $(app.nextBtn).off().on('click', function() {
@@ -398,9 +396,19 @@
     // dateBooking function ENDS
 
     placeBooking: function() {
+      // map popups
+      var hotelPopup = new mapboxgl.Popup({ offset: 25 }).setHTML(
+        '<p>' + accommodation.hotel.name + '</p>' +
+        '<img src="' + accommodation.hotel.img + '">'
+      ),
+        // hostelPopup = new mapboxgl.Popup({ offset: 25 }).setHTML(
+        //   '<p>' + accommodation.hostel.name + '</p>' +
+        //   '<img src="' + accommodation.hostel.img + '">'
+        // ),
       // map markers
-      var hotelMarker = new mapboxgl.Marker()
-        .setLngLat(accommodation.hotel.coordinates),
+        hotelMarker = new mapboxgl.Marker()
+          .setLngLat(accommodation.hotel.coordinates)
+          .setPopup(hotelPopup),
         hostelMarker = new mapboxgl.Marker()
           .setLngLat(accommodation.hostel.coordinates),
         motelMarker = new mapboxgl.Marker()
@@ -507,7 +515,7 @@
           app.optIndex = app.accSelect.selectedIndex - 1;
         }
 
-        // on change of option selection, resets the list by removing all children if the firstChild exists --> this is so the list doesn't print multiple times
+        // on change of option selection, resets the list by removing all children if the firstChild exists --> this is so the list doesn't print multiple times each time the user makes a new selection
         while (app.attractionList.firstChild) {
           app.attractionList.removeChild(app.attractionList.lastChild);
         }
@@ -544,9 +552,9 @@
       $(app.backBtn).off().on('click', function() {
         app.needsReset = true;
         app.nextBtn.style.opacity = '1';
+        app.resetIndex = true;
         app.back();
         app.placeReset();
-        app.resetIndex = true;
       });
 
       $(app.nextBtn).off().on('click', function() {
@@ -558,10 +566,10 @@
     placeReset: function() {
       if (app.needsReset) {
         app.optIndex = app.accSelect.selectedIndex;
-        app.resetMarkers();
         app.accNames = [];
         app.options = [];
         app.needsReset = false;
+        app.resetMarkers();
         while (app.accSelect.firstChild) {
           app.accSelect.removeChild(app.accSelect.lastChild);
         }
@@ -596,8 +604,8 @@
       app.addListeners();
 
       $(app.backBtn).off().on('click', function() {
-        app.back();
         app.nextBtn.style.opacity = '1';
+        app.back();
       });
 
       $(app.nextBtn).off().on('click', function() {
@@ -737,8 +745,8 @@
       app.finalPrice.innerHTML = '$' + user.total;
 
       $(app.backBtn).off().on('click', function() {
-        app.back();
         app.nextBtn.style.opacity = '1';
+        app.back();
       });
     },
     // reviewBooking function ENDS
@@ -747,8 +755,8 @@
       app.nextBtn.style.display = 'none';
 
       $(app.backBtn).off().on('click', function() {
-        app.back();
         app.nextBtn.style.opacity = '1';
+        app.back();
       });
     }
     // confirm function ENDS

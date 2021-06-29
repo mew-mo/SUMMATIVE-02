@@ -26,6 +26,9 @@ Gulp was used for various different functions that greatly enhanced my productio
 * **Sass:** In the past, I have used Koala to watch my SCSS files and convert them into CSS. While functional, it was always a touch buggy- using Gulp to watch my SCSS and convert it saved on time greatly as I wasn't relying on an individual application and it runs through the terminal instantly on save without any hassle. This is also closer to an industry standard way of writing SCSS compared to Koala.
 1,665 companies use gulp, showcasing how it is an industry standard tool utilised professionally for a similar purpose of making workflow more efficient.
 
+#### Chrome Inspector :ski:
+The chrome inspector was extremely helpful, as the errors it throws in the console are sometimes undetected by the gulp linter. Using the two in collaboration with each other enabled me to most efficiently weed out issues and figure out problems as I worked. The inspector was particularly handy for checking if the html file was altering as I'd expected it to, and checking when functions were firing. This made my work process much more efficient, giving me clues or direct nods to where issues lie throughout the coding process.
+
 #### Node.js and npm :ski:
 Node.js is a hugely popular open-source platform for executing JS server-side (back-end). It is absolutely an industry standard tool, used by huge companies such as Netflix, LinkedIn and Paypal. I personally used node.js in order to access npm installs, which greatly decreased the amount of time I had to spend searching for specific plugins or libraries as I could download them straight into my project using the 'npm i' command- this follows best practices as I didn't waste any time and was able to have quick, easy access to all the files I needed.
 
@@ -70,13 +73,17 @@ Sass (SCSS) is a style of coding akin to CSS that I have become very font of for
 ---
 ## Code Validation
 #### HTML :ski:
-I ran my HTML through the [w3 schools HTML validator](https://validator.w3.org/nu/#textarea),and resulted with no errors.
+I ran my HTML through the [w3 schools HTML validator](https://validator.w3.org/nu/#textarea), and resulted with no errors.
+
 ![Screenshot of my w3 HTML approval](img/html-valid.png?raw=true)
-At first there were warnings for empty titles as they were left empty to dynamically change through js based on user inputs, but this was easily resolved by adding spaces in manually.
+
+There are also no warnings, so everything is all sweet!
 
 #### CSS :ski:
-I ran my CSS through the [w3 schools CSS validator](https://jigsaw.w3.org/css-validator/validator),and resulted with no errors.
+I ran my CSS through the [w3 schools CSS validator](https://jigsaw.w3.org/css-validator/validator), and resulted with no errors.
+
 ![Screenshot of my w3 CSS approval](img/css-valid.png?raw=true)
+
 There are a few warnings, mostly for extension transitions, which were included for the sake of the broadest use of my outcome. Additionally, some warnings for the styles I had to create to overwrite daterangepicker and bootstrap's styles (setting the border colour to the same as the background colour), but this was necessary in order to keep the style in line with my website's style overall.
 
 #### JS :ski:
@@ -86,9 +93,16 @@ Throughout my coding process, as mentioned previously, my JS was ran through a l
 ## JS Code Style Guide
 #### Idiomatic JS :ski:
 The Javascript Style Guide I adhered by in this project was idiomatic.js, with the ruleset found [here](https://github.com/rwaldron/idiomatic.js/).\
-In my project I chose to use tabs rather than soft indents, and worked with ‘show invisibles’ turned on inside of atom to ensure that no blank line or end of line whitespaces were present.
-Other Main principles I needed to follow from the manifesto in my project included:
+
+Main principles I followed from the manifesto in my project included:
 * Declaring variables at the top of functions
+* Declaring variables once per scope
+``` javascript
+var startDate = new Date (start.format('MM/DD/YYYY')),
+  endDate = new Date (end.format('MM/DD/YYYY')),
+  timeDifference = endDate.getTime() - startDate.getTime();
+
+```
 * Consistently using only single quotes
 * Evaluating directly for truthy and falsy, with el and !el
 ```javascript
@@ -103,11 +117,24 @@ if (!app.showPrices) {
   app.dinnerLabel.innerHTML += ' - $' + meals.dinner;
 }
 ```
+* Sticking consistently with tabs instead of soft indents
+* Working with 'show invisibles' on - I used '1' to represent spaces as that made it easiest for me to locate accidental blank line or end of line whitespaces
+![screenshot showing the character '1' representing space](img/invisibles-ex.png?raw=true)
+
 * Consistently using strict equals (===)
 * Using readable var names and camelCase for function and var declarations
 * Array variable names using 's' at the end to indicate they are an array of multiple items
 
-In section 2.D.1.1 it is declared that the ‘inner whitespace’ rule is optional, so I chose to not do this (including a space after the beginning and before the end of round brackets ( like so )) but ensured that the spacing of the contents remained spaced like in 2.A.1.1. I applied this consistently, as that is the primary rule stressed in section.
+* In section 2.D.1.1 it is declared that the ‘inner whitespace’ rule is optional, so I chose to not do this (including a space after the beginning and before the end of round brackets ( like so )) but ensured that the inner spacing of the contents remained spaced like in 2.A.1.1. I applied this consistently, as that is the primary rule stressed in the section.
+``` javascript
+// how I followed the style guide, consistently through my code
+  if ((printMeals === user.gettingMeals[0] + user.gettingMeals[1]) && (user.gettingMeals[1] != '') && (user.gettingMeals[0] != '')) {
+    printMeals = ' Breakfast & Lunch';
+  }
+
+  // how my code would've looked if I didn't
+  if(printMeals===user.gettingMeals[0]+user.gettingMeals[1]&&user.gettingMeals[1]!=''&&user.gettingMeals[0]!='') printMeals = ' Breakfast & Lunch';
+```
 
 ---
 ## Libraries, Plugins and APIs
@@ -153,21 +180,14 @@ In section 2.D.1.1 it is declared that the ‘inner whitespace’ rule is option
 <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.css" rel="stylesheet" />
 ```
 
-# this is where I'm up to :)
+---
+## Future Improvements
+:ski:
 
+I learned a lot throughout this project, and am mostly satisfied with the outcome- although there are a few things I would do differently or improve on (potentially to be updated in the future), as follows:
+* Adding images of the accommodation places that appear upon clicking map markers
+* Reducing code by using more functions with arguments and parameters
+* Working more with returns
+* Making slick's transitions more interesting / animated
 
-* Description of project √
-* Productions tools [RETURN HERE AT SOME POINT] √
-* Validation statement for .js/.css & html
-* Some detail of javascript style guide --idiomatic and examples??
-* Any other info you wish to add
-  * maybe all plugins, libraries and APIs included? :0 !!
-
-
-*This text will be italic* (forward slash to line break)\
-_This will also be italic_\
-**This text will be bold**\
-__This will also be bold__\
-*You **can** combine them*
-
-✨
+It'd be cool if I could implement these extras in the future and improve my coding skills more!
