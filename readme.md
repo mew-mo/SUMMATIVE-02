@@ -14,6 +14,7 @@ The main objectives of the application is to create a simple, easy to understand
 *This project was done for class at Yoobee Colleges, and the premise is entirely fictional. Made for educational purposes only to build on the foundations of my Javascript coding and showcase what I have learned through the second module.*
 
 ---
+
 ## Code Validation
 #### HTML :ski:
 I ran my HTML through the [w3 schools HTML validator](https://validator.w3.org/nu/#textarea), and resulted with no errors.
@@ -35,6 +36,7 @@ Throughout my coding process, my JS was ran through a linter via gulp. This was 
 ![Screenshot of my gulp linter approval](img/js-valid.png?raw=true)
 
 ---
+
 ## JS Code Style Guide
 #### Idiomatic JS :ski:
 The Javascript Style Guide I adhered by in this project was idiomatic.js, with the ruleset found [here](https://github.com/rwaldron/idiomatic.js/).\
@@ -142,6 +144,7 @@ Sass (SCSS) is a style of coding akin to CSS that I have become very font of for
 ```
 
 ---
+
 ## Libraries, Plugins and APIs
 #### Libraries :ski:
 * bootstrap
@@ -198,9 +201,11 @@ I learned a lot throughout this project, and am mostly satisfied with the outcom
 
 It'd be cool if I could implement these extras in the future and improve my coding skills more!
 
+---
+
 ## Bonus
 :ski:
 
-*Since I grew up in Queenstown, I asked my Mum if she had any photos she had taken that I could use in my project copyright-free. The background image and modal image in my site were both taken by her! Here's a cool bonus pic she took of Queenstown from Cecil Peak*  :sunglasses: :sunrise_over_mountains:
+*Since I grew up in Queenstown, I asked my Mum if she had any photos she had taken that I could use in my project copyright-free. The background image and modal image in my site were both taken by her! Here's a cool bonus pic she took of Queenstown from Cecil Peak*  :sunglasses:&nbsp;:sunrise_over_mountains:
 
 ![The view of Queenstown from Cecil Peak](img/cecil-peak.jpg?raw=true)
