@@ -1,3 +1,6 @@
+![sweet as campaign logo](img/sweetas-logo.png?raw=true)
+
+
 #  Sweet As!<br> Queenstown Getaways
 ##### T O U R I S M &nbsp;&nbsp;N E W &nbsp;&nbsp;Z E A L A N D
 \
@@ -9,6 +12,74 @@ The main objectives of the application is to create a simple, easy to understand
 
 
 *This project was done for class at Yoobee Colleges, and the premise is entirely fictional. Made for educational purposes only to build on the foundations of my Javascript coding and showcase what I have learned through the second module.*
+
+---
+## Code Validation
+#### HTML :ski:
+I ran my HTML through the [w3 schools HTML validator](https://validator.w3.org/nu/#textarea), and resulted with no errors.
+
+![Screenshot of my w3 HTML approval](img/html-valid.png?raw=true)
+
+There are also no warnings, so everything is all sweet!
+
+#### CSS :ski:
+I ran my CSS through the [w3 schools CSS validator](https://jigsaw.w3.org/css-validator/validator), and resulted with no errors.
+
+![Screenshot of my w3 CSS approval](img/css-valid.png?raw=true)
+
+There are a few warnings, mostly for extension transitions, which were included for the sake of the broadest use of my outcome. Additionally, some warnings for the styles I had to create to overwrite daterangepicker and bootstrap's styles (setting the border colour to the same as the background colour), but this was necessary in order to keep the style in line with my website's style overall.
+
+#### JS :ski:
+Throughout my coding process, my JS was ran through a linter via gulp. This was constantly open on my terminal and checked, so I could quickly and easily resolve errors as soon as they did pop up. As of finishing my project, the lint was clean and showed no errors.
+
+![Screenshot of my gulp linter approval](img/js-valid.png?raw=true)
+
+---
+## JS Code Style Guide
+#### Idiomatic JS :ski:
+The Javascript Style Guide I adhered by in this project was idiomatic.js, with the ruleset found [here](https://github.com/rwaldron/idiomatic.js/).\
+
+Main principles I followed from the manifesto in my project included:
+* Declaring variables at the top of functions
+* Declaring variables once per scope
+``` javascript
+var startDate = new Date (start.format('MM/DD/YYYY')),
+  endDate = new Date (end.format('MM/DD/YYYY')),
+  timeDifference = endDate.getTime() - startDate.getTime();
+
+```
+* Consistently using only single quotes
+* Evaluating directly for truthy and falsy, with el and !el
+```javascript
+if (user.meals) {
+  app.nextBtn.style.opacity = '1';
+}
+
+if (!app.showPrices) {
+  app.showPrices = true;
+  app.breakfastLabel.innerHTML += ' - $' + meals.breakfast;
+  app.lunchLabel.innerHTML += ' - $' + meals.lunch;
+  app.dinnerLabel.innerHTML += ' - $' + meals.dinner;
+}
+```
+* Sticking consistently with tabs instead of soft indents
+* Working with 'show invisibles' on - I used '1' to represent spaces as that made it easiest for me to locate accidental blank line or end of line whitespaces
+![screenshot showing the character '1' representing space](img/invisibles-ex.png?raw=true)
+
+* Consistently using strict equals (===)
+* Using readable var names and camelCase for function and var declarations
+* Array variable names using 's' at the end to indicate they are an array of multiple items
+
+* In section 2.D.1.1 it is declared that the ‘inner whitespace’ rule is optional, so I chose to not do this (including a space after the beginning and before the end of round brackets ( like so )) but ensured that the inner spacing of the contents remained spaced like in 2.A.1.1. I applied this consistently, as that is the primary rule stressed in the section.
+``` javascript
+// how I followed the style guide, consistently through my code
+  if ((printMeals === user.gettingMeals[0] + user.gettingMeals[1]) && (user.gettingMeals[1] != '') && (user.gettingMeals[0] != '')) {
+    printMeals = ' Breakfast & Lunch';
+  }
+
+  // how my code would've looked if I didn't
+  if(printMeals===user.gettingMeals[0]+user.gettingMeals[1]&&user.gettingMeals[1]!=''&&user.gettingMeals[0]!='') printMeals = ' Breakfast & Lunch';
+```
 
 ---
 
@@ -68,72 +139,6 @@ Sass (SCSS) is a style of coding akin to CSS that I have become very font of for
     margin-top: 26%;
   }
 }
-```
-
----
-## Code Validation
-#### HTML :ski:
-I ran my HTML through the [w3 schools HTML validator](https://validator.w3.org/nu/#textarea), and resulted with no errors.
-
-![Screenshot of my w3 HTML approval](img/html-valid.png?raw=true)
-
-There are also no warnings, so everything is all sweet!
-
-#### CSS :ski:
-I ran my CSS through the [w3 schools CSS validator](https://jigsaw.w3.org/css-validator/validator), and resulted with no errors.
-
-![Screenshot of my w3 CSS approval](img/css-valid.png?raw=true)
-
-There are a few warnings, mostly for extension transitions, which were included for the sake of the broadest use of my outcome. Additionally, some warnings for the styles I had to create to overwrite daterangepicker and bootstrap's styles (setting the border colour to the same as the background colour), but this was necessary in order to keep the style in line with my website's style overall.
-
-#### JS :ski:
-Throughout my coding process, as mentioned previously, my JS was ran through a linter via gulp. This was constantly open on my terminal and checked, so I could quickly and easily resolve errors as soon as they did pop up. As of finishing my project, the lint was clean and showed no errors.
-
----
-## JS Code Style Guide
-#### Idiomatic JS :ski:
-The Javascript Style Guide I adhered by in this project was idiomatic.js, with the ruleset found [here](https://github.com/rwaldron/idiomatic.js/).\
-
-Main principles I followed from the manifesto in my project included:
-* Declaring variables at the top of functions
-* Declaring variables once per scope
-``` javascript
-var startDate = new Date (start.format('MM/DD/YYYY')),
-  endDate = new Date (end.format('MM/DD/YYYY')),
-  timeDifference = endDate.getTime() - startDate.getTime();
-
-```
-* Consistently using only single quotes
-* Evaluating directly for truthy and falsy, with el and !el
-```javascript
-if (user.meals) {
-  app.nextBtn.style.opacity = '1';
-}
-
-if (!app.showPrices) {
-  app.showPrices = true;
-  app.breakfastLabel.innerHTML += ' - $' + meals.breakfast;
-  app.lunchLabel.innerHTML += ' - $' + meals.lunch;
-  app.dinnerLabel.innerHTML += ' - $' + meals.dinner;
-}
-```
-* Sticking consistently with tabs instead of soft indents
-* Working with 'show invisibles' on - I used '1' to represent spaces as that made it easiest for me to locate accidental blank line or end of line whitespaces
-![screenshot showing the character '1' representing space](img/invisibles-ex.png?raw=true)
-
-* Consistently using strict equals (===)
-* Using readable var names and camelCase for function and var declarations
-* Array variable names using 's' at the end to indicate they are an array of multiple items
-
-* In section 2.D.1.1 it is declared that the ‘inner whitespace’ rule is optional, so I chose to not do this (including a space after the beginning and before the end of round brackets ( like so )) but ensured that the inner spacing of the contents remained spaced like in 2.A.1.1. I applied this consistently, as that is the primary rule stressed in the section.
-``` javascript
-// how I followed the style guide, consistently through my code
-  if ((printMeals === user.gettingMeals[0] + user.gettingMeals[1]) && (user.gettingMeals[1] != '') && (user.gettingMeals[0] != '')) {
-    printMeals = ' Breakfast & Lunch';
-  }
-
-  // how my code would've looked if I didn't
-  if(printMeals===user.gettingMeals[0]+user.gettingMeals[1]&&user.gettingMeals[1]!=''&&user.gettingMeals[0]!='') printMeals = ' Breakfast & Lunch';
 ```
 
 ---

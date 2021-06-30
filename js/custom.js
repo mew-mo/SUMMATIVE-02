@@ -469,7 +469,7 @@
 
         app.hotelOpt.innerHTML = accommodation.hotel.name;
         app.accNames.push('hotel');
-        // accNames is an array of the current available accommodation data options to the user. accNames is used to ensure only the relevant names are targeted later.
+        // accNames is an array of the current available accommodation data options to the user. accNames is used to ensure only the relevant names from the accommodation object are targeted later.
 
         app.accSelect.appendChild(app.hotelOpt);
         app.options.push(app.hotelOpt);
@@ -540,12 +540,12 @@
         } else {
           app.optIndex = app.accSelect.selectedIndex - 1;
         }
-        // when resetting, the index number changes- on the first runthrough of the website, the index is offset, though I couldn't figure out why. This statement fixes it that so errors aren't thrown when the index resets if you go back a step from selecting accommodation, while still running properly on the first try.
+        // when resetting from being on a different screen, the index number of the option selection box changes- on the first runthrough of the website, the index is offset, though I couldn't figure out why. This statement fixes it that so errors aren't thrown when the index resets if you go back a step from selecting accommodation, while still running properly on the first try.
 
         while (app.attractionList.firstChild) {
           app.attractionList.removeChild(app.attractionList.lastChild);
         }
-        // on change of option selection, resets the list by removing all children if the firstChild exists --> this is so the list doesn't print multiple times each time the user makes a new selection
+        // on change of option selection, resets the DOM display list by removing all children if the firstChild exists --> this is so the list doesn't print multiple times each time the user makes a new selection.
 
         if (app.options[app.optIndex].label === accommodation[app.accNames[app.optIndex]].name) {
           // checks if the label of the option matches the type of accommodation within the newly defined accNames array based on the user case, and fires when they match.
@@ -740,6 +740,7 @@
           printMeals += user.gettingMeals[i];
         }
       }
+      // this for loop and the following if conditional are just so the user's selection of meals display more nicely on the DOM rather than displaying the array of their choices directly, which would display like 'Breakfast, Lunch, Dinner' or 'Breakfast,, Dinner' which isn't so nice. gettingMeals array has a set amount so meals display in logical order rather than order user clicked in.
 
       // printMeals conditional
       if ((printMeals === user.gettingMeals[0] + user.gettingMeals[1]) && (user.gettingMeals[1] != '') && (user.gettingMeals[0] != '')) {
