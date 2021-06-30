@@ -197,3 +197,10 @@ I learned a lot throughout this project, and am mostly satisfied with the outcom
 * Making slick's transitions more interesting / animated
 
 It'd be cool if I could implement these extras in the future and improve my coding skills more!
+
+## Bonus
+:ski:
+
+*Since I grew up in Queenstown, I asked my Mum if she had any photos she had taken that I could use in my project copyright-free. The background image and modal image in my site were both taken by her! Here's a cool bonus pic she took of Queenstown from Cecil Peak*  :sunglasses: :sunrise_over_mountains:
+
+![The view of Queenstown from Cecil Peak](img/cecil-peak.jpg?raw=true)
