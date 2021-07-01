@@ -39,7 +39,7 @@ Throughout my coding process, my JS was ran through a linter via gulp. This was 
 
 ## JS Code Style Guide
 #### Idiomatic JS :ski:
-The Javascript Style Guide I adhered by in this project was idiomatic.js, with the ruleset found [here](https://github.com/rwaldron/idiomatic.js/).\
+The Javascript Style Guide I adhered by in this project was idiomatic.js, with the ruleset found [here](https://github.com/rwaldron/idiomatic.js/).
 
 Main principles I followed from the manifesto in my project included:
 * Declaring variables at the top of functions
@@ -94,8 +94,11 @@ The terminal was used extensively throughout the project alongside Gulp and Git,
 #### Gulp :ski:
 Gulp was used for various different functions that greatly enhanced my production workflow:
 * **Live refresh:** Refreshes the HTML live page on HTML, JS and CSS save, therefore reducing time spent saving and manually refreshing the page. Gulp does so by simulating a live-server environment, which follows industry best practices as the application would run through a server in a real scenario. Being able to instantly see changes saved time and allowed me to make changes faster and more efficiently.
+
 * **Minifying:** Automatically minifies CSS and JS files. This is efficient for reducing the file-size of these pieces of code, and follows industry best practices.
+
 * **JS Linting:** Automatically linted my JS code on save, which saves time that would've been spent manually copying my JS onto an online linting tool and waiting for it to run. The results are instant and greatly increase efficiency, pointing out errors and their exact line and column position. I was able to eliminate errors nearly the instant they appeared.
+
 * **Sass:** In the past, I have used Koala to watch my SCSS files and convert them into CSS. While functional, it was always a touch buggy- using Gulp to watch my SCSS and convert it saved on time greatly as I wasn't relying on an individual application and it runs through the terminal instantly on save without any hassle. This is also closer to an industry standard way of writing SCSS compared to Koala.
 1,665 companies use gulp, showcasing how it is an industry standard tool utilised professionally for a similar purpose of making workflow more efficient.
 
@@ -189,23 +192,44 @@ Sass (SCSS) is a style of coding akin to CSS that I have become very font of for
 ```
 
 ---
-## Future Improvements
-:ski:
 
+## Evaluation
+
+#### Thoughts :ski:
+Overall, I had a really good time working on this project. It provided a good balance between challenge and fun, as I enjoying coming up with different ways to get around problems and learning as I went along. It was an awesome opportunity for me to see how far I've come since the beginning of the module and encourage me to take this knowledge and get even better from here!
+
+
+#### Challenges :ski:
+I was fairly confident going in, but was presented with quite a few challenges. There were errors that took me longer than I would've originally thought to figure out, especially with my accommodation and meal select screens, but I found that figuring these out proved to be a really rewarding experience.
+
+In all honesty, solving these problems has only given me more desire to learn so I can come up with better, more code-efficient solutions for them.
+
+
+#### Assessment Improvements :ski:
+My Yoobee tutor already 'went at the assessment with a chainsaw' (his words) which I think made a big difference! If I'd had to spend more time writing docs, my code would've suffered a lot for it. I think that this is a good note for the assessment designers, as the project should remain very code-focused in my opinion.
+
+
+#### Future Improvements :ski:
 I learned a lot throughout this project, and am mostly satisfied with the outcome- although there are a few things I would do differently or improve on (potentially to be updated in the future), as follows:
 * Making the code auto select the accommodation based on what map marker you've clicked
+
 * Working more images of the accommodation and details into the design
+
 * Reducing code by using more functions with arguments and parameters
+
 * Working more with returns
+
 * Making slick's transitions more interesting / animated
 
 It'd be cool if I could implement these extras in the future and improve my coding skills more!
 
 ---
 
-## Bonus
+## Bonus :four_leaf_clover:
 :ski:
 
-*Since I grew up in Queenstown, I asked my Mum if she had any photos she had taken that I could use in my project copyright-free. The background image and modal image in my site were both taken by her! Here's a cool bonus pic she took of Queenstown from Cecil Peak*  :sunglasses:&nbsp;:sunrise_over_mountains:
+*Since I grew up in Queenstown, I asked my Mum if she had any photos she had taken that I could use in my project copyright-free. The background image and modal image in my site were both taken by her! Here's a cool bonus pic she took of Queenstown from Cecil Peak*  :sunglasses: &nbsp;:sunrise_over_mountains:
 
 ![The view of Queenstown from Cecil Peak](img/cecil-peak.jpg?raw=true)
+
+*thanks for reading!* :cat2:
