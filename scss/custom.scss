@@ -9,6 +9,7 @@
 * {
   margin: 0;
   padding: 0;
+  font-size: 16px;
 }
 
 html,
@@ -378,6 +379,14 @@ p {
   color: $white;
 }
 
+#map {
+  height: 600px;
+}
+
+.mapboxgl-canvas {
+  width: 100% !important;
+}
+
 .mapboxgl-popup-content {
   border-radius: 10px;
 }
@@ -497,3 +506,6 @@ li {
   margin-top: -20px;
   margin-left: 30%;
 }
+
+// importing media queries
+@import 'media-queries';

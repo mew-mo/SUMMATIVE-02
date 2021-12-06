@@ -1,0 +1,124 @@
+
+// LAPTOPS
+// =======================
+@media screen and (min-width: 1025px) and (max-width: 1500px) {
+  .logo img {
+    margin-left: -2%;
+  }
+}
+
+// TINY LAPTOPS
+// =======================
+@media screen and (max-width: 1024px) {
+
+  // and (min-width: 800px) and
+  .logo img {
+    margin-left: 0;
+  }
+
+  .sweet-as-logo {
+    margin: 0 0 0 20%;
+    padding: 5% 0 0 0;
+  }
+
+  .go-btn,
+  .info-btn {
+    margin-top: 10%;
+  }
+
+  .col-md-4 {
+    width: 100vw;
+  }
+
+  .four-btn, .one-btn, .three-btn, .two-btn {
+    height: 170px;
+    width: 170px;
+  }
+
+  .col-md-12 {
+    margin-top: 20%;
+  }
+
+  #map {
+    height: 500px;
+    margin-top: 20%;
+  }
+}
+
+// TABLETS
+// =======================
+@media screen and (max-width: 799px) {
+  // (min-width: 600px) and
+
+  * {
+    font-size: 13px;
+  }
+
+  .sweet-as-logo {
+    margin: 0 0 0 7%;
+    padding: 5% 0 0 0;
+  }
+
+  .four-btn, .one-btn, .three-btn, .two-btn {
+    height: 200px;
+    width: 200px;
+  }
+
+  .people-content {
+    button {
+      margin: 20px;
+    }
+  }
+
+  #map {
+    height: 500px;
+  }
+
+  .sweet-as-logo-end {
+    margin-top: 0;
+    margin-left: 7%;
+  }
+
+  .place-info {
+    margin-top: 10%;
+  }
+}
+
+// MOBILE PHONES
+// =======================
+@media screen and (max-width: 450px) {
+
+  * {
+    font-size: 13px;
+  }
+
+  .sweet-as-logo,
+  .sweet-as-logo-end {
+    margin: 50% 0 0 7%;
+    height: 90%;
+    width: 90%;
+  }
+
+  .go-btn,
+  .info-btn {
+    margin-top: 20%;
+  }
+
+  .four-btn, .one-btn, .three-btn, .two-btn {
+    height: 150px;
+    width: 150px;
+  }
+
+  .col-md-12 {
+    margin-top: 30%;
+  }
+
+  .back i,
+  .next i {
+    font-size: 90px;
+  }
+
+  #map {
+    height: 100px;
+  }
+}
