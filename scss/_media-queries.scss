@@ -59,7 +59,18 @@
     padding: 5% 0 0 0;
   }
 
-  .four-btn, .one-btn, .three-btn, .two-btn {
+  .four-btn,
+  .one-btn,
+  .three-btn,
+  .two-btn,
+  .one-btn:hover,
+  .one-clicked,
+  .two-btn:hover,
+  .two-clicked,
+  .three-btn:hover,
+  .three-clicked,
+  .four-btn:hover,
+  .four-clicked  {
     height: 200px;
     width: 200px;
   }
@@ -104,9 +115,21 @@
     margin-top: 20%;
   }
 
-  .four-btn, .one-btn, .three-btn, .two-btn {
-    height: 150px;
-    width: 150px;
+  .four-btn,
+  .one-btn,
+  .three-btn,
+  .two-btn,
+  .one-btn:hover,
+  .one-clicked,
+  .two-btn:hover,
+  .two-clicked,
+  .three-btn:hover,
+  .three-clicked,
+  .four-btn:hover,
+  .four-clicked  {
+    height: 120px;
+    width: 120px;
+    font-size: 4rem;
   }
 
   .col-md-12 {

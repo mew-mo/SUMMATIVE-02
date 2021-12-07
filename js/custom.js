@@ -162,6 +162,12 @@
     revMeals: document.querySelector('.rev-meals'),
     finalPrice: document.querySelector('.final-price'),
 
+    // // Pulling the screens width and height for media queries ---------------
+    // width: window.innerWidth || document.documentElement.clientWidth ||
+    // document.body.clientWidth,
+    // height: window.innerHeight|| document.documentElement.clientHeight||
+    // document.body.clientHeight,
+
     // initialisation function
     init: function() {
       // LOAD IN MAP ---------------
@@ -266,6 +272,7 @@
     // welcome function ENDS
 
     peopleBooking: function() {
+      console.log('BOOKING PEOPLE');
 
       app.needsFill = 'the number of people you are booking for';
       app.maxPeople.innerHTML = accommodation.house.maxPeople;
